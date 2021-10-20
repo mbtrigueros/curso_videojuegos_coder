@@ -12,14 +12,14 @@ public class PlayerController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        PlayerLivesDown(5); //verifico por metodo Start que mis metodos funcionen
+        //PlayerLivesDown(5); //verifico por metodo Start que mis metodos funcionen
         //PlayerLivesUp(2);
         Debug.Log("La cantidad de vidas es: " + playerLives); //muestro por consola la cantidad de vidas para ver que este todo ok
     }
 
     // Update is called once per frame
     void Update() {
-        PlayerMovement(new Vector3(0, 0, speedPlayer)); //establezco por parametro la direccion en la que quiero que se mueva el jugador y verifco su funcionalidad
+        //PlayerMovement(new Vector3(0, 0, speedPlayer)); //establezco por parametro la direccion en la que quiero que se mueva el jugador y verifco su funcionalidad
     }
 
     //Metodo para curar al jugador
