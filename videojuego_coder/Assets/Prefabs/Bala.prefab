@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490ab427f39bdf845a1f97e5a72391de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedBala: 1
+  speedBala: 0.5
   dir: {x: 1, y: 0, z: 0}
   balaDamage: 1
+  timeBala: 3
