@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BalaController : MonoBehaviour
 {
-    public float speedBala = 0.5f; //velocidad de la bala
-    public Vector3 dir = new Vector3(1, 0, 0); //direccion de la bala
-    public int balaDamage = 1; //daño que provoca la bala
-    public float timeBala = 3f; //tiempo en que la bala estara en la escena antes de ser eliminada
+    [SerializeField] private float speedBala = 0.5f; //velocidad de la bala
+    [SerializeField] private Vector3 dir = new Vector3(1, 0, 0); //direccion de la bala
+    [SerializeField] private int balaDamage = 1; //daño que provoca la bala
+    [SerializeField] private float timeBala = 3f; //tiempo en que la bala estara en la escena antes de ser eliminada
 
     // Start is called before the first frame update
     void Start()

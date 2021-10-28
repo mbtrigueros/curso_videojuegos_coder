@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GeneratorController : MonoBehaviour
 {
-    public GameObject balasPrefab; //array con los prefab de las balas
-    public float disparoSpeedInit = 1f; //velocidad inicial del disparador
-    public float disparoSpeedRepetition = 0.2f; //tiempo que pasa entre una bala y la siguiente
-    public float cooldown = 0.5f; //tiempo de descanso entre cada disparo
-    public bool beenShot = false; //variable booleana que establece si la bala ha sido disparada o no
-    float timePassed = 0f;
+    [SerializeField] private GameObject balasPrefab; //array con los prefab de las balas
+    [SerializeField] private float disparoSpeedInit = 1f; //velocidad inicial del disparador
+    [SerializeField] private float disparoSpeedRepetition = 0.2f; //tiempo que pasa entre una bala y la siguiente
+    [SerializeField] private float cooldown = 0.5f; //tiempo de descanso entre cada disparo
+    [SerializeField] private bool beenShot = false; //variable booleana que establece si la bala ha sido disparada o no
+    [SerializeField] private float timePassed = 0f;
 
     // Start is called before the first frame update
     void Start()
