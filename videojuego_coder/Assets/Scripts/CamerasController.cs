@@ -21,13 +21,13 @@ public class CamerasController : MonoBehaviour
 
     private void switchCamera()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             cameras[0].SetActive(true);
             cameras[1].SetActive(false);
         }
 
-        else if (Input.GetKeyDown(KeyCode.F2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             cameras[0].SetActive(false);
             cameras[1].SetActive(true);
