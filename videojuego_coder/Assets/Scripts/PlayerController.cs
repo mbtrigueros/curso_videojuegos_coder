@@ -10,12 +10,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotationSpeed = 40f; // velocidad de rotacion 
     [SerializeField] private Vector3 initPosition = new Vector3(0, 0, 0); //posicion inicial del jugador
     [SerializeField] private Vector3 dir = new Vector3(-1, 0, 0); //direccion por default en la que va a moverse 
+    private Material playerMaterial;
+    private float a = 0.7f;
+    private Color colorCollisionPlayer = Color.red;
+    private Color colorPlayer = Color.yellow;
 
     // Start is called before the first frame update
     void Start() {
         //PlayerLivesDown(5); //verifico por metodo Start que mis metodos funcionen
         //PlayerLivesUp(2);
         Debug.Log("La cantidad de vidas es: " + playerLives); //muestro por consola la cantidad de vidas para ver que este todo ok
+
+        playerMaterial = transform.GetComponent<MeshRenderer>().material;
+        colorCollisionPlayer.a = 0.7f;
+        colorPlayer.a = 1f;
+
     }
 
     // Update is called once per frame
@@ -23,6 +32,12 @@ public class PlayerController : MonoBehaviour
 
         PlayerMovementInput();
         PlayerRotation();
+
+        if(playerLives == 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     //Metodo para curar al jugador
@@ -52,6 +67,24 @@ public class PlayerController : MonoBehaviour
     {
         float ejeHorizontal = Input.GetAxis("Horizontal"); //establecemos el eje horizontal con getaxis
         transform.Rotate(Vector3.up, ejeHorizontal * rotationSpeed * Time.deltaTime); //con el metodo rotate, el se genera un quaternion que permite que el jugador rote. Esta rotacion sera sobre el eje y (vector3.up), asi logramos que el jugador rote como es conveniente. Se controla esta rotacion con el input del eje x, es decir con las teclas A y D. 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            PlayerLivesDown(2);
+            Debug.Log("La cantidad de vidas es: " + playerLives);
+            playerMaterial.SetColor("_Color", colorCollisionPlayer);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            playerMaterial.SetColor("_Color", colorPlayer);
+        }
     }
 
 }

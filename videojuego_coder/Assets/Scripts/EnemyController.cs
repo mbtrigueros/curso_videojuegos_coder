@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour
         {
             case RotationTypes.follow:
                 LookAt(player); //en el tipo de movimiento follow, paso ambos metodos; con lookAt logro que el enemigo rote en direccion al jugador
-                Follow(2); // y en el metodo follow logro que se mueva en esa direccion
+                Follow(0); // y en el metodo follow logro que se mueva en esa direccion
                 break;
             case RotationTypes.lookAt:
                 LookAt(player);
