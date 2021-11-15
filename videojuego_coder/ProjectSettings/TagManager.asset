@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Ceiling
+  - Floor
+  - Mirror
   layers:
   - Default
   - TransparentFX
@@ -37,7 +40,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Ground
   m_SortingLayers:
   - name: Default
     uniqueID: 0
