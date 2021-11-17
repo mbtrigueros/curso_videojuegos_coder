@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7500629252929479820}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &4022689975098084167
 Light:
@@ -123,6 +123,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1752762534656223385}
   - {fileID: 6708017622006353371}
   - {fileID: 8365810246147682770}
   - {fileID: 8816351537967444836}
@@ -143,12 +144,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLives: 10
+  playerStars: 0
   speedPlayer: 5
   forceJump: 50
   rotationSpeed: 40
   initPosition: {x: 0, y: 0, z: 0}
   dir: {x: -1, y: 0, z: 0}
   cameras: []
+  animPlayer: {fileID: 0}
+  playerMesh: {fileID: 0}
 --- !u!54 &4486905042716420914
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -178,6 +182,68 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9049729, y: 2.710243, z: 1}
   m_Center: {x: -0.012221932, y: 1.3433706, z: 0}
+--- !u!1001 &395880531379591295
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7500629252929479820}
+    m_Modifications:
+    - target: {fileID: 2102445469674483941, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+      propertyPath: m_Name
+      value: Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102445469674483942, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102445469674483942, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102445469674483942, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102445469674483942, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102445469674483942, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102445469674483942, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102445469674483942, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102445469674483942, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102445469674483942, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102445469674483942, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102445469674483942, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+--- !u!4 &1752762534656223385 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2102445469674483942, guid: 4cfb97aac622bf34a891f4e3ecd7cce6, type: 3}
+  m_PrefabInstance: {fileID: 395880531379591295}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2210940374221582227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191,7 +257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7275336006391258359, guid: 8d6d4e95469d3d04dad549931f4fd270, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7275336006391258359, guid: 8d6d4e95469d3d04dad549931f4fd270, type: 3}
       propertyPath: m_LocalPosition.x
@@ -249,7 +315,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 165321649375152219, guid: a22030e1caf44424a9cf4c1561c15567, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 165321649375152219, guid: a22030e1caf44424a9cf4c1561c15567, type: 3}
       propertyPath: m_LocalPosition.x
@@ -295,6 +361,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: player_animation
       objectReference: {fileID: 0}
+    - target: {fileID: 6101106453434454561, guid: a22030e1caf44424a9cf4c1561c15567, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
+        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:RightArm'\n\tTransform
+        'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tTransform 'mixamorig:RightFoot'\n\tTransform
+        'mixamorig:Head'\n\tTransform 'mixamorig:LeftUpLeg'\n\tand more ...\n\tFrom
+        animation clip 'mixamo.com'"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a22030e1caf44424a9cf4c1561c15567, type: 3}
 --- !u!4 &6708017622006353371 stripped
@@ -315,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2157595153950449706, guid: 49a07fea5bb9a4b478402eeb3e354824, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2157595153950449706, guid: 49a07fea5bb9a4b478402eeb3e354824, type: 3}
       propertyPath: m_LocalPosition.x

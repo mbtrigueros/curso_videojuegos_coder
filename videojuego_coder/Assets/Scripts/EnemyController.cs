@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private RotationTypes rotationtype; //variable del tipo de rotacion
     [SerializeField] private float speedEnemy = 4.0f; //velocidad a la que se mueve el enemigo
+    public int enemyLives = 10; 
 
     private GameObject player; //llamo al player para poder usarlo en el script
 
@@ -21,7 +22,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         //switch para poder elegir desde el inspector el tipo de rotacion que quiero que tenga el enemigo
-        switch (rotationtype)
+       /* switch (rotationtype)
         {
             case RotationTypes.follow:
                 LookAt(player); //en el tipo de movimiento follow, paso ambos metodos; con lookAt logro que el enemigo rote en direccion al jugador
@@ -30,7 +31,7 @@ public class EnemyController : MonoBehaviour
             case RotationTypes.lookAt:
                 LookAt(player);
                 break;
-        }
+        }*/
     }
 
     private void LookAt(GameObject lookObject) //metodo para mirar al jugador. paso como parametro un gameObject para poder cambiar el target de ser necesario.
@@ -47,6 +48,11 @@ public class EnemyController : MonoBehaviour
         {
             transform.position += speedEnemy * dir.normalized * Time.deltaTime;  //el metodo normalized es para que me devuelva el vector normalizado, es decir que su magnitud sea 1
         }
+    }
+
+    public int EnemyLivesDown(int lives)
+    { //parametro que indica la cantidad de vidas que pierde
+        return enemyLives = enemyLives - lives; //establezco la cantidad de vidas actuales
     }
 
 }

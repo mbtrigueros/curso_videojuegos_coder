@@ -16,6 +16,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject[] cameras;
 
+    [SerializeField] private ParticleSystem attack;
+    [SerializeField] private float cooldown = 0.5f; //tiempo de descanso entre cada ataque
+    [SerializeField] private bool beenShot = false; //variable booleana que establece si el ataque ha sido disparado o no
+    [SerializeField] private float timePassed = 0f;
+
+
     private GameObject[] enemies;
     private Rigidbody rbPlayer;
     
@@ -63,6 +69,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMovementInput();
         PlayerJump();
+        PlayerAttack();
 
     }
 
@@ -131,7 +138,24 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void PlayerAttack()
+    {
+        if (Input.GetKeyDown(KeyCode.X) && !beenShot)
+        {
+            beenShot = true;
+            attack.Play();
+        }
+        if (beenShot) //si beenShot es true, se empieza a contar el tiempo pasado
+        {
+            timePassed += Time.deltaTime;
+        }
+        if (timePassed > cooldown) // si el tiempo pasado es mayor al establecido en el cooldown, se reinicia el contador, y la variable beenShot vuelve a ser falsa. De esta manera, se puede volver a instanciar una nueva bala.
+        {
+            beenShot = false;
+            timePassed = 0;
+        }
 
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -159,6 +183,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
 
 
 
