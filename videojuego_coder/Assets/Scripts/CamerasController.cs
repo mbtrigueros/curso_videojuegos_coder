@@ -21,7 +21,7 @@ public class CamerasController : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, target.position + offset, Time.deltaTime * 2);
+        transform.position = Vector3.Lerp(transform.position, target.position + offset, Time.deltaTime * 4);
 
     }
 

@@ -55,6 +55,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy_animation
       objectReference: {fileID: 0}
+    - target: {fileID: 648667358386213601, guid: a22030e1caf44424a9cf4c1561c15567, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101106453434454561, guid: a22030e1caf44424a9cf4c1561c15567, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1f161e59e5a9e8d4093a967e477abad6, type: 2}
+    - target: {fileID: 6101106453434454561, guid: a22030e1caf44424a9cf4c1561c15567, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8147460156123343406, guid: a22030e1caf44424a9cf4c1561c15567, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

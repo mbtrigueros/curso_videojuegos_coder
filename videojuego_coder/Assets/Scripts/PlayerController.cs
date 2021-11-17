@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         animPlayer.SetBool("isRunning", false);
+        animPlayer.SetBool("isJumping", false);
 
 
     }
@@ -117,11 +118,11 @@ public class PlayerController : MonoBehaviour
         Vector3 jumpMirror = Vector3.down;
         if (Input.GetKeyDown(KeyCode.Z) && isGrounded)
         {
+            animPlayer.SetBool("isJumping", true);
             if (mirror)
             {
                 Debug.Log("Aprete z en mirror");
                 rbPlayer.AddForce(jumpMirror * forceJump, ForceMode.Impulse);
-                animPlayer.SetBool("isJumping", true);
             }
             else
             {

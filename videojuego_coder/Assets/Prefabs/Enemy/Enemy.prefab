@@ -30,7 +30,7 @@ Transform:
   m_LocalPosition: {x: -21.44, y: -1.48, z: -0.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8965840934821111320}
+  - {fileID: 4912090234320329238}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65,6 +65,10 @@ MonoBehaviour:
   rotationtype: 1
   speedEnemy: 4
   enemyLives: 10
+  rotationSpeed: 0
+  waypoints: []
+  minDistance: 0
+  animEnemy: {fileID: 0}
 --- !u!65 &2222482461150086509
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78,107 +82,13 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9049729, y: 2.710243, z: 1}
   m_Center: {x: -0.012221932, y: 1.3433706, z: 0}
---- !u!1001 &2222482460579819600
+--- !u!1001 &2779152927826791518
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 2222482461150086504}
     m_Modifications:
-    - target: {fileID: 177654928439538375, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 441690837004268823, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 749218670676565120, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 967282477723433442, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1198601750625073456, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1737176427172060580, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2217879509838941788, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2265040109680968736, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2805553085592853739, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3163027937407913854, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3466284534951839016, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3772578337461079090, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 1f161e59e5a9e8d4093a967e477abad6, type: 2}
-    - target: {fileID: 3772578337461079090, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:RightArm'\n\tTransform
-        'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tTransform 'mixamorig:RightFoot'\n\tTransform
-        'mixamorig:Head'\n\tTransform 'mixamorig:LeftUpLeg'\n\tand more ...\n\tFrom
-        animation clip 'mixamo.com'"
-      objectReference: {fileID: 0}
-    - target: {fileID: 4656670246319758498, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4803257183646593966, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551098867853673575, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5671569409284717454, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5723504015249748899, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5969252181481030875, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6052024770456020200, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6332367835848823092, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6580093988580735087, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7114219383082079816, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -223,46 +133,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7282572086292971354, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7435253666135307237, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7633909758126066930, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
       propertyPath: m_Name
       value: enemy_animation
       objectReference: {fileID: 0}
-    - target: {fileID: 7633909758126066930, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7633909758126066930, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 7653147626180702121, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7979272600485430215, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8109045888214883608, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8621298077635987022, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
---- !u!4 &8965840934821111320 stripped
+--- !u!4 &4912090234320329238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7114219383082079816, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
-  m_PrefabInstance: {fileID: 2222482460579819600}
+  m_PrefabInstance: {fileID: 2779152927826791518}
   m_PrefabAsset: {fileID: 0}

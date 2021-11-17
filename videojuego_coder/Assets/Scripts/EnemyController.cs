@@ -8,19 +8,35 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private RotationTypes rotationtype; //variable del tipo de rotacion
     [SerializeField] private float speedEnemy = 4.0f; //velocidad a la que se mueve el enemigo
-    public int enemyLives = 10; 
+    public int enemyLives = 10;
+    [SerializeField] float rotationSpeed;
 
     private GameObject player; //llamo al player para poder usarlo en el script
+
+    [SerializeField] Transform[] waypoints;
+    [SerializeField] float minDistance;
+
+    private Rigidbody rbEnemy;
+
+    [SerializeField] private Animator animEnemy;
+
+
+    private int currentIndex = 0;
+    private bool goBack = false;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player"); // con el metodo find busco al jugador
+        rbEnemy = GetComponent<Rigidbody>();
+
+        animEnemy.SetBool("isWalking", false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Walk();
         //switch para poder elegir desde el inspector el tipo de rotacion que quiero que tenga el enemigo
        /* switch (rotationtype)
         {
@@ -53,6 +69,38 @@ public class EnemyController : MonoBehaviour
     public int EnemyLivesDown(int lives)
     { //parametro que indica la cantidad de vidas que pierde
         return enemyLives = enemyLives - lives; //establezco la cantidad de vidas actuales
+    }
+
+    private void Walk()
+    {
+        animEnemy.SetBool("isWalking", true);
+        Vector3 deltaVector = waypoints[currentIndex].position - transform.position;
+        Vector3 direction = deltaVector.normalized;
+
+        transform.forward = Vector3.Lerp(transform.forward, direction, rotationSpeed * Time.deltaTime);
+
+        transform.position += transform.forward * speedEnemy * Time.deltaTime;
+
+
+        float distance = deltaVector.magnitude;
+
+        if (distance < minDistance)
+        {
+            if (currentIndex >= waypoints.Length - 1)
+            {
+                goBack = true;
+            }
+            else if (currentIndex <= 0)
+            {
+                goBack = false;
+            }
+
+            if (!goBack)
+            {
+                currentIndex++;
+            }
+            else currentIndex--;
+        }
     }
 
 }
