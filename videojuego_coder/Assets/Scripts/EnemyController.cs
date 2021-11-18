@@ -24,6 +24,11 @@ public class EnemyController : MonoBehaviour
     private int currentIndex = 0;
     private bool goBack = false;
 
+
+    [SerializeField] private LayerMask playerMask;
+
+    private bool playerSeen = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,23 +36,36 @@ public class EnemyController : MonoBehaviour
         rbEnemy = GetComponent<Rigidbody>();
 
         animEnemy.SetBool("isWalking", false);
+        animEnemy.SetBool("playerSeen", false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Walk();
-        //switch para poder elegir desde el inspector el tipo de rotacion que quiero que tenga el enemigo
-       /* switch (rotationtype)
+        DetectPlayer();
+
+        if (playerSeen)
         {
-            case RotationTypes.follow:
-                LookAt(player); //en el tipo de movimiento follow, paso ambos metodos; con lookAt logro que el enemigo rote en direccion al jugador
-                Follow(0); // y en el metodo follow logro que se mueva en esa direccion
-                break;
-            case RotationTypes.lookAt:
-                LookAt(player);
-                break;
-        }*/
+            Chase();
+        }
+        else
+        {
+            Walk();
+        }
+
+
+
+        //switch para poder elegir desde el inspector el tipo de rotacion que quiero que tenga el enemigo
+        /* switch (rotationtype)
+         {
+             case RotationTypes.follow:
+                 LookAt(player); //en el tipo de movimiento follow, paso ambos metodos; con lookAt logro que el enemigo rote en direccion al jugador
+                 Follow(0); // y en el metodo follow logro que se mueva en esa direccion
+                 break;
+             case RotationTypes.lookAt:
+                 LookAt(player);
+                 break;
+         }*/
     }
 
     private void LookAt(GameObject lookObject) //metodo para mirar al jugador. paso como parametro un gameObject para poder cambiar el target de ser necesario.
@@ -77,7 +95,7 @@ public class EnemyController : MonoBehaviour
         Vector3 deltaVector = waypoints[currentIndex].position - transform.position;
         Vector3 direction = deltaVector.normalized;
 
-        transform.forward = Vector3.Lerp(transform.forward, direction, rotationSpeed * Time.deltaTime);
+        transform.forward = direction * Time.deltaTime;
 
         transform.position += transform.forward * speedEnemy * Time.deltaTime;
 
@@ -103,4 +121,31 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void Chase()
+    {
+        animEnemy.SetBool("playerSeen", true);
+        Vector3 dir = (player.transform.position - transform.position);  //obtengo el vector entre la posicion del jugador y la del 
+        
+        transform.position += speedEnemy * dir.normalized * Time.deltaTime;  //el metodo normalized es para que me devuelva el vector normalizado, es decir que su magnitud sea 1
+        
+        
+    }
+
+    private void DetectPlayer()
+    {
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 5, playerMask))
+        {
+            playerSeen = true;
+            Debug.DrawLine(ray.origin, hit.point, Color.red);
+
+        }
+        else
+        {
+            Debug.DrawLine(ray.origin, ray.origin + ray.direction * 5, Color.blue);
+        }
+
+    }
 }

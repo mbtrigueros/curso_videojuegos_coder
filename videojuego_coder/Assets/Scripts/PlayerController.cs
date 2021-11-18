@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
             
         if(playerLives == 0)
         {
-            Destroy(gameObject);
+            Debug.Log("Has sido derrotadx por tus demonios :(");
         }
 
     }
@@ -223,10 +223,10 @@ public class PlayerController : MonoBehaviour
             mirror = true;
 
 
-        /*   foreach (GameObject enemy in enemies)
+            foreach (GameObject enemy in enemies)
            {
                enemy.GetComponent<Rigidbody>().useGravity = false;
-           } */
+           } 
 
     }
 
@@ -239,10 +239,10 @@ public class PlayerController : MonoBehaviour
         Physics.gravity = gravedad;
         mirror = false;
 
-       /* foreach (GameObject enemy in enemies)
+        foreach (GameObject enemy in enemies)
         {
             enemy.GetComponent<Rigidbody>().useGravity = true;
-        } */
+        } 
     }
 
 
