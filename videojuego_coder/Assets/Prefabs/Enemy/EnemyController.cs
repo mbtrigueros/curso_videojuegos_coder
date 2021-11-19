@@ -27,6 +27,8 @@ public class EnemyController : MonoBehaviour
     private int currentIndex = 0;
     private bool goBack = false;
 
+    private Rigidbody rbEnemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,8 @@ public class EnemyController : MonoBehaviour
         animEnemy.SetBool("playerSeen", false);
 
         enemyCeilingRotation();
+
+        rbEnemy = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -45,7 +49,7 @@ public class EnemyController : MonoBehaviour
 
         DetectPlayer();
 
-        if (playerSeen)
+        if (playerSeen && rbEnemy.useGravity == true)
         {
             Chase();
         }
@@ -78,6 +82,7 @@ public class EnemyController : MonoBehaviour
     private void Walk()
     {
         animEnemy.SetBool("isWalking", true);
+        animEnemy.SetBool("playerSeen", false);
         Vector3 deltaVector = waypoints[currentIndex].position - transform.position;
         Vector3 direction = deltaVector.normalized;
 
@@ -131,6 +136,7 @@ public class EnemyController : MonoBehaviour
         else
         {
             Debug.DrawLine(ray.origin, ray.origin + ray.direction * 5, Color.blue);
+
         }
 
     }

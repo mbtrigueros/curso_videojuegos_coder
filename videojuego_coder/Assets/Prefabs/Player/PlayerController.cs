@@ -224,10 +224,11 @@ public class PlayerController : MonoBehaviour
     private void enterUpsideDown()
     {
 
-            Debug.Log("Cruce el espejo");
+        Debug.Log("Cruce el espejo");
 
         playerMesh.transform.Rotate(new Vector3(0, 0, -180), Space.Self);
         playerMesh.transform.position += new Vector3(0, 2.69f, 0);
+        
         cameras[0].SetActive(false);
             cameras[1].SetActive(true);
             Physics.gravity = gravedadMirror;
@@ -251,6 +252,10 @@ public class PlayerController : MonoBehaviour
     {
 
         Debug.Log("Volvi a la normalidad");
+
+        playerMesh.transform.Rotate(new Vector3(0, 180f, 180f), Space.World);
+        playerMesh.transform.position += new Vector3(0, -2.69f, 0);
+
         cameras[1].SetActive(false);
         cameras[0].SetActive(true);
         Physics.gravity = gravedad;
