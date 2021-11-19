@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //variables publicas
-    [SerializeField] private int playerLives = 10; //cantidad de vidas del jugador
+    [SerializeField] private int playerLives = 100; //cantidad de vidas del jugador
     [SerializeField] private int playerStars = 0; //cantidad de vidas del jugador
     [SerializeField] private float speedPlayer = 5f; //velocidad del jugador
     [SerializeField] private float forceJump = 50f; //fuerza del salto del jugador
 
-    [SerializeField] private float rotationSpeed = 40f; // velocidad de rotacion 
-    [SerializeField] private Vector3 initPosition = new Vector3(0, 0, 0); //posicion inicial del jugador
-    [SerializeField] private Vector3 dir = new Vector3(-1, 0, 0); //direccion por default en la que va a moverse 
+    //[SerializeField] private float rotationSpeed = 40f; // velocidad de rotacion 
+    //[SerializeField] private Vector3 initPosition = new Vector3(0, 0, 0); //posicion inicial del jugador
+    //[SerializeField] private Vector3 dir = new Vector3(-1, 0, 0); //direccion por default en la que va a moverse 
 
     [SerializeField] private GameObject[] cameras;
 
@@ -22,7 +22,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float timePassed = 0f;
 
 
-    private GameObject[] enemies;
+    [SerializeField] private GameObject[] enemiesFloor;
+    [SerializeField] private GameObject[] enemiesCeiling;
+
     private Rigidbody rbPlayer;
     
     private bool isGrounded = true;
@@ -46,10 +48,14 @@ public class PlayerController : MonoBehaviour
 
 
         rbPlayer = GetComponent<Rigidbody>();
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         animPlayer.SetBool("isRunning", false);
         animPlayer.SetBool("isJumping", false);
+
+        foreach (GameObject enemy in enemiesCeiling)
+        {
+            enemy.GetComponent<Rigidbody>().useGravity = false;
+        }
 
 
     }
@@ -123,12 +129,13 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Aprete z en mirror");
                 rbPlayer.AddForce(jumpMirror * forceJump, ForceMode.Impulse);
+                
             }
             else
             {
                 Debug.Log("Aprete z");
                 rbPlayer.AddForce(jump * forceJump, ForceMode.Impulse);
-                animPlayer.SetBool("isJumping", true);
+                
             }
             
         }
@@ -160,6 +167,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision);
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -170,6 +178,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Floor"))
         {
+            Debug.Log("Estoy tocando el piso");
             isGrounded = true;
         }
 
@@ -180,6 +189,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
+            Debug.Log("NO estoy tocando el piso");
             isGrounded = false;
         }
     }
@@ -201,6 +211,7 @@ public class PlayerController : MonoBehaviour
         {
             enterUpsideDown();
             enteredMirror = true;
+            
         }
         else if(other.gameObject.CompareTag("Mirror") && enteredMirror)
         {
@@ -223,10 +234,16 @@ public class PlayerController : MonoBehaviour
             mirror = true;
 
 
-            foreach (GameObject enemy in enemies)
+            foreach (GameObject enemy in enemiesFloor)
            {
                enemy.GetComponent<Rigidbody>().useGravity = false;
-           } 
+           }
+
+        foreach (GameObject enemy in enemiesCeiling)
+        {
+
+            enemy.GetComponent<Rigidbody>().useGravity = true;
+        }
 
     }
 
@@ -239,10 +256,15 @@ public class PlayerController : MonoBehaviour
         Physics.gravity = gravedad;
         mirror = false;
 
-        foreach (GameObject enemy in enemies)
+        foreach (GameObject enemy in enemiesFloor)
         {
             enemy.GetComponent<Rigidbody>().useGravity = true;
-        } 
+        }
+
+        foreach (GameObject enemy in enemiesCeiling)
+        {
+            enemy.GetComponent<Rigidbody>().useGravity = false;
+        }
     }
 
 

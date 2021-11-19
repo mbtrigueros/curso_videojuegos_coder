@@ -7,12 +7,12 @@ public class Attack : MonoBehaviour
 
     private ParticleSystem attack;
     private List<ParticleCollisionEvent> particleCollisionEvents;
-    private GameObject enemy;
+    private GameObject[] enemies;
 
     // Start is called before the first frame update
     void Start()
     {
-        enemy = GameObject.FindWithTag("Enemy");
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
         attack = GetComponent<ParticleSystem>();
         particleCollisionEvents = new List<ParticleCollisionEvent>();
     }
@@ -39,7 +39,7 @@ public class Attack : MonoBehaviour
 
                 if (damage.enemyLives == 0)
                 {
-                    Destroy(enemy);
+                    Destroy(other);
                 }
                 
             }

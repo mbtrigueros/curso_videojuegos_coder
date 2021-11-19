@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private RotationTypes rotationtype; //variable del tipo de rotacion
     [SerializeField] private float speedEnemy = 4.0f; //velocidad a la que se mueve el enemigo
-    public int enemyLives = 10;
+    public int enemyLives = 100;
     [SerializeField] float rotationSpeed;
 
     private GameObject player; //llamo al player para poder usarlo en el script
@@ -16,32 +16,33 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Transform[] waypoints;
     [SerializeField] float minDistance;
 
-    private Rigidbody rbEnemy;
-
     [SerializeField] private Animator animEnemy;
-
-
-    private int currentIndex = 0;
-    private bool goBack = false;
-
 
     [SerializeField] private LayerMask playerMask;
 
+    [SerializeField] private GameObject enemyCeiling;
+
     private bool playerSeen = false;
+
+    private int currentIndex = 0;
+    private bool goBack = false;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player"); // con el metodo find busco al jugador
-        rbEnemy = GetComponent<Rigidbody>();
 
         animEnemy.SetBool("isWalking", false);
         animEnemy.SetBool("playerSeen", false);
+
+        enemyCeilingRotation();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
         DetectPlayer();
 
         if (playerSeen)
@@ -68,21 +69,6 @@ public class EnemyController : MonoBehaviour
          }*/
     }
 
-    private void LookAt(GameObject lookObject) //metodo para mirar al jugador. paso como parametro un gameObject para poder cambiar el target de ser necesario.
-    {
-        Quaternion newRotation = Quaternion.LookRotation(lookObject.transform.position - transform.position); //creo un quaternion con el metodo LookRotation y paso como parametro dos posiciones, la del enemigo y la del objeto. 
-        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, 1f * Time.deltaTime); //el metodo Lerp logra que la rotacion sea mas suave
-    }
-
-    private void Follow(int distancia) //metodo para seguir al jugador. paso como parametro la distancia a la que quiero que este del jugador. 
-    {
-        Vector3 dir = (player.transform.position - transform.position);  //obtengo el vector entre la posicion del jugador y la del enemigo
-
-        if (dir.magnitude > distancia) //con el metodo magnitude obtengo el largo del vector, y calculo si es mayor que la distancia que quiero.
-        {
-            transform.position += speedEnemy * dir.normalized * Time.deltaTime;  //el metodo normalized es para que me devuelva el vector normalizado, es decir que su magnitud sea 1
-        }
-    }
 
     public int EnemyLivesDown(int lives)
     { //parametro que indica la cantidad de vidas que pierde
@@ -147,5 +133,10 @@ public class EnemyController : MonoBehaviour
             Debug.DrawLine(ray.origin, ray.origin + ray.direction * 5, Color.blue);
         }
 
+    }
+
+    private void enemyCeilingRotation()
+    {
+        enemyCeiling.transform.Rotate(new Vector3(0, 0, -180), Space.Self);
     }
 }
