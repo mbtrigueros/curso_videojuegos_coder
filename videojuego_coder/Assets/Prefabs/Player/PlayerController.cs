@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     //variables publicas
     [SerializeField] private int playerLives = 100; //cantidad de vidas del jugador
-    [SerializeField] private int playerStars = 0; //cantidad de vidas del jugador
     [SerializeField] private float speedPlayer = 5f; //velocidad del jugador
     [SerializeField] private float forceJump = 50f; //fuerza del salto del jugador
 
@@ -74,7 +73,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        PlayerMovementInput();
+        PlayerMove();
         PlayerJump();
         PlayerAttack();
 
@@ -92,13 +91,13 @@ public class PlayerController : MonoBehaviour
 
     private int PlayerStarsUp()
     { //parametro que indica la cantidad de vidas que gana 
-        return playerStars++;
+        return GameManager.playerStars++;
     }
 
 
 
     //Metodo para que el jugador se mueva con el input del usuario. 
-    private void PlayerMovementInput()
+    private void PlayerMove()
     {
         float ejeHorizontal = Input.GetAxis("Horizontal"); //establecemos el eje vertical con getaxis
         rbPlayer.velocity = new Vector3(ejeHorizontal * speedPlayer, rbPlayer.velocity.y, 0);
@@ -203,7 +202,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Star"))
         {
             PlayerStarsUp();
-            Debug.Log("Tienes " + playerStars + " estrellas");
+            Debug.Log("Tienes " +  GameManager.playerStars + " estrellas");
             Destroy(other.gameObject);
         }
 
@@ -240,11 +239,11 @@ public class PlayerController : MonoBehaviour
                enemy.GetComponent<Rigidbody>().useGravity = false;
            }
 
-        foreach (GameObject enemy in enemiesCeiling)
-        {
+            foreach (GameObject enemy in enemiesCeiling)
+            {
 
-            enemy.GetComponent<Rigidbody>().useGravity = true;
-        }
+                enemy.GetComponent<Rigidbody>().useGravity = true;
+            }
 
     }
 
@@ -258,6 +257,7 @@ public class PlayerController : MonoBehaviour
 
         cameras[1].SetActive(false);
         cameras[0].SetActive(true);
+
         Physics.gravity = gravedad;
         mirror = false;
 

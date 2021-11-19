@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    enum RotationTypes { follow, lookAt }; //enum para declarar los tipos de rotacion que hara el enemigo
+    enum BehaviourTypes { follow, walk }; //enum para declarar los tipos de rotacion que hara el enemigo
 
-    [SerializeField] private RotationTypes rotationtype; //variable del tipo de rotacion
+    [SerializeField] private BehaviourTypes behaviourtype; //variable del tipo de comportamiento
     [SerializeField] private float speedEnemy = 4.0f; //velocidad a la que se mueve el enemigo
-    public int enemyLives = 100;
     [SerializeField] float rotationSpeed;
 
     private GameObject player; //llamo al player para poder usarlo en el script
@@ -27,6 +26,7 @@ public class EnemyController : MonoBehaviour
     private int currentIndex = 0;
     private bool goBack = false;
 
+
     private Rigidbody rbEnemy;
 
     // Start is called before the first frame update
@@ -34,7 +34,8 @@ public class EnemyController : MonoBehaviour
     {
         player = GameObject.Find("Player"); // con el metodo find busco al jugador
 
-        animEnemy.SetBool("isWalking", false);
+
+        animEnemy.SetBool("isWalking", true);
         animEnemy.SetBool("playerSeen", false);
 
         enemyCeilingRotation();
@@ -46,38 +47,35 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
 
-
+        
         DetectPlayer();
+        EnemyDies();
 
-        if (playerSeen && rbEnemy.useGravity == true)
-        {
-            Chase();
-        }
-        else
-        {
-            Walk();
-        }
-
-
-
-        //switch para poder elegir desde el inspector el tipo de rotacion que quiero que tenga el enemigo
-        /* switch (rotationtype)
+        //switch para poder elegir desde el inspector el tipo de comportamiento que quiero que tenga el enemigo
+         switch (behaviourtype)
          {
-             case RotationTypes.follow:
-                 LookAt(player); //en el tipo de movimiento follow, paso ambos metodos; con lookAt logro que el enemigo rote en direccion al jugador
-                 Follow(0); // y en el metodo follow logro que se mueva en esa direccion
+             case BehaviourTypes.follow:
+                if (playerSeen && rbEnemy.useGravity == true)
+                {
+                    Chase();
+                }
+                else
+                {
+                    Walk();
+                }
                  break;
-             case RotationTypes.lookAt:
-                 LookAt(player);
+             case BehaviourTypes.walk:
+                 Walk();
                  break;
-         }*/
+         }
     }
 
 
-    public int EnemyLivesDown(int lives)
+    private int EnemyLivesDown(int lives)
     { //parametro que indica la cantidad de vidas que pierde
-        return enemyLives = enemyLives - lives; //establezco la cantidad de vidas actuales
+        return GameManager.enemyLives = GameManager.enemyLives - lives; //establezco la cantidad de vidas actuales
     }
+    
 
     private void Walk()
     {
@@ -127,7 +125,7 @@ public class EnemyController : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 5, playerMask))
+        if (Physics.Raycast(ray, out hit, 10, playerMask))
         {
             playerSeen = true;
             Debug.DrawLine(ray.origin, hit.point, Color.red);
@@ -135,7 +133,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            Debug.DrawLine(ray.origin, ray.origin + ray.direction * 5, Color.blue);
+            Debug.DrawLine(ray.origin, ray.origin + ray.direction * 10, Color.blue);
 
         }
 
@@ -145,4 +143,15 @@ public class EnemyController : MonoBehaviour
     {
         enemyCeiling.transform.Rotate(new Vector3(0, 0, -180), Space.Self);
     }
+
+    private void EnemyDies()
+    {
+        if (GameManager.enemyLives <= 0)
+        {
+            Destroy(gameObject);
+        }
+        
+    }
+
+
 }
