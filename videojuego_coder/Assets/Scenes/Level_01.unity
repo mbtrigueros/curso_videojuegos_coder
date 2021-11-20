@@ -1103,25 +1103,6 @@ Transform:
   m_Father: {fileID: 860589187}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1086622500 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4456144569484298412, guid: bb9a9258c380eec4694e479d3857cbda, type: 3}
-  m_PrefabInstance: {fileID: 3726671156467428099}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1086622501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086622500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7bed54bc8f9cfd4ebf8f3ebc631803e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedObstacle: 0.5
-  timeObstacle: 3
 --- !u!4 &1086622506 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3705041124007916449, guid: bb9a9258c380eec4694e479d3857cbda, type: 3}
@@ -2460,6 +2441,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3c35ccf6ca4a2b34d8772f908bd32432, type: 2}
     - target: {fileID: 4456144569484298412, guid: bb9a9258c380eec4694e479d3857cbda, type: 3}
       propertyPath: m_Name
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456144569484298412, guid: bb9a9258c380eec4694e479d3857cbda, type: 3}
+      propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []

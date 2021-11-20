@@ -6,32 +6,32 @@ public class TrapController : MonoBehaviour
 {
 
 
-    [SerializeField] private LayerMask playerMask;
+    [SerializeField] private LayerMask playerMask; //llamo a la capa del player
 
-    private bool playerDetected = false;
+    private bool playerDetected = false; //booleana para la deteccion juegador
 
-    private Rigidbody rbTrap;
+    private Rigidbody rbTrap; //traigo el rigidbody de la trampa
 
 
     // Start is called before the first frame update
     void Start()
     
     {
-        playerDetected = false;
+        playerDetected = false; 
         rbTrap = GetComponent<Rigidbody>();
-        rbTrap.useGravity = false;
+        rbTrap.useGravity = false; //establezco que la gravedad es falsa para que no se caiga 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         DetectPlayer();
     }
 
-    private void DetectPlayer()
+    //--------------------------------------------------------------------METODOS PROPIOS--------------------------------------------------------------------
+    private void DetectPlayer() //metodo para detectar al jugador con raycast
     {
-        Ray ray = new Ray(transform.position, transform.up);
+        Ray ray = new Ray(transform.position, transform.up); 
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 100, playerMask))
@@ -47,17 +47,6 @@ public class TrapController : MonoBehaviour
 
         }
 
-    }
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Has muerto!!!!!!!!!!!!");
-            
-            //Destroy(collision.gameObject);
-        }
     }
 
 }

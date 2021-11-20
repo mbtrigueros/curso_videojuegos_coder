@@ -17,28 +17,25 @@ public class Obstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeObstacle -= Time.deltaTime; //al tiempo de la bala le voy restando el tiempo del juego, asi logro determinar si la bala sera destruida o no.
-        if (timeObstacle > 0) //si el tiempo de la bala es mayor a 0, esta se movera
+        timeObstacle -= Time.deltaTime; //le voy tomando el tiempo al obstaculo para luego destruirlo
+
+        if (timeObstacle > 0) //si el tiempo es mayor a cero, el obstaculo va a moverse
         {
             Movement();
         }
-        else // si el tiempo llega a 0 sera destruida
+
+        else // si el tiempo llega a 0 sera destruido
         {
             Debug.Log("Destruyo el obstaculo");
             Destroy(gameObject);
         }
     }
 
-    private Vector3 Movement()
+    //--------------------------------------------------------------------METODOS PROPIOS--------------------------------------------------------------------
+    private Vector3 Movement() //metodo para mover el obstaculo en el eje vertical
     {
-        return (transform.position += Vector3.up * speedObstacle) * Time.deltaTime;
+        return (transform.position += Vector3.up * speedObstacle) * Time.deltaTime; 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Te moristeeeeeeeeeeeeee");        }
-    }
 
 }

@@ -18,7 +18,9 @@ public class Rotation : MonoBehaviour
         Rotate();
     }
 
-    private void Rotate()
+    //--------------------------------------------------------------------METODOS PROPIOS--------------------------------------------------------------------
+
+    private void Rotate() //rotacion en el eje establecido a lo largo del tiempo
     {
         transform.Rotate(rotateVector * Time.deltaTime);
     }
