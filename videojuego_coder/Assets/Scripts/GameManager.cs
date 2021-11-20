@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public bool dontDestroyOnLoad;
     public static int playerStars = 0; //cantidad de stars del jugador
-    public static int enemyLives = 100; //cantidad de stars del jugador
+   
 
     private void Awake()
     {

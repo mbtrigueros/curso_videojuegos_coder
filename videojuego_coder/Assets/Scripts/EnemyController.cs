@@ -4,30 +4,26 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    enum BehaviourTypes { follow, walk }; //enum para declarar los tipos de rotacion que hara el enemigo
-
+    enum BehaviourTypes { follow, walk }; //enum para declarar los tipos de comportamiento que hara el enemigo
     [SerializeField] private BehaviourTypes behaviourtype; //variable del tipo de comportamiento
+
+    public int enemyLives = 50; //cantidad de stars del jugador. lo puse public para que pueda ser afectado por el script attack
+
     [SerializeField] private float speedEnemy = 4.0f; //velocidad a la que se mueve el enemigo
-    [SerializeField] float rotationSpeed;
 
     private GameObject player; //llamo al player para poder usarlo en el script
+    [SerializeField] private LayerMask playerMask;
 
     [SerializeField] Transform[] waypoints;
     [SerializeField] float minDistance;
-
-    [SerializeField] private Animator animEnemy;
-
-    [SerializeField] private LayerMask playerMask;
-
-    [SerializeField] private GameObject enemyCeiling;
-
-    private bool playerSeen = false;
-
     private int currentIndex = 0;
     private bool goBack = false;
 
-
+    [SerializeField] private Animator animEnemy;
+    [SerializeField] private GameObject enemyCeiling;
     private Rigidbody rbEnemy;
+
+    private bool playerSeen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +48,7 @@ public class EnemyController : MonoBehaviour
         EnemyDies();
 
         //switch para poder elegir desde el inspector el tipo de comportamiento que quiero que tenga el enemigo
+
          switch (behaviourtype)
          {
              case BehaviourTypes.follow:
@@ -73,7 +70,7 @@ public class EnemyController : MonoBehaviour
 
     private int EnemyLivesDown(int lives)
     { //parametro que indica la cantidad de vidas que pierde
-        return GameManager.enemyLives = GameManager.enemyLives - lives; //establezco la cantidad de vidas actuales
+        return enemyLives = enemyLives - lives; //establezco la cantidad de vidas actuales
     }
     
 
@@ -146,7 +143,7 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyDies()
     {
-        if (GameManager.enemyLives <= 0)
+        if (enemyLives <= 0)
         {
             Destroy(gameObject);
         }

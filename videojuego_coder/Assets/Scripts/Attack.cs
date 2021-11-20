@@ -12,7 +12,7 @@ public class Attack : MonoBehaviour
     void Start()
     {
         attack = GetComponent<ParticleSystem>();
-        particleCollisionEvents = new List<ParticleCollisionEvent>();
+        particleCollisionEvents = new List<ParticleCollisionEvent>(); //aca traigo todos los elementos con los que puede colisionar el sistema de particulas
     }
 
     // Update is called once per frame
@@ -25,13 +25,13 @@ public class Attack : MonoBehaviour
     {
         ParticlePhysicsExtensions.GetCollisionEvents(attack, other, particleCollisionEvents);
 
-        for(int i = 0; i <particleCollisionEvents.Count; i++)
+        for(int i = 0; i <particleCollisionEvents.Count; i++) //recorro la lista de colisiones
         {
-            var Collider = particleCollisionEvents[i].colliderComponent;
-            if (Collider.CompareTag("Enemy"))
+            var enem = particleCollisionEvents[i].colliderComponent; 
+            if (enem.CompareTag("Enemy")) //comparo el elemento de la lista y verifico  si tiene la tag Enemy
             {
-                GameManager.enemyLives--;
-                Debug.Log("Al enemigo le quedan: " + GameManager.enemyLives);
+                enem.GetComponent<EnemyController>().enemyLives--; //le bajo la vida al Enemy
+                Debug.Log("Al enemigo le quedan: " + enem.GetComponent<EnemyController>().enemyLives);
                 
             }
 

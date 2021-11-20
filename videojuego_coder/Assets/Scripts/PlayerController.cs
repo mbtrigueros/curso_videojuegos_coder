@@ -9,13 +9,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speedPlayer = 5f; //velocidad del jugador
     [SerializeField] private float forceJump = 50f; //fuerza del salto del jugador
 
-    //[SerializeField] private float rotationSpeed = 40f; // velocidad de rotacion 
-    //[SerializeField] private Vector3 initPosition = new Vector3(0, 0, 0); //posicion inicial del jugador
-    //[SerializeField] private Vector3 dir = new Vector3(-1, 0, 0); //direccion por default en la que va a moverse 
-
     [SerializeField] private GameObject[] cameras;
 
     [SerializeField] private ParticleSystem attack;
+
     [SerializeField] private float cooldown = 0.5f; //tiempo de descanso entre cada ataque
     [SerializeField] private bool beenShot = false; //variable booleana que establece si el ataque ha sido disparado o no
     [SerializeField] private float timePassed = 0f;
@@ -175,6 +172,11 @@ public class PlayerController : MonoBehaviour
 
         }
 
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+
         if (collision.gameObject.CompareTag("Floor"))
         {
             Debug.Log("Estoy tocando el piso");
@@ -229,20 +231,37 @@ public class PlayerController : MonoBehaviour
         playerMesh.transform.position += new Vector3(0, 2.69f, 0);
         
         cameras[0].SetActive(false);
-            cameras[1].SetActive(true);
-            Physics.gravity = gravedadMirror;
-            mirror = true;
+        cameras[1].SetActive(true);
+        Physics.gravity = gravedadMirror;
+        mirror = true;
 
 
             foreach (GameObject enemy in enemiesFloor)
            {
-               enemy.GetComponent<Rigidbody>().useGravity = false;
-           }
+            if (enemy !=null)
+            {
+                enemy.GetComponent<Rigidbody>().useGravity = false;
+            }
+            else
+            {
+                Debug.Log("Ya mataste a este enemigo");
+            }
+
+        }
 
             foreach (GameObject enemy in enemiesCeiling)
             {
 
+            if(enemy != null)
+
+            {
                 enemy.GetComponent<Rigidbody>().useGravity = true;
+            }
+            else
+            {
+                Debug.Log("Ya mataste a este enemigo");
+            }
+                
             }
 
     }
@@ -263,31 +282,28 @@ public class PlayerController : MonoBehaviour
 
         foreach (GameObject enemy in enemiesFloor)
         {
-            enemy.GetComponent<Rigidbody>().useGravity = true;
+            if (enemy != null)
+            {
+                enemy.GetComponent<Rigidbody>().useGravity = true;
+            }
+            else
+            {
+                Debug.Log("Ya mataste a este enemigo");
+            }
         }
 
         foreach (GameObject enemy in enemiesCeiling)
         {
-            enemy.GetComponent<Rigidbody>().useGravity = false;
+            if (enemy != null)
+            {
+                enemy.GetComponent<Rigidbody>().useGravity = false;
+            }
+            else
+            {
+                Debug.Log("Ya mataste a este enemigo");
+            }
         }
     }
-
-
-
-    //                                                                  COSAS QUE POR AHORA NO ESTOY USANDO
-
-
-    /* private void PlayerRotation()
-      {
-          float ejeVertical = Input.GetAxis("Vertical"); //establecemos el eje horizontal con getaxis
-          transform.Rotate(Vector3.up, ejeVertical * rotationSpeed * Time.deltaTime); //con el metodo rotate, el se genera un quaternion que permite que el jugador rote. Esta rotacion sera sobre el eje y (vector3.up), asi logramos que el jugador rote como es conveniente. Se controla esta rotacion con el input del eje x, es decir con las teclas A y D. 
-      }
-
-     //Metodo para que el jugador se mueva
-     /* private Vector3 PlayerMovement(Vector3 nuevaDir) { //paso como parametro la direccion que quiero que tome el jugador
-          dir = nuevaDir; //reemplazo la dir inicial con el valor que pase como parametro
-          return (transform.position +=  dir) * Time.deltaTime; //transforma la posicion del jugador en relacion a la direccion previamente designada. Agrego la funcion Time.deltaTime para que el movimiento sea constante
-      } */
 }
 
 

@@ -5,8 +5,6 @@ using UnityEngine;
 public class TrapController : MonoBehaviour
 {
 
-    [SerializeField] private float cooldown = 0.5f; //tiempo de descanso entre cada disparo
-    [SerializeField] private float timePassed = 0f;
 
     [SerializeField] private LayerMask playerMask;
 
@@ -14,7 +12,6 @@ public class TrapController : MonoBehaviour
 
     private Rigidbody rbTrap;
 
-    [SerializeField] private float speedFall = 12f;
 
     // Start is called before the first frame update
     void Start()
@@ -42,8 +39,8 @@ public class TrapController : MonoBehaviour
             playerDetected = true;
             Debug.DrawLine(ray.origin, hit.point, Color.red);
             rbTrap.useGravity = true;
-
         }
+
         else
         {
             Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100, Color.blue);
@@ -58,6 +55,7 @@ public class TrapController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Has muerto!!!!!!!!!!!!");
+            
             //Destroy(collision.gameObject);
         }
     }
