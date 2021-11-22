@@ -38,25 +38,23 @@ public class PlatformMovement : MonoBehaviour
 
         if (distance < minDistance) //si la distancia es menor a la distancia minima establecida
         {
-            if (currentIndex >= waypoints.Length - 1) //y el indice del array es mayor o igual al tamaño total del array -1
+            if (!goBack) 
             {
-                goBack = true; //vuelvo
+                for (currentIndex = 0; currentIndex >= waypoints.Length - 1; currentIndex++) //recorro el array de waypoints y determino de acuerdo a si el indice es 0 o del tamaño del array, si tengo que sumar o restar al indice
+                {
+                    transform.position += direction * speedPlatform * Time.deltaTime;
+                }
+                goBack = true;
             }
 
-            else if (currentIndex <= 0) //si el indice actual es menor o igual a 0 
+            else 
             {
-                goBack = false; //no vuelvo
+                for (currentIndex = waypoints.Length - 1; currentIndex <= 0; currentIndex--)
+                {
+                    transform.position += direction * speedPlatform * Time.deltaTime;
+                }
+                goBack = false;
             }
-
-            if (!goBack) //si no vuelvo, el indice aumenta
-            {
-                currentIndex++;
-            }
-
-            else if (goBack) //si vuelvo, el indice disminuy
-            {
-                currentIndex--;
-            }       
         }
     }
 

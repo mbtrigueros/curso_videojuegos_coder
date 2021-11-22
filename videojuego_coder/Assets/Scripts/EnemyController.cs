@@ -99,7 +99,7 @@ public class EnemyController : MonoBehaviour
     }
 
     //metodo de caminata por waypoints 
-    private void Walk() 
+    private void Walk()
     {
         animEnemy.SetBool("isWalking", true);
         animEnemy.SetBool("playerSeen", false);
@@ -116,27 +116,31 @@ public class EnemyController : MonoBehaviour
 
         if (distance < minDistance) //si la distancia es menor a la distancia minima establecida
         {
-            if (currentIndex >= waypoints.Length - 1) //y el indice del array es mayor o igual al tamaño total del array -1
+            if (distance < minDistance) //si la distancia es menor a la distancia minima establecida
             {
-                goBack = true; //vuelvo
-            }
+                if (!goBack)
+                {
+                    for (currentIndex = 0; currentIndex >= waypoints.Length - 1; currentIndex++) //recorro el array de waypoints y determino de acuerdo a si el indice es 0 o del tamaño del array, si tengo que sumar o restar al indice
+                    {
+                        transform.position += direction * speedEnemy * Time.deltaTime;
+                    }
+                    goBack = true;
+                }
 
-            else if (currentIndex <= 0) //si el indice actual es menor o igual a 0 
-            {
-                goBack = false; //no vuelvo
+                else
+                {
+                    for (currentIndex = waypoints.Length - 1; currentIndex <= 0; currentIndex--)
+                    {
+                        transform.position += direction * speedEnemy * Time.deltaTime;
+                    }
+                    goBack = false;
+                }
             }
-
-            if (!goBack) //si no vuelvo, el indice aumenta
-            {
-                currentIndex++;
-            }
-
-            else currentIndex--; //si vuelvo, el indice disminuye
         }
     }
 
-    //metodo para perseguir al enemigo
-    private void Chase() 
+        //metodo para perseguir al enemigo
+        private void Chase() 
     {
         animEnemy.SetBool("playerSeen", true); //determino la variable como cierta para activar la animacion de correr
 
