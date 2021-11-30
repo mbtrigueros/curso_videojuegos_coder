@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     //variables publicas
 
-    [SerializeField] private int playerLives = 100; //cantidad de vidas del jugador
     [SerializeField] private float speedPlayer = 5f; //velocidad del jugador
     [SerializeField] private float forceJump = 50f; //fuerza del salto del jugador
 
@@ -38,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log(Physics.gravity);
 
-        Debug.Log("La cantidad de vidas es: " + playerLives); //muestro por consola la cantidad de vidas para ver que este todo ok
+        Debug.Log("La cantidad de vidas es: " + GameManager.playerLives); //muestro por consola la cantidad de vidas para ver que este todo ok
 
         rbPlayer = GetComponent<Rigidbody>();
 
@@ -55,7 +54,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update() {
             
-        if(playerLives == 0) 
+        if(GameManager.playerLives == 0) 
         {
             Debug.Log("Has sido derrotadx por tus demonios :(");
         }
@@ -77,13 +76,18 @@ public class PlayerController : MonoBehaviour
     //Metodo para curar al jugador
     private int PlayerLivesUp(int lives)
     { //parametro que indica la cantidad de vidas que gana 
-        return playerLives = playerLives + lives; //establezco la cantidad de vidas actuales
+        return GameManager.playerLives = GameManager.playerLives + lives; //establezco la cantidad de vidas actuales
     }
 
     //Metodo para herir al jugador
     private int PlayerLivesDown(int lives)
     { //parametro que indica la cantidad de vidas que pierde
-        return playerLives = playerLives - lives; //establezco la cantidad de vidas actuales
+        return GameManager.playerLives = GameManager.playerLives - lives; //establezco la cantidad de vidas actuales
+    }
+
+    public int GetPlayerLives()
+    {
+        return GameManager.playerLives;
     }
 
     private int PlayerStarsUp()
@@ -264,18 +268,18 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy")) //si colisiona con un enemigo, pierde 2 vidas
         {
             PlayerLivesDown(2);
-            Debug.Log("La cantidad de vidas es: " + playerLives);
+            Debug.Log("La cantidad de vidas es: " + GameManager.playerLives);
         }
 
         if (collision.gameObject.CompareTag("Trap")) //si colisiona con una trampa, muere
         {
-            PlayerLivesDown(playerLives);
+            PlayerLivesDown(GameManager.playerLives);
             Debug.Log("Has muerto no tan estupidamente pero igual si");
         }
         
         if (collision.gameObject.CompareTag("Obstacle")) //si colisiona con el obstaculo generado por la fuente, muere
         {
-            PlayerLivesDown(playerLives);
+            PlayerLivesDown(GameManager.playerLives);
             Debug.Log("Has muerto estupidamente");
         }
 
