@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
     enum BehaviourTypes { follow, walk }; //enum para declarar los tipos de comportamiento que hara el enemigo
     [SerializeField] private BehaviourTypes behaviourtype; //variable del tipo de comportamiento
 
-    public int enemyLives = 50; //cantidad de vidas del enemigo. lo puse public para que pueda ser afectado por el script attack
+    private int enemyLives = 50; //cantidad de vidas del enemigo. lo puse public para que pueda ser afectado por el script attack
 
     [SerializeField] private float speedEnemy = 4.0f; //velocidad a la que se mueve el enemigo
 
@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private LayerMask playerMask; //llamo a la capa player
 
-    [SerializeField] Transform[] waypoints; //waypoints hacia los que se movera la plataforma
+    [SerializeField] Transform[] waypoints; //waypoints hacia los que se movera el enemigo
     [SerializeField] float minDistance; //distancia minima
     private int currentIndex = 0;
     private bool goBack = false; //variable booleana para establecer si vuelvo o no
@@ -27,6 +27,8 @@ public class EnemyController : MonoBehaviour
     private Rigidbody rbEnemy; //rigidbody del enemigo
 
     private bool playerSeen = false; //booleana para detectar si el player ha sido visto o no
+
+    [SerializeField] protected GameObject origen;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +49,7 @@ public class EnemyController : MonoBehaviour
     {
 
         
-        DetectPlayer();
+        DetectPlayer(origen.transform);
         EnemyDies();
 
         //switch para poder elegir desde el inspector el tipo de comportamiento que quiero que tenga el enemigo
@@ -76,9 +78,14 @@ public class EnemyController : MonoBehaviour
 
     //--------------------------------------------------------------------ENEMY HEALTH
 
-    private int EnemyLivesDown(int lives)
+    public int EnemyLivesDown(int lives)
     { //parametro que indica la cantidad de vidas que pierde
         return enemyLives = enemyLives - lives; //establezco la cantidad de vidas actuales
+    }
+
+    public int GetEnemyLives()
+    { //parametro que indica la cantidad de vidas que pierde
+        return enemyLives; //establezco la cantidad de vidas actuales
     }
 
     //metodo para destruir al enemigo
@@ -150,9 +157,9 @@ public class EnemyController : MonoBehaviour
         
     }
 
-    private void DetectPlayer() //metodo para detectar al player mediante raycast
+    private void DetectPlayer(Transform origen) //metodo para detectar al player mediante raycast
     {
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(origen.position, origen.TransformDirection(Vector3.forward));
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 10, playerMask))

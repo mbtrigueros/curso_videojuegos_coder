@@ -30,9 +30,9 @@ public class Attack : MonoBehaviour
             var enem = particleCollisionEvents[i].colliderComponent; 
             if (enem.CompareTag("Enemy")) //comparo el elemento de la lista y verifico  si tiene la tag Enemy
             {
-                enem.GetComponent<EnemyController>().enemyLives--; //le bajo la vida al Enemy
-                Debug.Log("Al enemigo le quedan: " + enem.GetComponent<EnemyController>().enemyLives);
-                
+                enem.GetComponent<Enemy>().EnemyLivesDown(); //le bajo la vida al Enemy
+                Debug.Log("Al enemigo le quedan: " + enem.GetComponent<Enemy>().GetEnemyLives());
+
             }
 
 

@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/UI/Landing.unity
     guid: 6e7a7280e716899419ea87beb4626c3a
   - enabled: 1
-    path: Assets/Scenes/Level_01.unity
+    path: Assets/Scenes/Level_01/Level_01.unity
     guid: abb680fd9872ce746a669c3602afdc38
   m_configObjects: {}
