@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HUDController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class HUDController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayerController.onPlayerDeath += OnPlayerDeathHandler;
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class HUDController : MonoBehaviour
     {
         int stars = GameManager.instance.GetStars();
 
-        textStars.text = "" + stars;
+        textStars.text = stars.ToString();
 
     }
 
@@ -36,6 +37,11 @@ public class HUDController : MonoBehaviour
 
         int lives = GameManager.instance.GetPlayerLives();
 
-        textLives.text = "" + lives;
+        textLives.text = lives.ToString();
+    }
+
+    void OnPlayerDeathHandler()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 }

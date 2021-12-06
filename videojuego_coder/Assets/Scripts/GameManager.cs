@@ -35,12 +35,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        PlayerController.onPlayerDeath += GameOver;
     }
 
     public int GetStars()
     {
         return playerStars;
+    }
+
+    public void GameOver()
+    {
+        playerStars = 0;
+        playerLives = 100;
     }
 
     public int GetPlayerLives()

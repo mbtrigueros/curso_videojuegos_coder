@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -32,8 +33,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animPlayer; //animacion del player
     [SerializeField]  private GameObject playerMesh; //mesh del player
 
+    public static event Action onPlayerDeath;
+
     // Start is called before the first frame update
     void Start() {
+
 
         Debug.Log(Physics.gravity);
 
@@ -56,6 +60,7 @@ public class PlayerController : MonoBehaviour
             
         if(GameManager.playerLives == 0) 
         {
+            OnPlayerDeath();
             Debug.Log("Has sido derrotadx por tus demonios :(");
         }
 
@@ -70,6 +75,13 @@ public class PlayerController : MonoBehaviour
     }
 
     //--------------------------------------------------------------------METODOS PROPIOS--------------------------------------------------------------------
+
+    //--------------------------------------------------------------------EVENTS
+
+    public static void OnPlayerDeath()
+    {
+        onPlayerDeath?.Invoke();
+    }
 
     //--------------------------------------------------------------------PLAYER HEALTH Y SCORE
 
