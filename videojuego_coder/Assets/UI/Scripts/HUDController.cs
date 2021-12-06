@@ -11,6 +11,11 @@ public class HUDController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textStars;
     [SerializeField] private TextMeshProUGUI textLives;
 
+    private void Awake()
+    {
+        PlayerController.onPlayerLivesChange += OnPlayerLivesChangeHandler;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +26,6 @@ public class HUDController : MonoBehaviour
     void Update()
     {
         UpdateStars();
-        UpdateLives();
     }
 
     void UpdateStars()
@@ -32,10 +36,8 @@ public class HUDController : MonoBehaviour
 
     }
 
-    void UpdateLives()
+    void OnPlayerLivesChangeHandler(int lives)
     {
-
-        int lives = GameManager.instance.GetPlayerLives();
 
         textLives.text = lives.ToString();
     }

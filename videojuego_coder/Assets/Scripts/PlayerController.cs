@@ -33,7 +33,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animPlayer; //animacion del player
     [SerializeField]  private GameObject playerMesh; //mesh del player
 
+    //variables de eventos
     public static event Action onPlayerDeath;
+    public static event Action<int> onPlayerLivesChange;
 
     // Start is called before the first frame update
     void Start() {
@@ -41,6 +43,8 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log(Physics.gravity);
 
+
+        onPlayerLivesChange?.Invoke(GameManager.playerLives);
         Debug.Log("La cantidad de vidas es: " + GameManager.playerLives); //muestro por consola la cantidad de vidas para ver que este todo ok
 
         rbPlayer = GetComponent<Rigidbody>();
@@ -88,17 +92,20 @@ public class PlayerController : MonoBehaviour
     //Metodo para curar al jugador
     private int PlayerLivesUp(int lives)
     { //parametro que indica la cantidad de vidas que gana 
+        onPlayerLivesChange?.Invoke(GameManager.playerLives);
         return GameManager.playerLives = GameManager.playerLives + lives; //establezco la cantidad de vidas actuales
     }
 
     //Metodo para herir al jugador
     private int PlayerLivesDown(int lives)
     { //parametro que indica la cantidad de vidas que pierde
+        onPlayerLivesChange?.Invoke(GameManager.playerLives);
         return GameManager.playerLives = GameManager.playerLives - lives; //establezco la cantidad de vidas actuales
     }
 
     public int GetPlayerLives()
     {
+        onPlayerLivesChange?.Invoke(GameManager.playerLives);
         return GameManager.playerLives;
     }
 
@@ -280,7 +287,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy")) //si colisiona con un enemigo, pierde 2 vidas
         {
             PlayerLivesDown(2);
-            Debug.Log("La cantidad de vidas es: " + GameManager.playerLives);
+            Debug.Log("La cantidad de vidas es: " + GameManager.instance.GetPlayerLives());
         }
 
         if (collision.gameObject.CompareTag("Trap")) //si colisiona con una trampa, muere

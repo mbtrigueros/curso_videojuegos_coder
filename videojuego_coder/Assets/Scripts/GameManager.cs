@@ -45,12 +45,25 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        playerStars = 0;
-        playerLives = 100;
+        ResetLives();
+        ResetStars();
+
     }
 
     public int GetPlayerLives()
     {
         return playerLives;
     }
+
+    public void ResetStars()
+    {
+        playerStars = 0;
+    }
+
+    public void ResetLives()
+    {
+        playerLives = 100;
+    }
+
+
 }
