@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float speedPlayer = 5f; //velocidad del jugador
     [SerializeField] private float forceJump = 50f; //fuerza del salto del jugador
+    private bool pressedJump;
 
     [SerializeField] private GameObject[] cameras; //llamo a las camaras virtuales
 
@@ -60,14 +61,23 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
-            
-        if(GameManager.playerLives == 0) 
+    void Update()
+    {
+
+        if (GameManager.playerLives == 0)
         {
             OnPlayerDeath();
             Debug.Log("Has sido derrotadx por tus demonios :(");
         }
 
+        if (Input.GetKeyDown(KeyCode.Z) && isGrounded) //si apreto Z y estoy en el piso
+        {
+            pressedJump = true; //esta variable es para que el input del jugador se maneje en el update y no el fixed update porque puede traer problemas de
+
+        }
+        if (Input.GetKeyDown(KeyCode.C)){
+            pressedDash = true;
+        }
     }
 
     void FixedUpdate() //como estoy moviendo al jugador con las fuerzas del rigidbody, llamo a los metodos en el fixedupdate
@@ -75,6 +85,7 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
         PlayerJump();
         PlayerAttack();
+        PlayerDash();
 
     }
 
@@ -116,10 +127,13 @@ public class PlayerController : MonoBehaviour
 
     //--------------------------------------------------------------------MOVIMIENTO Y ATAQUE
 
+    bool facingLeft;
+
     //Metodo para que el jugador se mueva con el input del usuario. 
     private void PlayerMove()
-    {
+    {    
         float ejeHorizontal = Input.GetAxis("Horizontal"); //establecemos el eje horizontal con getaxis
+
         rbPlayer.velocity = new Vector3(ejeHorizontal * speedPlayer, rbPlayer.velocity.y, 0); //modifico la velocidad del jugador para poder moverlo a traves del input. en el ejehorizontal estara el input, en el vertical queda igual(10 unidades por segundo) y en el z es 0. esto es para poder moverlo unicamente en los ejes horizontal y vertical, y no en el eje z.
 
         transform.forward = new Vector3(ejeHorizontal, 0, (Mathf.Abs(ejeHorizontal) - 1)); //con este metodo transformo la direccion en la que mira el jugador. paso el input como parametro horizontal, 0 al vertical, y en el eje z saco el absoluto del horizontal (es decir el modulo) y le resto 1. 
@@ -137,6 +151,8 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    [SerializeField] private float fallMultiplier;
+
     //metodo para que el jugador salte al apretar Z
     private void PlayerJump()
     {
@@ -144,7 +160,7 @@ public class PlayerController : MonoBehaviour
         Vector3 jump = Vector3.up; //vector up es 1 en el eje y
         Vector3 jumpMirror = Vector3.down; //vector down es -1 en el eje y
 
-        if (Input.GetKeyDown(KeyCode.Z) && isGrounded) //si apreto Z y estoy en el piso
+        if (pressedJump) //si apreto Z y estoy en el piso
         {
             animPlayer.SetBool("isJumping", true); //animacion para que el jugador salte
             if (mirror) //si esta en el espejo
@@ -164,6 +180,56 @@ public class PlayerController : MonoBehaviour
         {
             animPlayer.SetBool("isJumping", false); //si no apreto Z o si no estoy en el piso, la animacion es false
         }
+
+        pressedJump = false;
+
+        if (mirror)
+        {
+            if (rbPlayer.velocity.y < 0 && !Input.GetKey(KeyCode.Z))
+            {
+                rbPlayer.AddForce(-fallMultiplier * gravedadMirror.y * jumpMirror, ForceMode.Acceleration);
+                //rbPlayer.velocity += fallMultiplier * Physics.gravity.y * jump * Time.deltaTime;
+            }
+
+        }
+
+        else
+
+        {
+            if (rbPlayer.velocity.y > 0 && !Input.GetKey(KeyCode.Z))
+            {
+                rbPlayer.AddForce(fallMultiplier * gravedad.y * jump, ForceMode.Acceleration);
+                //rbPlayer.velocity += fallMultiplier * Physics.gravity.y * jump * Time.deltaTime;
+            }
+        }
+    }
+
+    private bool dashed;
+    private bool pressedDash;
+    private float dashCooldown = 0.2f;
+    private float time;
+
+    private void PlayerDash()
+    {
+        if (pressedDash && !dashed)
+        {
+            Debug.Log("estoy dashing");
+            rbPlayer.useGravity = false;
+            rbPlayer.AddForce(transform.forward * 1000f, ForceMode.Impulse);
+            dashed = true;
+        }
+        if (dashed)
+        {
+            time += Time.deltaTime;
+        }
+        if (time >= dashCooldown)
+        {
+            rbPlayer.useGravity = true;
+            time = 0f;
+            dashed = false;
+        }
+
+        pressedDash = false;
     }
 
 
