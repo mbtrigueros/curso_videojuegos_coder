@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject[] cameras; //llamo a las camaras virtuales
 
+
+    [SerializeField] private ParticleSystem footsteps; //llamo al sistema de particulas que hara de "polvo" al caminar
     [SerializeField] private ParticleSystem attack; //llamo al sistema de particulas que hara de ataque
     [SerializeField] private float cooldown = 0.5f; //tiempo de descanso entre cada ataque
     [SerializeField] private bool beenShot = false; //variable booleana que establece si el ataque ha sido disparado o no
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour
 
         animPlayer.SetBool("isRunning", false); //determino las variables de animacion de correr y saltar como falsas por default
         animPlayer.SetBool("isJumping", false);
+        
 
         foreach (GameObject enemy in enemiesCeiling) //recorro el array de enemigos del techo, y con un foreach le asigno a cada componente del array lo que pongo dentro del for
         {
@@ -75,8 +78,13 @@ public class PlayerController : MonoBehaviour
             pressedJump = true; //esta variable es para que el input del jugador se maneje en el update y no el fixed update porque puede traer problemas de
 
         }
-        if (Input.GetKeyDown(KeyCode.C)){
+        if (Input.GetKeyDown(KeyCode.C))
+        {
             pressedDash = true;
+        }
+        else
+        {
+            pressedDash = false;
         }
     }
 
@@ -127,7 +135,6 @@ public class PlayerController : MonoBehaviour
 
     //--------------------------------------------------------------------MOVIMIENTO Y ATAQUE
 
-    bool facingLeft;
 
     //Metodo para que el jugador se mueva con el input del usuario. 
     private void PlayerMove()
@@ -142,6 +149,8 @@ public class PlayerController : MonoBehaviour
         if (ejeHorizontal != 0)
         {
             animPlayer.SetBool("isRunning", true);
+            if(isGrounded) footsteps.Play(); //disparo las particulas
+
         }
 
         else
@@ -206,16 +215,19 @@ public class PlayerController : MonoBehaviour
 
     private bool dashed;
     private bool pressedDash;
-    private float dashCooldown = 0.2f;
+    private float dashCooldown = 0.7f;
     private float time;
+
+    private float dashVelocity = 250f;
 
     private void PlayerDash()
     {
         if (pressedDash && !dashed)
         {
+            
             Debug.Log("estoy dashing");
             rbPlayer.useGravity = false;
-            rbPlayer.AddForce(transform.forward * 1000f, ForceMode.Impulse);
+            rbPlayer.AddForce(transform.forward * dashVelocity, ForceMode.VelocityChange);
             dashed = true;
         }
         if (dashed)
@@ -227,9 +239,10 @@ public class PlayerController : MonoBehaviour
             rbPlayer.useGravity = true;
             time = 0f;
             dashed = false;
+            
         }
-
-        pressedDash = false;
+        
+        
     }
 
 
