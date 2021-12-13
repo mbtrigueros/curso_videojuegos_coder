@@ -5,18 +5,20 @@ using UnityEngine;
 public class EnemyFollow : Enemy
 {
 
-    private GameObject player; //llamo al player para poder usarlo en el 
+    private GameObject player; //llamo al player para poder usarlo
     [SerializeField] private LayerMask playerMask; //llamo a la capa player
 
 
     private bool playerSeen = false; //booleana para detectar si el player ha sido visto o no
 
     [SerializeField] protected GameObject origen;
+    protected Rigidbody rbEnemy; //rigidbody del enemigo
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player"); // con el metodo find busco al jugador
+        rbEnemy = GetComponent<Rigidbody>(); //rigidbody enemigo
     }
 
     // Update is called once per frame
@@ -24,7 +26,7 @@ public class EnemyFollow : Enemy
     {
         EnemyDies();
         DetectPlayer(origen.transform);
-        if (playerSeen)
+        if (playerSeen && rbEnemy.useGravity == true)
         {
             Chase();
         }
@@ -42,7 +44,9 @@ public class EnemyFollow : Enemy
 
         Vector3 dir = (player.transform.position - transform.position);  //obtengo el vector entre la posicion del jugador y la del enemigo
 
-        transform.position += enemyData.SpeedEnemy * dir.normalized * Time.deltaTime;  //el metodo normalized es para que me devuelva el vector normalizado, es decir que su magnitud sea 1
+        transform.forward = dir.normalized * Time.deltaTime; //modifico el forward para que el frente del enemigo coincida con la direccion
+
+        transform.position +=  enemyData.SpeedEnemy * transform.forward  * Time.deltaTime;  //el metodo normalized es para que me devuelva el vector normalizado, es decir que su magnitud sea 1
 
     }
 

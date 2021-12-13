@@ -14,15 +14,14 @@ public class Enemy : MonoBehaviour
     private bool goBack = false; //variable booleana para establecer si vuelvo o no
 
     [SerializeField] protected Animator animEnemy; //animacion del enemigo 
-    protected Rigidbody rbEnemy; //rigidbody del enemigo
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         animEnemy.SetBool("isWalking", true); //determino las variables de animacion de correr como falsa por default y la de caminar como verdadera
         animEnemy.SetBool("playerSeen", false);
-
-        rbEnemy = GetComponent<Rigidbody>(); //rigidbody enemigo
 
     }
 

@@ -42,16 +42,15 @@ public class PlayerController : MonoBehaviour
     //variables de eventos
     public static event Action onPlayerDeath;
     public static event Action<int> onPlayerLivesChange;
+    public static event Action<int> onPlayerStarsChange;
 
     // Start is called before the first frame update
     void Start() {
 
+        Debug.Log("Tenes estas vidas " + GetPlayerLives());
+        Debug.Log("Tenes estas stars " + GetPlayerStars());
 
         Debug.Log(Physics.gravity);
-
-
-        onPlayerLivesChange?.Invoke(GameManager.playerLives);
-        Debug.Log("La cantidad de vidas es: " + GameManager.playerLives); //muestro por consola la cantidad de vidas para ver que este todo ok
 
         rbPlayer = GetComponent<Rigidbody>();
 
@@ -134,14 +133,14 @@ public class PlayerController : MonoBehaviour
     //--------------------------------------------------------------------PLAYER HEALTH Y SCORE
 
     //Metodo para curar al jugador
-    private int PlayerLivesUp(int lives)
+    public int PlayerLivesUp(int lives)
     { //parametro que indica la cantidad de vidas que gana 
         onPlayerLivesChange?.Invoke(GameManager.playerLives);
         return GameManager.playerLives = GameManager.playerLives + lives; //establezco la cantidad de vidas actuales
     }
 
     //Metodo para herir al jugador
-    private int PlayerLivesDown(int lives)
+    public int PlayerLivesDown(int lives)
     { //parametro que indica la cantidad de vidas que pierde
         onPlayerLivesChange?.Invoke(GameManager.playerLives);
         return GameManager.playerLives = GameManager.playerLives - lives; //establezco la cantidad de vidas actuales
@@ -153,8 +152,15 @@ public class PlayerController : MonoBehaviour
         return GameManager.playerLives;
     }
 
-    private int PlayerStarsUp()
+    public int GetPlayerStars()
+    {
+        onPlayerStarsChange?.Invoke(GameManager.playerStars);
+        return GameManager.playerStars;
+    }
+
+    public int PlayerStarsUp()
     { //parametro que indica la cantidad de vidas que gana 
+        onPlayerStarsChange?.Invoke(GameManager.playerStars);
         return GameManager.playerStars++;
     }
 
@@ -354,8 +360,8 @@ public class PlayerController : MonoBehaviour
         playerMesh.transform.position += new Vector3(0, -2.69f, 0);
         footsteps.transform.position = footsteps.transform.position = playerMesh.transform.position + new Vector3(0, 0.24f, 0);
 
-        cameras[1].SetActive(false);
-        cameras[0].SetActive(true);
+        //cameras[1].SetActive(false); ahora estoy usando un unity event para manejar esto
+        //cameras[0].SetActive(true);
 
         Physics.gravity = gravedad;
         mirror = false;
@@ -438,14 +444,14 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Star")) //si toco las estrellas las "agarro" 
         {
             PlayerStarsUp();
-            Debug.Log("Tienes " +  GameManager.playerStars + " estrellas");
-            Destroy(other.gameObject);
+            Debug.Log("Tienes " +  GetPlayerStars() + " estrellas");
+            other.gameObject.SetActive(false);
         }
 
         else if (other.gameObject.CompareTag("Mirror") && !mirror) //atravieso el espejo y paso al techo
         {
             enterUpsideDown();
-            
+
         }
         
         else if(other.gameObject.CompareTag("Mirror") && mirror) //vuelvo a atravesar el espejo y retorno a la normalidad

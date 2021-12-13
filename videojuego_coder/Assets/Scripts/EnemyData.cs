@@ -28,7 +28,7 @@ public class EnemyData : ScriptableObject
     {
         if (enemyLives <= 0)
         {
-            Destroy(enemy);
+            enemy.SetActive(false);
         }
         
     }

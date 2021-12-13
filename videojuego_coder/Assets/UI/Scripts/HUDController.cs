@@ -14,6 +14,7 @@ public class HUDController : MonoBehaviour
     private void Awake()
     {
         PlayerController.onPlayerLivesChange += OnPlayerLivesChangeHandler;
+        PlayerController.onPlayerStarsChange += OnPlayerStarsChangeHandler;
     }
 
     // Start is called before the first frame update
@@ -25,21 +26,26 @@ public class HUDController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateStars();
+       // UpdateStars();
     }
 
-    void UpdateStars()
-    {
-        int stars = GameManager.instance.GetStars();
+    //void UpdateStars()
+    //{
+    //    int stars = GameManager.instance.GetStars();
 
-        textStars.text = stars.ToString();
+    //    textStars.text = stars.ToString();
 
-    }
+    //}
 
     void OnPlayerLivesChangeHandler(int lives)
     {
 
         textLives.text = lives.ToString();
+    }
+    void OnPlayerStarsChangeHandler(int stars)
+    {
+
+        textStars.text = stars.ToString();
     }
 
     void OnPlayerDeathHandler()
