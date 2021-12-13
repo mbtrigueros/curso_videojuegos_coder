@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject[] enemiesFloor; //llamo a los enemigos que estaran en el suelo
     [SerializeField] private GameObject[] enemiesCeiling; //lamo a los enemigos que estaran en el techo
+    private GameObject[] enemies;
 
     private Rigidbody rbPlayer; //rogodbody del player
     
@@ -43,6 +46,7 @@ public class PlayerController : MonoBehaviour
     public static event Action onPlayerDeath;
     public static event Action<int> onPlayerLivesChange;
     public static event Action<int> onPlayerStarsChange;
+    [SerializeField] private UnityEvent onAllEnemiesDeath;
 
     // Start is called before the first frame update
     void Start() {
@@ -66,6 +70,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        OnAllEnemiesDeath();
 
         if (GameManager.playerLives == 0)
         {
@@ -128,6 +133,17 @@ public class PlayerController : MonoBehaviour
     public static void OnPlayerDeath()
     {
         onPlayerDeath?.Invoke();
+    }
+
+    public void OnAllEnemiesDeath()
+    {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        
+        if (enemies.Length == 0)
+        {
+            onAllEnemiesDeath?.Invoke();
+        }
+        
     }
 
     //--------------------------------------------------------------------PLAYER HEALTH Y SCORE
