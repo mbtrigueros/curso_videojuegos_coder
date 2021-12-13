@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
         rbPlayer = GetComponent<Rigidbody>();
 
         animPlayer.SetBool("isRunning", false); //determino las variables de animacion de correr y saltar como falsas por default
-        animPlayer.SetBool("isJumping", false);
 
         foreach (GameObject enemy in enemiesCeiling) //recorro el array de enemigos del techo, y con un foreach le asigno a cada componente del array lo que pongo dentro del for
         {
@@ -78,13 +77,26 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z) && isGrounded)  //si apreto Z y estoy en el piso
         {
             pressedJump = true; //esta variable es para que el input del jugador se maneje en el update y no el fixed update porque puede traer problemas de
+            hasDoubleJumped = false;
+
+        }
+
+        else if(Input.GetKeyDown(KeyCode.Z) && !isGrounded && !hasDoubleJumped) {
+
+            doubleJump = true;
+            hasDoubleJumped = true;
+
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Z) && hasDoubleJumped)
+        {
+            doubleJump = false;
+
 
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
             pressedDash = true;
-            dashEffect.transform.position = footsteps.transform.position;
-            dashEffect.Play();
         }
         else
         {
@@ -174,7 +186,8 @@ public class PlayerController : MonoBehaviour
     }
 
     [SerializeField] private float fallMultiplier;
-
+    private bool hasDoubleJumped;
+    private bool doubleJump;
     //metodo para que el jugador salte al apretar Z
     private void PlayerJump()
     {
@@ -182,9 +195,9 @@ public class PlayerController : MonoBehaviour
         Vector3 jump = Vector3.up; //vector up es 1 en el eje y
         Vector3 jumpMirror = Vector3.down; //vector down es -1 en el eje y
 
-        if (pressedJump) //si apreto Z y estoy en el piso
+        if (pressedJump || doubleJump) //si pressedJump es true
         {
-            animPlayer.SetBool("isJumping", true); //animacion para que el jugador salte
+            animPlayer.SetTrigger(doubleJump ? "isDoubleJumping" : "isJumping"); //animacion para que el jugador salte
             if (mirror) //si esta en el espejo
             {
                 Debug.Log("Salto en el mirror");
@@ -197,20 +210,17 @@ public class PlayerController : MonoBehaviour
                 rbPlayer.AddForce(jump * forceJump, ForceMode.Impulse); //aplico fuerza en el vector jump
             }
         }
-
-        else
-        {
-            animPlayer.SetBool("isJumping", false); //si no apreto Z o si no estoy en el piso, la animacion es false
-        }
+        
 
         pressedJump = false;
+        doubleJump = false;
+
 
         if (mirror)
         {
             if (rbPlayer.velocity.y < 0 && !Input.GetKey(KeyCode.Z))
             {
                 rbPlayer.AddForce(-fallMultiplier * gravedadMirror.y * jumpMirror, ForceMode.Acceleration);
-                //rbPlayer.velocity += fallMultiplier * Physics.gravity.y * jump * Time.deltaTime;
             }
 
         }
@@ -221,7 +231,6 @@ public class PlayerController : MonoBehaviour
             if (rbPlayer.velocity.y > 0 && !Input.GetKey(KeyCode.Z))
             {
                 rbPlayer.AddForce(fallMultiplier * gravedad.y * jump, ForceMode.Acceleration);
-                //rbPlayer.velocity += fallMultiplier * Physics.gravity.y * jump * Time.deltaTime;
             }
         }
     }
@@ -240,7 +249,8 @@ public class PlayerController : MonoBehaviour
 
         if (pressedDash && !dashed)
         {
-            
+            dashEffect.transform.position = footsteps.transform.position;
+            dashEffect.Play();
             Debug.Log("estoy dashing");
             rbPlayer.useGravity = false;
             rbPlayer.AddForce(new Vector3(ejeHorizontal * 2f, ejeVertical * 0.3f, 0) * dashVelocity, ForceMode.Impulse);
