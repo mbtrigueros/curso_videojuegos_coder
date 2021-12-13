@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject[] cameras; //llamo a las camaras virtuales
 
-
+    [SerializeField] private ParticleSystem dashEffect; //llamo al sistema de particulas que hara el efecto del dash
+    [SerializeField] private ParticleSystem impact; //llamo al sistema de particulas que hara de impacto al caer
     [SerializeField] private ParticleSystem footsteps; //llamo al sistema de particulas que hara de "polvo" al caminar
     [SerializeField] private ParticleSystem attack; //llamo al sistema de particulas que hara de ataque
     [SerializeField] private float cooldown = 0.5f; //tiempo de descanso entre cada ataque
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rbPlayer; //rogodbody del player
     
     private bool isGrounded = true; //booleana para identificar si el jugador esta en el piso
+    private bool wasGrounded = false; //booleana para identificar si el jugador estaba en el piso en el frame anterior
 
     private bool mirror = false; //booleana que establece si estas en el espejo o no
     private Vector3 gravedad = new Vector3(0, -9.8f, 0); // valor habitual de la gravedad en juego
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Animator animPlayer; //animacion del player
     [SerializeField]  private GameObject playerMesh; //mesh del player
+
 
     //variables de eventos
     public static event Action onPlayerDeath;
@@ -54,7 +57,6 @@ public class PlayerController : MonoBehaviour
 
         animPlayer.SetBool("isRunning", false); //determino las variables de animacion de correr y saltar como falsas por default
         animPlayer.SetBool("isJumping", false);
-        
 
         foreach (GameObject enemy in enemiesCeiling) //recorro el array de enemigos del techo, y con un foreach le asigno a cada componente del array lo que pongo dentro del for
         {
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Has sido derrotadx por tus demonios :(");
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) && isGrounded) //si apreto Z y estoy en el piso
+        if (Input.GetKeyDown(KeyCode.Z) && isGrounded)  //si apreto Z y estoy en el piso
         {
             pressedJump = true; //esta variable es para que el input del jugador se maneje en el update y no el fixed update porque puede traer problemas de
 
@@ -81,11 +83,22 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             pressedDash = true;
+            dashEffect.transform.position = footsteps.transform.position;
+            dashEffect.Play();
         }
         else
         {
             pressedDash = false;
         }
+
+        if (!wasGrounded && isGrounded)
+        {
+            impact.transform.position = footsteps.transform.position;
+            impact.Play();
+            
+        }
+        wasGrounded = isGrounded;
+
     }
 
     void FixedUpdate() //como estoy moviendo al jugador con las fuerzas del rigidbody, llamo a los metodos en el fixedupdate
@@ -215,19 +228,22 @@ public class PlayerController : MonoBehaviour
 
     private bool dashed;
     private bool pressedDash;
-    private float dashCooldown = 0.7f;
+    private float dashCooldown = 0.3f;
     private float time;
 
-    private float dashVelocity = 250f;
+    private float dashVelocity = 550f;
 
     private void PlayerDash()
     {
+        float ejeHorizontal = Input.GetAxis("Horizontal"); //establecemos el eje horizontal con getaxis
+        float ejeVertical = Input.GetAxis("Vertical"); //establecemos el eje horizontal con getaxis
+
         if (pressedDash && !dashed)
         {
             
             Debug.Log("estoy dashing");
             rbPlayer.useGravity = false;
-            rbPlayer.AddForce(transform.forward * dashVelocity, ForceMode.VelocityChange);
+            rbPlayer.AddForce(new Vector3(ejeHorizontal * 2f, ejeVertical * 0.3f, 0) * dashVelocity, ForceMode.Impulse);
             dashed = true;
         }
         if (dashed)
@@ -277,6 +293,7 @@ public class PlayerController : MonoBehaviour
 
         playerMesh.transform.Rotate(new Vector3(0, 0, -180), Space.Self); //roto y bajo el personaje para que este alineado con el piso
         playerMesh.transform.position += new Vector3(0, 2.69f, 0);
+        footsteps.transform.position = playerMesh.transform.position + new Vector3(0, -0.24f, 0);
 
         cameras[0].SetActive(false); //cambio las camaras
         cameras[1].SetActive(true);
@@ -325,6 +342,7 @@ public class PlayerController : MonoBehaviour
 
         playerMesh.transform.Rotate(new Vector3(0, 180f, 180f), Space.World);
         playerMesh.transform.position += new Vector3(0, -2.69f, 0);
+        footsteps.transform.position = footsteps.transform.position = playerMesh.transform.position + new Vector3(0, 0.24f, 0);
 
         cameras[1].SetActive(false);
         cameras[0].SetActive(true);
