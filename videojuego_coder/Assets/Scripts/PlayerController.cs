@@ -72,16 +72,20 @@ public class PlayerController : MonoBehaviour
     {
         OnAllEnemiesDeath();
 
-        if (GameManager.playerLives == 0)
-        {
+        if (GameManager.playerLives == 0){
             OnPlayerDeath();
             Debug.Log("Has sido derrotadx por tus demonios :(");
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) && isGrounded)  //si apreto Z y estoy en el piso
+
+        var coyote = isGrounded ? coyoteTimeCounter = coyoteTime : coyoteTimeCounter -= Time.deltaTime;
+
+
+        if (Input.GetKeyDown(KeyCode.Z) && coyoteTimeCounter > 0f)  //si apreto Z y estoy en el piso
         {
             pressedJump = true; //esta variable es para que el input del jugador se maneje en el update y no el fixed update porque puede traer problemas de
             hasDoubleJumped = false;
+            coyoteTimeCounter = 0f;
 
         }
 
@@ -96,16 +100,10 @@ public class PlayerController : MonoBehaviour
         {
             doubleJump = false;
 
+        }
 
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            pressedDash = true;
-        }
-        else
-        {
-            pressedDash = false;
-        }
+        var dash = Input.GetKeyDown(KeyCode.C) ? pressedDash = true : pressedDash = false;
+        
 
         if (!wasGrounded && isGrounded)
         {
@@ -113,6 +111,7 @@ public class PlayerController : MonoBehaviour
             impact.Play();
             
         }
+
         wasGrounded = isGrounded;
 
     }
@@ -138,11 +137,8 @@ public class PlayerController : MonoBehaviour
     public void OnAllEnemiesDeath()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        
-        if (enemies.Length == 0)
-        {
-            onAllEnemiesDeath?.Invoke();
-        }
+
+        if (enemies.Length == 0) onAllEnemiesDeath?.Invoke();
         
     }
 
@@ -197,7 +193,6 @@ public class PlayerController : MonoBehaviour
         {
             animPlayer.SetBool("isRunning", true);
             if(isGrounded) footsteps.Play(); //disparo las particulas
-
         }
 
         else
@@ -210,12 +205,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float fallMultiplier;
     private bool hasDoubleJumped;
     private bool doubleJump;
-    //metodo para que el jugador salte al apretar Z
+    //declaro variables tanto para el salto en el contexto normal como en el espejo.
+    Vector3 jump = Vector3.up; //vector up es 1 en el eje y
+    Vector3 jumpMirror = Vector3.down; //vector down es -1 en el eje y
+                                       //metodo para que el jugador salte al apretar Z
+    private float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
+
     private void PlayerJump()
     {
-        //declaro variables tanto para el salto en el contexto normal como en el espejo.
-        Vector3 jump = Vector3.up; //vector up es 1 en el eje y
-        Vector3 jumpMirror = Vector3.down; //vector down es -1 en el eje y
+
 
         if (pressedJump || doubleJump) //si pressedJump es true
         {
@@ -240,26 +239,19 @@ public class PlayerController : MonoBehaviour
 
         if (mirror)
         {
-            if (rbPlayer.velocity.y < 0 && !Input.GetKey(KeyCode.Z))
-            {
-                rbPlayer.AddForce(-fallMultiplier * gravedadMirror.y * jumpMirror, ForceMode.Acceleration);
-            }
-
+            if (rbPlayer.velocity.y < 0 && !Input.GetKey(KeyCode.Z)) rbPlayer.AddForce(-fallMultiplier * gravedadMirror.y * jumpMirror, ForceMode.Acceleration);
         }
 
         else
 
         {
-            if (rbPlayer.velocity.y > 0 && !Input.GetKey(KeyCode.Z))
-            {
-                rbPlayer.AddForce(fallMultiplier * gravedad.y * jump, ForceMode.Acceleration);
-            }
+            if (rbPlayer.velocity.y > 0 && !Input.GetKey(KeyCode.Z))rbPlayer.AddForce(fallMultiplier * gravedad.y * jump, ForceMode.Acceleration);
         }
     }
 
     private bool dashed;
     private bool pressedDash;
-    private float dashCooldown = 0.3f;
+    private float dashCooldown = 1f;
     private float time;
 
     private float dashVelocity = 550f;
@@ -278,10 +270,9 @@ public class PlayerController : MonoBehaviour
             rbPlayer.AddForce(new Vector3(ejeHorizontal * 2f, ejeVertical * 0.3f, 0) * dashVelocity, ForceMode.Impulse);
             dashed = true;
         }
-        if (dashed)
-        {
-            time += Time.deltaTime;
-        }
+        
+        if (dashed) time += Time.deltaTime;
+
         if (time >= dashCooldown)
         {
             rbPlayer.useGravity = true;
@@ -289,8 +280,6 @@ public class PlayerController : MonoBehaviour
             dashed = false;
             
         }
-        
-        
     }
 
 
@@ -303,10 +292,8 @@ public class PlayerController : MonoBehaviour
             attack.Play(); //disparo las particulas
         }
 
-        if (beenShot) //si beenShot es true, se empieza a contar el tiempo pasado
-        {
-            timePassed += Time.deltaTime;
-        }
+        //si beenShot es true, se empieza a contar el tiempo
+        if (beenShot) timePassed += Time.deltaTime;
 
         if (timePassed > cooldown) // si el tiempo pasado es mayor al establecido en el cooldown, se reinicia el contador, y la variable beenShot vuelve a ser falsa
         {
@@ -323,12 +310,13 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("Cruce el espejo");
 
+        //--------------------------------------------------------------------REVISAR ESTO, CREO QUE TENGO QUE RESETEAR LA POSICION DE LOS HIJOS, POR EL TEMA DEL COLLIDER Y EL PLAYERMESH
         playerMesh.transform.Rotate(new Vector3(0, 0, -180), Space.Self); //roto y bajo el personaje para que este alineado con el piso
         playerMesh.transform.position += new Vector3(0, 2.69f, 0);
         footsteps.transform.position = playerMesh.transform.position + new Vector3(0, -0.24f, 0);
 
-        cameras[0].SetActive(false); //cambio las camaras
-        cameras[1].SetActive(true);
+        //cameras[0].SetActive(false); //cambio las camaras
+        //cameras[1].SetActive(true);
 
         Physics.gravity = gravedadMirror; //invierto la gravedad
         mirror = true;
@@ -336,31 +324,19 @@ public class PlayerController : MonoBehaviour
 
         foreach (GameObject enemy in enemiesFloor) //convierto el uso de gravedad de los enemigos en el piso a falso, asi no se caen :) 
         {
+            //primero chequeo que el enemigo exista sino me pincha todo
+            if (enemy != null) enemy.GetComponent<Rigidbody>().useGravity = false;
 
-            if (enemy != null) //primero chequeo que el enemigo exista sino me pincha todo
-            {
-                enemy.GetComponent<Rigidbody>().useGravity = false;
-            }
-
-            else
-            {
-                Debug.Log("Ya mataste a este enemigo");
-            }
+            else Debug.Log("Ya mataste a este enemigo");
 
         }
 
         foreach (GameObject enemy in enemiesCeiling) //convierto el uso de gravedad de los enemigos en el techo a verdadero
         {
 
-            if (enemy != null)
-            {
-                enemy.GetComponent<Rigidbody>().useGravity = true;
-            }
+            if (enemy != null) enemy.GetComponent<Rigidbody>().useGravity = true;
 
-            else
-            {
-                Debug.Log("Ya mataste a este enemigo");
-            }
+            else Debug.Log("Ya mataste a este enemigo");
 
         }
 
@@ -372,6 +348,7 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("Volvi a la normalidad");
 
+        //--------------------------------------------------------------------REVISAR ESTO, CREO QUE TENGO QUE RESETEAR LA POSICION DE LOS HIJOS, POR EL TEMA DEL COLLIDER Y EL PLAYERMESH
         playerMesh.transform.Rotate(new Vector3(0, 180f, 180f), Space.World);
         playerMesh.transform.position += new Vector3(0, -2.69f, 0);
         footsteps.transform.position = footsteps.transform.position = playerMesh.transform.position + new Vector3(0, 0.24f, 0);
@@ -384,26 +361,16 @@ public class PlayerController : MonoBehaviour
 
         foreach (GameObject enemy in enemiesFloor)
         {
-            if (enemy != null)
-            {
-                enemy.GetComponent<Rigidbody>().useGravity = true;
-            }
-            else
-            {
-                Debug.Log("Ya mataste a este enemigo");
-            }
+            if (enemy != null) enemy.GetComponent<Rigidbody>().useGravity = true;
+
+            else Debug.Log("Ya mataste a este enemigo");
         }
 
         foreach (GameObject enemy in enemiesCeiling)
         {
-            if (enemy != null)
-            {
-                enemy.GetComponent<Rigidbody>().useGravity = false;
-            }
-            else
-            {
-                Debug.Log("Ya mataste a este enemigo");
-            }
+            if (enemy != null) enemy.GetComponent<Rigidbody>().useGravity = false;
+
+            else Debug.Log("Ya mataste a este enemigo");
         }
     }
 
@@ -464,16 +431,12 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
         }
 
-        else if (other.gameObject.CompareTag("Mirror") && !mirror) //atravieso el espejo y paso al techo
-        {
-            enterUpsideDown();
+        //atravieso el espejo y paso al techo
+        else if (other.gameObject.CompareTag("Mirror") && !mirror) enterUpsideDown();
 
-        }
+        //vuelvo a atravesar el espejo y retorno a la normalidad
+        else if (other.gameObject.CompareTag("Mirror") && mirror) outOfUpsideDown();
         
-        else if(other.gameObject.CompareTag("Mirror") && mirror) //vuelvo a atravesar el espejo y retorno a la normalidad
-        {
-            outOfUpsideDown();
-        }
     }
 
     

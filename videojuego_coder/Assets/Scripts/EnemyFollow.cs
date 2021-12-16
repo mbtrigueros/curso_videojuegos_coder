@@ -42,7 +42,11 @@ public class EnemyFollow : Enemy
     {
         animEnemy.SetBool("playerSeen", true); //determino la variable como cierta para activar la animacion de correr
 
-        Vector3 dir = (player.transform.position - transform.position);  //obtengo el vector entre la posicion del jugador y la del enemigo
+        float enemyX = transform.position.x; //posicions de x tanto del player como el enemigo, asi a la hora de modificar la direccion no da una vuelta en el aire :) 
+
+        float playerX = player.transform.position.x;
+
+        Vector3 dir = new Vector3(playerX, 0f, 0f) - new Vector3(enemyX, 0f, 0f);  //obtengo el vector entre la posicion del jugador y la del enemigo
 
         transform.forward = dir.normalized * Time.deltaTime; //modifico el forward para que el frente del enemigo coincida con la direccion
 

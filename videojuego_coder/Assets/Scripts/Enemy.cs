@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 
 {
-    [SerializeField] private UnityEvent onAllEnemiesDeath;
 
     [SerializeField] protected EnemyData enemyData;
 
@@ -67,7 +66,8 @@ public class Enemy : MonoBehaviour
 
         transform.forward = direction * Time.deltaTime; //modifico el forward para que el frente del enemigo coincida con la direccion
 
-        transform.position += transform.forward * enemyData.SpeedEnemy * Time.deltaTime; //muevo el enemigo en esa direccion
+        transform.Translate(Vector3.forward * enemyData.SpeedEnemy * Time.deltaTime); //muevo el enemigo en esa direccion
+
 
         float distance = deltaVector.magnitude; //magnitud del vector 
 
