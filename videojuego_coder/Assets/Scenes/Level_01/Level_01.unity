@@ -1338,6 +1338,10 @@ PrefabInstance:
       propertyPath: CollisionModule.collidesWith.m_Bits
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3336440060582997934, guid: 71f6bf74fefb3f7478ef5d32f931cf93, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5091620732063367428, guid: 71f6bf74fefb3f7478ef5d32f931cf93, type: 3}
       propertyPath: dashEffect
       value: 
@@ -1735,7 +1739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1116982042
 Transform:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     private GameObject[] enemies;
 
     private Rigidbody rbPlayer; //rogodbody del player
-    
+
     private bool isGrounded = true; //booleana para identificar si el jugador esta en el piso
     private bool wasGrounded = false; //booleana para identificar si el jugador estaba en el piso en el frame anterior
 
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField] private Animator animPlayer; //animacion del player
-    [SerializeField]  private GameObject playerMesh; //mesh del player
+    [SerializeField] private GameObject playerMesh; //mesh del player
 
 
     //variables de eventos
@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
+
+
 
         Debug.Log("Tenes estas vidas " + GetPlayerLives());
         Debug.Log("Tenes estas stars " + GetPlayerStars());
@@ -70,9 +72,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         OnAllEnemiesDeath();
 
-        if (GameManager.playerLives == 0){
+        if (GameManager.playerLives == 0) {
             OnPlayerDeath();
             Debug.Log("Has sido derrotadx por tus demonios :(");
         }
@@ -89,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        else if(Input.GetKeyDown(KeyCode.Z) && !isGrounded && !hasDoubleJumped) {
+        else if (Input.GetKeyDown(KeyCode.Z) && !isGrounded && !hasDoubleJumped) {
 
             doubleJump = true;
             hasDoubleJumped = true;
@@ -103,13 +106,13 @@ public class PlayerController : MonoBehaviour
         }
 
         var dash = Input.GetKeyDown(KeyCode.C) ? pressedDash = true : pressedDash = false;
-        
+
 
         if (!wasGrounded && isGrounded)
         {
             impact.transform.position = footsteps.transform.position;
             impact.Play();
-            
+
         }
 
         wasGrounded = isGrounded;
@@ -139,7 +142,7 @@ public class PlayerController : MonoBehaviour
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         if (enemies.Length == 0) onAllEnemiesDeath?.Invoke();
-        
+
     }
 
     //--------------------------------------------------------------------PLAYER HEALTH Y SCORE
@@ -181,18 +184,20 @@ public class PlayerController : MonoBehaviour
 
     //Metodo para que el jugador se mueva con el input del usuario. 
     private void PlayerMove()
-    {    
+    {
         float ejeHorizontal = Input.GetAxis("Horizontal"); //establecemos el eje horizontal con getaxis
 
         rbPlayer.velocity = new Vector3(ejeHorizontal * speedPlayer, rbPlayer.velocity.y, 0); //modifico la velocidad del jugador para poder moverlo a traves del input. en el ejehorizontal estara el input, en el vertical queda igual(10 unidades por segundo) y en el z es 0. esto es para poder moverlo unicamente en los ejes horizontal y vertical, y no en el eje z.
 
         transform.forward = new Vector3(ejeHorizontal, 0, (Mathf.Abs(ejeHorizontal) - 1)); //con este metodo transformo la direccion en la que mira el jugador. paso el input como parametro horizontal, 0 al vertical, y en el eje z saco el absoluto del horizontal (es decir el modulo) y le resto 1. 
 
+
+
         //determino si el jugador se mueve, y le asigno true a la variable booleana para correr
         if (ejeHorizontal != 0)
         {
             animPlayer.SetBool("isRunning", true);
-            if(isGrounded) footsteps.Play(); //disparo las particulas
+            if (isGrounded) footsteps.Play(); //disparo las particulas
         }
 
         else
@@ -231,7 +236,7 @@ public class PlayerController : MonoBehaviour
                 rbPlayer.AddForce(jump * forceJump, ForceMode.Impulse); //aplico fuerza en el vector jump
             }
         }
-        
+
 
         pressedJump = false;
         doubleJump = false;
@@ -245,14 +250,16 @@ public class PlayerController : MonoBehaviour
         else
 
         {
-            if (rbPlayer.velocity.y > 0 && !Input.GetKey(KeyCode.Z))rbPlayer.AddForce(fallMultiplier * gravedad.y * jump, ForceMode.Acceleration);
+            if (rbPlayer.velocity.y > 0 && !Input.GetKey(KeyCode.Z)) rbPlayer.AddForce(fallMultiplier * gravedad.y * jump, ForceMode.Acceleration);
         }
     }
 
     private bool dashed;
     private bool pressedDash;
-    private float dashCooldown = 1f;
-    private float time;
+    private float dashCooldownGround = 0.3f;
+    private float dashCooldownAir = 2.5f;
+    private float timeGround;
+    private float timeAir;
 
     private float dashVelocity = 550f;
 
@@ -266,19 +273,23 @@ public class PlayerController : MonoBehaviour
             dashEffect.transform.position = footsteps.transform.position;
             dashEffect.Play();
             Debug.Log("estoy dashing");
-            rbPlayer.useGravity = false;
-            rbPlayer.AddForce(new Vector3(ejeHorizontal * 2f, ejeVertical * 0.3f, 0) * dashVelocity, ForceMode.Impulse);
+            rbPlayer.AddForce(new Vector3(ejeHorizontal * 5f, 0, 0) * dashVelocity, ForceMode.Impulse);
             dashed = true;
         }
-        
-        if (dashed) time += Time.deltaTime;
 
-        if (time >= dashCooldown)
+        var dashedAndGrounded =  (dashed && isGrounded) ? timeGround += Time.deltaTime : timeAir += Time.deltaTime;
+        
+
+        if (timeGround >= dashCooldownGround)
         {
-            rbPlayer.useGravity = true;
-            time = 0f;
+            timeGround = 0f;
             dashed = false;
-            
+        }
+
+         if (timeAir >= dashCooldownAir)
+        {
+            dashed = false;
+            timeAir = 0f;
         }
     }
 
@@ -310,8 +321,9 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("Cruce el espejo");
 
-        //--------------------------------------------------------------------REVISAR ESTO, CREO QUE TENGO QUE RESETEAR LA POSICION DE LOS HIJOS, POR EL TEMA DEL COLLIDER Y EL PLAYERMESH
-        playerMesh.transform.Rotate(new Vector3(0, 0, -180), Space.Self); //roto y bajo el personaje para que este alineado con el piso
+        
+        playerMesh.transform.Rotate(new Vector3(0, 0, -180f), Space.Self); //roto y bajo el personaje para que este alineado con el piso
+        
         playerMesh.transform.position += new Vector3(0, 2.69f, 0);
         footsteps.transform.position = playerMesh.transform.position + new Vector3(0, -0.24f, 0);
 
@@ -348,10 +360,9 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("Volvi a la normalidad");
 
-        //--------------------------------------------------------------------REVISAR ESTO, CREO QUE TENGO QUE RESETEAR LA POSICION DE LOS HIJOS, POR EL TEMA DEL COLLIDER Y EL PLAYERMESH
         playerMesh.transform.Rotate(new Vector3(0, 180f, 180f), Space.World);
         playerMesh.transform.position += new Vector3(0, -2.69f, 0);
-        footsteps.transform.position = footsteps.transform.position = playerMesh.transform.position + new Vector3(0, 0.24f, 0);
+        footsteps.transform.position = playerMesh.transform.position + new Vector3(0, 0.24f, 0);
 
         //cameras[1].SetActive(false); ahora estoy usando un unity event para manejar esto
         //cameras[0].SetActive(true);
