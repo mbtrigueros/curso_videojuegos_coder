@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animPlayer; //animacion del player
     [SerializeField] private GameObject playerMesh; //mesh del player
 
+    GameObject globalPostProcessing;
+
 
     //variables de eventos
     public static event Action onPlayerDeath;
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
 
-
+        globalPostProcessing = GameObject.Find("GlobalPostProcessing");
 
         Debug.Log("Tenes estas vidas " + GetPlayerLives());
         Debug.Log("Tenes estas stars " + GetPlayerStars());
@@ -318,7 +320,7 @@ public class PlayerController : MonoBehaviour
     //metodo al atravesar el espejo
     private void enterUpsideDown()
     {
-
+        globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(true);
         Debug.Log("Cruce el espejo");
 
         
@@ -357,7 +359,7 @@ public class PlayerController : MonoBehaviour
     //basicamente lo mismo pero al reves
     private void outOfUpsideDown()
     {
-
+        globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(false);
         Debug.Log("Volvi a la normalidad");
 
         playerMesh.transform.Rotate(new Vector3(0, 180f, 180f), Space.World);
