@@ -73,12 +73,11 @@ public class Enemy : MonoBehaviour
 
         if (distance < minDistance) //si la distancia es menor a la distancia minima establecida
         {
-            if (distance < minDistance) //si la distancia es menor a la distancia minima establecida
-            {
                 if (!goBack)
                 {
                     for (currentIndex = 0; currentIndex >= waypoints.Length - 1; currentIndex++) //recorro el array de waypoints y determino de acuerdo a si el indice es 0 o del tamaño del array, si tengo que sumar o restar al indice
                     {
+                    
                         transform.position += direction * enemyData.SpeedEnemy * Time.deltaTime;
                     }
                     goBack = true;
@@ -91,7 +90,7 @@ public class Enemy : MonoBehaviour
                         transform.position += direction * enemyData.SpeedEnemy * Time.deltaTime;
                     }
                     goBack = false;
-                }
+
             }
         }
     }

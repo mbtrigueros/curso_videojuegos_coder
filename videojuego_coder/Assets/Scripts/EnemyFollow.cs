@@ -26,10 +26,11 @@ public class EnemyFollow : Enemy
     {
         EnemyDies();
         DetectPlayer(origen.transform);
-        if (playerSeen && rbEnemy.useGravity == true)
-        {
+        if (playerSeen && rbEnemy.useGravity == true) { 
+
             Chase();
         }
+
         else
         {
             Walk();

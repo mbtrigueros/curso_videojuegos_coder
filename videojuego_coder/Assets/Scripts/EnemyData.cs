@@ -26,20 +26,14 @@ public class EnemyData : ScriptableObject
 
     public void EnemyDead(GameObject enemy)
     {
-        if (enemyLives <= 0)
-        {
-            enemy.SetActive(false);
-        }
+        if (enemyLives <= 0) enemy.SetActive(false);
         
     }
 
 
     public float SpeedEnemy
     {
-        get
-        {
-            return speedEnemy;
-        }
+        get { return speedEnemy; }
     }
 
 }
