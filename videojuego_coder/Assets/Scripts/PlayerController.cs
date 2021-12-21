@@ -320,7 +320,6 @@ public class PlayerController : MonoBehaviour
     //metodo al atravesar el espejo
     private void enterUpsideDown()
     {
-        globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(true);
         Debug.Log("Cruce el espejo");
 
         
@@ -359,7 +358,6 @@ public class PlayerController : MonoBehaviour
     //basicamente lo mismo pero al reves
     private void outOfUpsideDown()
     {
-        globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(false);
         Debug.Log("Volvi a la normalidad");
 
         playerMesh.transform.Rotate(new Vector3(0, 180f, 180f), Space.World);
@@ -396,6 +394,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy")) //si colisiona con un enemigo, pierde 2 vidas
         {
             PlayerLivesDown(2);
+            globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(true);
             Debug.Log("La cantidad de vidas es: " + GameManager.instance.GetPlayerLives());
         }
 
@@ -430,6 +429,10 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("NO estoy tocando el piso");
             isGrounded = false;
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(false);
         }
     }
 
