@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy_animation
       objectReference: {fileID: 0}
+    - target: {fileID: 7979272600485430215, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
+      propertyPath: m_Name
+      value: EnemyMesh
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e02203005bea7ed4d87b91d27c8f5d89, type: 3}
 --- !u!4 &2146044692389672396 stripped

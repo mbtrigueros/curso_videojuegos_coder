@@ -35,6 +35,31 @@ public class Enemy : MonoBehaviour
 
     //--------------------------------------------------------------------METODOS PROPIOS--------------------------------------------------------------------
 
+    private float duration = 0.8f;
+
+    private Material enemyMaterial;
+    private Color colorCollisionEnemy = Color.white;
+    private Color originalColor;
+
+
+    public IEnumerator ColorChange()
+    {
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            enemyMaterial = GetComponentInChildren<SkinnedMeshRenderer>().material;
+            enemyMaterial.color = originalColor;
+            enemyMaterial.SetColor("_Color", colorCollisionEnemy);
+            elapsed += Time.deltaTime;
+            yield return null;
+
+        }
+
+        enemyMaterial.color = originalColor;
+
+    }
+
     //--------------------------------------------------------------------ENEMY HEALTH
 
     public int EnemyLivesDown()

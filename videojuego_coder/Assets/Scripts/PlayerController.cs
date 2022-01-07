@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject[] cameras; //llamo a las camaras virtuales
 
+    [SerializeField] private ParticleSystem attackEffect; //llamo al sistema de particulas que hara el efecto del dash
     [SerializeField] private ParticleSystem dashEffect; //llamo al sistema de particulas que hara el efecto del dash
     [SerializeField] private ParticleSystem impact; //llamo al sistema de particulas que hara de impacto al caer
     [SerializeField] private ParticleSystem footsteps; //llamo al sistema de particulas que hara de "polvo" al caminar
@@ -38,6 +39,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject playerMesh; //mesh del player
 
     GameObject globalPostProcessing;
+
+    private Material enemyMaterial;
+    private Color colorCollisionEnemy = Color.white;
+    private Color colorEnemy = Color.magenta;
 
 
     //variables de eventos
@@ -227,12 +232,14 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Salto en el mirror");
                 rbPlayer.AddForce(jumpMirror * forceJump, ForceMode.Impulse); //aplico fuerza en el vector jumpMirror. el modo de la fuerza es de tipo impulso para generar mejor el moviemiento 
+                Debug.Log("Velocity del player en el espejo:" + rbPlayer.velocity.y);
             }
 
             else //si no esta en el espejo
             {
                 Debug.Log("Salto");
                 rbPlayer.AddForce(jump * forceJump, ForceMode.Impulse); //aplico fuerza en el vector jump
+                Debug.Log("Velocity del player:" + rbPlayer.velocity.y);
             }
         }
 
@@ -293,25 +300,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //metodo para que el jugador ataque al apretar X
-    //private void PlayerAttack()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.X) && !beenShot) //si aprete X y beenShot es false
-    //    {
-    //        beenShot = true;
-    //        attack.Play(); //disparo las particulas
-    //    }
-
-    //    //si beenShot es true, se empieza a contar el tiempo
-    //    if (beenShot) timePassed += Time.deltaTime;
-
-    //    if (timePassed > cooldown) // si el tiempo pasado es mayor al establecido en el cooldown, se reinicia el contador, y la variable beenShot vuelve a ser falsa
-    //    {
-    //        beenShot = false;
-    //        timePassed = 0;
-    //    }
-    //}
-
     private bool attacked;
     private void PlayerAttack()
     {
@@ -319,6 +307,7 @@ public class PlayerController : MonoBehaviour
         {
             animPlayer.SetBool("isAttacking", true);
             attacked = true;
+            attackEffect.Play();
         }
         else
         {
@@ -408,9 +397,23 @@ public class PlayerController : MonoBehaviour
             var enemy = collision.gameObject;
             if (!attacked)
             {
-               // rbPlayer.AddForce((transform.position-enemy.transform.position).normalized * 200f, ForceMode.Impulse);
+                animPlayer.SetTrigger("isAttacked");
+                StartCoroutine(gameObject.GetComponent<TimeTilt>().TimeChange());
+                foreach (GameObject camera in cameras)
+                {
+                    if (camera.activeInHierarchy)
+                    {
+                        StartCoroutine(camera.GetComponent<CameraShake>().Shake(0.1f, -4f)); 
+                    }
+                    
+
+                        }
+
+               
+                
+                // rbPlayer.AddForce((transform.position-enemy.transform.position).normalized * 200f, ForceMode.Impulse);
                 PlayerLivesDown(2);
-                globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(true);
+                //globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(true);
                 Debug.Log("La cantidad de vidas es: " + GameManager.instance.GetPlayerLives());
             }
             
@@ -438,6 +441,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Estoy tocando el piso");
             isGrounded = true;
+            animPlayer.SetBool("isGrounded", true);
         }
         if (collision.gameObject.CompareTag("Enemy")) //si colisiona con un enemigo, pierde 2 vidas
         {
@@ -447,8 +451,11 @@ public class PlayerController : MonoBehaviour
                 rbPlayer.AddForce((transform.position - enemy.transform.position).normalized * 600f, ForceMode.Impulse);
                 enemy.GetComponent<Rigidbody>().AddForce((enemy.transform.position - transform.position).normalized * 80f, ForceMode.Impulse);
                 enemy.GetComponent<Enemy>().EnemyLivesDown();
+                StartCoroutine(enemy.GetComponent<Enemy>().ColorChange());
+                enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
                 Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
             }
+           
         }
 
         }
@@ -459,6 +466,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("NO estoy tocando el piso");
             isGrounded = false;
+            animPlayer.SetBool("isGrounded", false);
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
