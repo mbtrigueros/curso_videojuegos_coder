@@ -316,6 +316,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //--------------------------------------------------------------------GRAVEDAD
+
+    public void SetGravity(Vector3 newGravity)
+    {
+        Physics.gravity = newGravity;
+    }
+    public Vector3 GetGravity()
+    {
+        Vector3 gravityActual = Physics.gravity;
+        return gravityActual;
+    }
+
     //--------------------------------------------------------------------ESPEJO
 
     //metodo al atravesar el espejo

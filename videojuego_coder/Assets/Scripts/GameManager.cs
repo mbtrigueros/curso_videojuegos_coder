@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     {
         ResetLives();
         ResetStars();
+        ResetGravity();
 
     }
 
@@ -63,6 +64,11 @@ public class GameManager : MonoBehaviour
     public void ResetLives()
     {
         playerLives = 100;
+    }
+
+    public void ResetGravity()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SetGravity(new Vector3(0f, -9.8f, 0f));
     }
 
 
