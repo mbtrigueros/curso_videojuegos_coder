@@ -71,8 +71,18 @@ public class PlatformMovement : MonoBehaviour
             float platformX = transform.position.x;
 
             Move(); //solo va a moverse si el player esta en la plataforma
-            collision.transform.position = new Vector3(transform.position.x, collision.transform.position.y, collision.transform.position.z); //para que el player se mueve junto con la plataforma00000000
+            collision.transform.SetParent(transform);
+            //collision.transform.position = new Vector3(transform.position.x, collision.transform.position.y, collision.transform.position.z); //para que el player se mueve junto con la plataforma00000000
      
         }
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.transform.SetParent(null);
+        }
+        
+        }
 }

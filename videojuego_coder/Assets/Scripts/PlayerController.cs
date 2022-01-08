@@ -448,7 +448,7 @@ public class PlayerController : MonoBehaviour
             var enemy = collision.gameObject;
             if (attacked)
             {
-                rbPlayer.AddForce((transform.position - enemy.transform.position).normalized * 600f, ForceMode.Impulse);
+                rbPlayer.AddForce((transform.position - enemy.transform.position).normalized * 60f, ForceMode.Impulse);
                 enemy.GetComponent<Rigidbody>().AddForce((enemy.transform.position - transform.position).normalized * 80f, ForceMode.Impulse);
                 enemy.GetComponent<Enemy>().EnemyLivesDown();
                 StartCoroutine(enemy.GetComponent<Enemy>().ColorChange());
@@ -486,7 +486,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //atravieso el espejo y paso al techo
-        else if (other.gameObject.CompareTag("Mirror") && !mirror) //HACER METODO DE ROTACION DEL ESPEJO EN EL GAMEOBJECT ESPEJO NO ACA
+        else if (other.gameObject.CompareTag("Mirror") && !mirror) 
         {
 
             enterUpsideDown();
