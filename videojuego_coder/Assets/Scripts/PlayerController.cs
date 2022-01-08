@@ -481,15 +481,26 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Star")) //si toco las estrellas las "agarro" 
         {
             PlayerStarsUp();
-            Debug.Log("Tienes " +  GetPlayerStars() + " estrellas");
+            Debug.Log("Tienes " + GetPlayerStars() + " estrellas");
             other.gameObject.SetActive(false);
         }
 
         //atravieso el espejo y paso al techo
-        else if (other.gameObject.CompareTag("Mirror") && !mirror) enterUpsideDown();
+        else if (other.gameObject.CompareTag("Mirror") && !mirror) //HACER METODO DE ROTACION DEL ESPEJO EN EL GAMEOBJECT ESPEJO NO ACA
+        {
+
+            enterUpsideDown();
+            other.gameObject.GetComponent<MirrorRotation>().Rotation();
+            
+        }
 
         //vuelvo a atravesar el espejo y retorno a la normalidad
-        else if (other.gameObject.CompareTag("Mirror") && mirror) outOfUpsideDown();
+        else if (other.gameObject.CompareTag("Mirror") && mirror)
+        {
+            outOfUpsideDown();
+            other.gameObject.GetComponent<MirrorRotation>().Rotation();
+            
+        }
         
     }
 
