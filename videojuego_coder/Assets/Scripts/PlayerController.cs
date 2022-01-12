@@ -151,20 +151,6 @@ public class PlayerController : MonoBehaviour
 
     //--------------------------------------------------------------------PLAYER HEALTH Y SCORE
 
-    //Metodo para curar al jugador
-    public int PlayerLivesUp(int lives)
-    { //parametro que indica la cantidad de vidas que gana 
-        onPlayerLivesChange?.Invoke(GameManager.playerLives);
-        return GameManager.playerLives = GameManager.playerLives + lives; //establezco la cantidad de vidas actuales
-    }
-
-    //Metodo para herir al jugador
-    public int PlayerLivesDown(int lives)
-    { //parametro que indica la cantidad de vidas que pierde
-        onPlayerLivesChange?.Invoke(GameManager.playerLives);
-        return GameManager.playerLives = GameManager.playerLives - lives; //establezco la cantidad de vidas actuales
-    }
-
     public int GetPlayerLives()
     {
         onPlayerLivesChange?.Invoke(GameManager.playerLives);
@@ -179,7 +165,7 @@ public class PlayerController : MonoBehaviour
 
     public int PlayerStarsUp()
     { //parametro que indica la cantidad de vidas que gana 
-        onPlayerStarsChange?.Invoke(GameManager.playerStars);
+        onPlayerStarsChange?.Invoke(GetPlayerStars());
         return GameManager.playerStars++;
     }
 
@@ -421,10 +407,11 @@ public class PlayerController : MonoBehaviour
 
                         }
 
-               
-                
+
+
                 // rbPlayer.AddForce((transform.position-enemy.transform.position).normalized * 200f, ForceMode.Impulse);
-                PlayerLivesDown(2);
+                GameManager.playerLives--;
+                onPlayerLivesChange?.Invoke(GetPlayerLives());
                 //globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(true);
                 Debug.Log("La cantidad de vidas es: " + GameManager.instance.GetPlayerLives());
             }
@@ -434,14 +421,16 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Trap")) //si colisiona con una trampa, muere
         {
-            PlayerLivesDown(GameManager.playerLives);
-            Debug.Log("Has muerto no tan estupidamente pero igual si");
+            GameManager.playerLives--;
+            onPlayerLivesChange?.Invoke(GetPlayerLives());
+            Debug.Log("La cantidad de vidas es: " + GameManager.instance.GetPlayerLives());
         }
         
         if (collision.gameObject.CompareTag("Obstacle")) //si colisiona con el obstaculo generado por la fuente, muere
         {
-            PlayerLivesDown(GameManager.playerLives);
-            Debug.Log("Has muerto estupidamente");
+            GameManager.playerLives--;
+            onPlayerLivesChange?.Invoke(GetPlayerLives());
+            Debug.Log("La cantidad de vidas es: " + GameManager.instance.GetPlayerLives());
         }
 
     }

@@ -1,6 +1,6 @@
 Using pre-set license
 Built from '2020.3/staging' branch; Version is '2020.3.14f1 (d0d1bb862f9d) revision 13685179'; Using compiler version '192528614'; Build Type 'Release'
-OS: 'Windows 10 Home; OS build 19042.1415; Version 2009; 64bit' Language: 'en' Physical Memory: 8089 MB
+OS: 'Windows 10 Home; OS build 19042.1466; Version 2009; 64bit' Language: 'en' Physical Memory: 8089 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
 
  COMMAND LINE ARGUMENTS:
@@ -15,11 +15,11 @@ C:/Users/beltr/OneDrive/Escritorio/coderHouse/Desarrollo-Videojuegos/curso_video
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50152
+51214
 Successfully changed project path to: C:/Users/beltr/OneDrive/Escritorio/coderHouse/Desarrollo-Videojuegos/curso_videojuegos_coder/videojuego_coder
 C:/Users/beltr/OneDrive/Escritorio/coderHouse/Desarrollo-Videojuegos/curso_videojuegos_coder/videojuego_coder
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 40.79 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 46.56 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.14f1 (d0d1bb862f9d)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.14f1/Editor/Data/Resources/UnitySubsystems
@@ -35,73 +35,73 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.14f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.14f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.14f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56688
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56020
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002039 seconds.
+Registered in 0.001968 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 39.98 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 42.55 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.054 seconds
+- Completed reload, in  1.009 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1054ms)
-		BeginReloadAssembly (55ms)
+	ReloadAssembly (1009ms)
+		BeginReloadAssembly (51ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (394ms)
-			LoadAssemblies (53ms)
+		EndReloadAssembly (412ms)
+			LoadAssemblies (50ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (142ms)
+			SetupTypeCache (148ms)
 			ReleaseScriptCaches (0ms)
 			RebuildScriptCaches (30ms)
-			SetupLoadedEditorAssemblies (156ms)
+			SetupLoadedEditorAssemblies (166ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (4ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (40ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (43ms)
 				BeforeProcessingInitializeOnLoad (13ms)
-				ProcessInitializeOnLoadAttributes (73ms)
-				ProcessInitializeOnLoadMethodAttributes (25ms)
+				ProcessInitializeOnLoadAttributes (79ms)
+				ProcessInitializeOnLoadMethodAttributes (27ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.004528 seconds.
+Registered in 0.004645 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 40.72 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 45.97 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.090 seconds
+- Completed reload, in  1.134 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1091ms)
-		BeginReloadAssembly (136ms)
+	ReloadAssembly (1135ms)
+		BeginReloadAssembly (138ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
+			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (19ms)
-		EndReloadAssembly (898ms)
-			LoadAssemblies (89ms)
+		EndReloadAssembly (936ms)
+			LoadAssemblies (91ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (292ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (52ms)
-			SetupLoadedEditorAssemblies (345ms)
+			SetupTypeCache (298ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (56ms)
+			SetupLoadedEditorAssemblies (367ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
+				InitializePlatformSupportModulesInManaged (4ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (41ms)
-				BeforeProcessingInitializeOnLoad (83ms)
-				ProcessInitializeOnLoadAttributes (199ms)
-				ProcessInitializeOnLoadMethodAttributes (11ms)
+				RefreshPlugins (46ms)
+				BeforeProcessingInitializeOnLoad (88ms)
+				ProcessInitializeOnLoadAttributes (211ms)
+				ProcessInitializeOnLoadMethodAttributes (10ms)
 				AfterProcessingInitializeOnLoad (6ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
@@ -109,15 +109,15 @@ Domain Reload Profiling:
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 0.87 ms, found 2 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 0.91 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2554 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 122.2 MB.
 System memory in use after: 122.4 MB.
 
 Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 3011.
-Total: 4.133700 ms (FindLiveObjects: 0.446000 ms CreateObjectMapping: 0.204900 ms MarkObjects: 3.314300 ms  DeleteObjects: 0.166300 ms)
+Total: 5.346500 ms (FindLiveObjects: 0.462200 ms CreateObjectMapping: 0.338500 ms MarkObjects: 4.410600 ms  DeleteObjects: 0.133300 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -132,56 +132,224 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/Scenes/Level_01/Level_01.unity
-  artifactKey: Guid(abb680fd9872ce746a669c3602afdc38) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Level_01/Level_01.unity using Guid(abb680fd9872ce746a669c3602afdc38) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '08c50f679e372274fdd6977e5bd4bf13') in 0.021027 seconds 
-  Import took 0.027329 seconds .
+  path: Assets/UI/Images/fondo_01.png
+  artifactKey: Guid(4e3e4c375cbe4764cb788dae57a0a026) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Images/fondo_01.png using Guid(4e3e4c375cbe4764cb788dae57a0a026) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bbcd039bcf6de6921d90912641d88d51') in 0.207788 seconds 
+  Import took 0.215518 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000289 seconds.
+  path: Assets/UI/Images/fondo_00.png
+  artifactKey: Guid(11632e73284a92946bb5e7a90e5b5775) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Images/fondo_00.png using Guid(11632e73284a92946bb5e7a90e5b5775) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a71cd4f17ca216bd0227fe720e3d385') in 0.022125 seconds 
+  Import took 0.034249 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 16.150849 seconds.
+  path: Assets/UI/Images/fondo_01.png
+  artifactKey: Guid(4e3e4c375cbe4764cb788dae57a0a026) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Images/fondo_01.png using Guid(4e3e4c375cbe4764cb788dae57a0a026) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81b0d34673291769be90889bd0bbb2c7') in 0.084056 seconds 
+  Import took 0.093693 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.887388 seconds.
+  path: Assets/UI/Images/fondo_00.png
+  artifactKey: Guid(11632e73284a92946bb5e7a90e5b5775) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Images/fondo_00.png using Guid(11632e73284a92946bb5e7a90e5b5775) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '398aadff1437f95fd227d8bfe610625b') in 0.020897 seconds 
+  Import took 0.032946 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1010.468737 seconds.
+  path: Assets/Fonts/static/Raleway-Light SDF.asset
+  artifactKey: Guid(cb84738a583a0fa41b0ac3a2d0a80419) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Light SDF.asset using Guid(cb84738a583a0fa41b0ac3a2d0a80419) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2783e108596b3472b14b4dff55224da2') in 0.830649 seconds 
+  Import took 0.837866 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.007801 seconds.
+  path: Assets/Fonts/static/Raleway-Light SDF.asset
+  artifactKey: Guid(cb84738a583a0fa41b0ac3a2d0a80419) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Light SDF.asset using Guid(cb84738a583a0fa41b0ac3a2d0a80419) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2783e108596b3472b14b4dff55224da2') in 0.091325 seconds 
+  Import took 0.099531 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.858168 seconds.
+  path: Assets/Fonts/static/Raleway-BlackItalic SDF.asset
+  artifactKey: Guid(44160c5edbe506a4fa9d4b60eeedda42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-BlackItalic SDF.asset using Guid(44160c5edbe506a4fa9d4b60eeedda42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '757ff764d27b5a2b77268ab5f1322a3f') in 0.087804 seconds 
+  Import took 0.094431 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.002511 seconds.
+  path: Assets/Fonts/static/Raleway-Bold SDF.asset
+  artifactKey: Guid(7195495a384764d40a9b47c7de80fd1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Bold SDF.asset using Guid(7195495a384764d40a9b47c7de80fd1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '398fa5f2c10ffc8cf4cc00079c3d78c5') in 0.086163 seconds 
+  Import took 0.091440 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.009490 seconds.
+  path: Assets/Fonts/static/Raleway-BoldItalic SDF.asset
+  artifactKey: Guid(14d6d336feafa47448465c8c0b5e6663) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-BoldItalic SDF.asset using Guid(14d6d336feafa47448465c8c0b5e6663) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1aaced4534b034a42f6f4928a645bfcd') in 0.086397 seconds 
+  Import took 0.091507 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.002048 seconds.
+  path: Assets/Fonts/static/Raleway-ExtraBold SDF.asset
+  artifactKey: Guid(baf4dcb568893ad4cba4c155a433ab20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-ExtraBold SDF.asset using Guid(baf4dcb568893ad4cba4c155a433ab20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c3786fd09efaaf3aac54b3b7f717a93f') in 0.091551 seconds 
+  Import took 0.100174 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000296 seconds.
+  path: Assets/Fonts/static/Raleway-ExtraBoldItalic SDF.asset
+  artifactKey: Guid(ccc439514c5e35f4aa2057fe3c76c595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-ExtraBoldItalic SDF.asset using Guid(ccc439514c5e35f4aa2057fe3c76c595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '439b880944dacee1a18619492f9726b9') in 0.104209 seconds 
+  Import took 0.111702 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000278 seconds.
+  path: Assets/Fonts/static/Raleway-ExtraLight SDF.asset
+  artifactKey: Guid(cec8ecc9e461c4344a5385c9186a3c6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-ExtraLight SDF.asset using Guid(cec8ecc9e461c4344a5385c9186a3c6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ddaad976ed4b6748be85d89a4b6f8ab') in 0.141914 seconds 
+  Import took 0.151114 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000299 seconds.
+  path: Assets/Fonts/static/Raleway-ExtraLightItalic SDF.asset
+  artifactKey: Guid(e3d96c125accfb841b085967096ed94c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-ExtraLightItalic SDF.asset using Guid(e3d96c125accfb841b085967096ed94c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '732f3a3a29d5c344dfbabd1d0aa331f9') in 0.101291 seconds 
+  Import took 0.108014 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000295 seconds.
+  path: Assets/Fonts/static/Raleway-Italic SDF.asset
+  artifactKey: Guid(ad8d4f151d26a184ba50c5b1588c8f91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Italic SDF.asset using Guid(ad8d4f151d26a184ba50c5b1588c8f91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ee745039245057d0f0762b11d789b2a3') in 0.087744 seconds 
+  Import took 0.092770 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000290 seconds.
+  path: Assets/Fonts/static/Raleway-Medium SDF.asset
+  artifactKey: Guid(7181e401b73febf4cb304c34f6449941) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Medium SDF.asset using Guid(7181e401b73febf4cb304c34f6449941) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65bbae6e2b3cd96dacd199d7928ea424') in 0.088315 seconds 
+  Import took 0.093408 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000391 seconds.
+  path: Assets/Fonts/static/Raleway-MediumItalic SDF.asset
+  artifactKey: Guid(65af363bf760650458a783085ed31789) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-MediumItalic SDF.asset using Guid(65af363bf760650458a783085ed31789) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1be740e98512afed12c772d04f738893') in 0.090494 seconds 
+  Import took 0.094531 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000356 seconds.
+  path: Assets/Fonts/static/Raleway-LightItalic SDF.asset
+  artifactKey: Guid(07a053b9512e67846a322632401968cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-LightItalic SDF.asset using Guid(07a053b9512e67846a322632401968cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a6e63c7bf3a6780141cf254fe10c2f3') in 0.090663 seconds 
+  Import took 0.094733 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000390 seconds.
+  path: Assets/Fonts/static/Raleway-SemiBold SDF.asset
+  artifactKey: Guid(69f5f53877d89e94c88fff01d0236df6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-SemiBold SDF.asset using Guid(69f5f53877d89e94c88fff01d0236df6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68784e34dd0e0712546a0f04a585d30d') in 0.088156 seconds 
+  Import took 0.094394 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000396 seconds.
+  path: Assets/Fonts/static/Raleway-SemiBoldItalic SDF.asset
+  artifactKey: Guid(399190f8276360749aae21e65bbd1cf4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-SemiBoldItalic SDF.asset using Guid(399190f8276360749aae21e65bbd1cf4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ad545c0e367825d2793d930e08c8846') in 0.085841 seconds 
+  Import took 0.093022 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000356 seconds.
+  path: Assets/Fonts/static/Raleway-Thin SDF.asset
+  artifactKey: Guid(840f0d1d70af07846bf017dcad5e1b33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Thin SDF.asset using Guid(840f0d1d70af07846bf017dcad5e1b33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b7989f8bfdf4d9dc3c601527c0ceb22') in 0.087283 seconds 
+  Import took 0.097451 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000543 seconds.
+  path: Assets/Fonts/static/Raleway-ThinItalic SDF.asset
+  artifactKey: Guid(73ced7ee28b19e14ab2ec8b0345dbddf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-ThinItalic SDF.asset using Guid(73ced7ee28b19e14ab2ec8b0345dbddf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ff627bdf5031bd656e68eb77e2696e2') in 0.092907 seconds 
+  Import took 0.099197 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000333 seconds.
+  path: Assets/Fonts/static/Raleway-Regular SDF.asset
+  artifactKey: Guid(2edd00ae6597911459eca96ce41ccf15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Regular SDF.asset using Guid(2edd00ae6597911459eca96ce41ccf15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e2313db868e80662e5e6f63eb996826b') in 0.077237 seconds 
+  Import took 0.083434 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.004430 seconds.
+Registered in 0.013260 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.54 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.46 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.061 seconds
+- Completed reload, in  1.266 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1061ms)
-		BeginReloadAssembly (113ms)
+	ReloadAssembly (1267ms)
+		BeginReloadAssembly (206ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
+			DisableScriptedObjects (12ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (37ms)
-		EndReloadAssembly (884ms)
-			LoadAssemblies (91ms)
+			CreateAndSetChildDomain (91ms)
+		EndReloadAssembly (978ms)
+			LoadAssemblies (125ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (325ms)
+			SetupTypeCache (393ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (48ms)
-			SetupLoadedEditorAssemblies (324ms)
+			RebuildScriptCaches (44ms)
+			SetupLoadedEditorAssemblies (329ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (90ms)
-				ProcessInitializeOnLoadAttributes (215ms)
-				ProcessInitializeOnLoadMethodAttributes (7ms)
-				AfterProcessingInitializeOnLoad (7ms)
+				BeforeProcessingInitializeOnLoad (86ms)
+				ProcessInitializeOnLoadAttributes (223ms)
+				ProcessInitializeOnLoadMethodAttributes (8ms)
+				AfterProcessingInitializeOnLoad (6ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (7ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.52 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.61 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2500 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.4 MB.
-System memory in use after: 117.6 MB.
+System memory in use before: 120.7 MB.
+System memory in use after: 120.9 MB.
 
-Unloading 15 unused Assets to reduce memory usage. Loaded Objects now: 3013.
-Total: 2.668900 ms (FindLiveObjects: 0.294400 ms CreateObjectMapping: 0.142000 ms MarkObjects: 2.213500 ms  DeleteObjects: 0.017900 ms)
+Unloading 15 unused Assets to reduce memory usage. Loaded Objects now: 3062.
+Total: 3.655300 ms (FindLiveObjects: 0.330100 ms CreateObjectMapping: 0.131700 ms MarkObjects: 3.160000 ms  DeleteObjects: 0.032000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -194,3 +362,273 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 792.473521 seconds.
+  path: Assets/UI/Images/fondo_01.png
+  artifactKey: Guid(4e3e4c375cbe4764cb788dae57a0a026) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Images/fondo_01.png using Guid(4e3e4c375cbe4764cb788dae57a0a026) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83dee78a93036279a9a9baff002b5440') in 0.079531 seconds 
+  Import took 0.085792 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.004088 seconds.
+  path: Assets/UI/Images/fondo_01.png
+  artifactKey: Guid(4e3e4c375cbe4764cb788dae57a0a026) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/Images/fondo_01.png using Guid(4e3e4c375cbe4764cb788dae57a0a026) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83dee78a93036279a9a9baff002b5440') in 0.014055 seconds 
+  Import took 0.019454 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 778.462580 seconds.
+  path: Assets/Fonts/static/Raleway-Thin SDF.asset
+  artifactKey: Guid(840f0d1d70af07846bf017dcad5e1b33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Thin SDF.asset using Guid(840f0d1d70af07846bf017dcad5e1b33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '631e3e4cad15595860a6c9666c18ea79') in 0.450284 seconds 
+  Import took 0.458417 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000343 seconds.
+  path: Assets/Fonts/static/Raleway-MediumItalic SDF.asset
+  artifactKey: Guid(65af363bf760650458a783085ed31789) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-MediumItalic SDF.asset using Guid(65af363bf760650458a783085ed31789) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99c95072f6909383733e43762755bf39') in 0.092136 seconds 
+  Import took 0.099755 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000304 seconds.
+  path: Assets/Fonts/static/Raleway-SemiBold SDF.asset
+  artifactKey: Guid(69f5f53877d89e94c88fff01d0236df6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-SemiBold SDF.asset using Guid(69f5f53877d89e94c88fff01d0236df6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b546bbbbe407895f08b6812eb4a9542') in 0.084982 seconds 
+  Import took 0.089720 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000282 seconds.
+  path: Assets/Fonts/static/Raleway-BoldItalic SDF.asset
+  artifactKey: Guid(14d6d336feafa47448465c8c0b5e6663) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-BoldItalic SDF.asset using Guid(14d6d336feafa47448465c8c0b5e6663) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64771853f82bfc3e07e0ae7d18a0e2b9') in 0.087560 seconds 
+  Import took 0.091216 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000302 seconds.
+  path: Assets/Fonts/static/Raleway-Light SDF.asset
+  artifactKey: Guid(cb84738a583a0fa41b0ac3a2d0a80419) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Light SDF.asset using Guid(cb84738a583a0fa41b0ac3a2d0a80419) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00e5ce81743a68cc0360781e79f99661') in 0.086620 seconds 
+  Import took 0.090372 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000331 seconds.
+  path: Assets/Fonts/static/Raleway-Medium SDF.asset
+  artifactKey: Guid(7181e401b73febf4cb304c34f6449941) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Medium SDF.asset using Guid(7181e401b73febf4cb304c34f6449941) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4eaabef0bbb8489277d2c5d0b02aba68') in 0.087421 seconds 
+  Import took 0.092251 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000328 seconds.
+  path: Assets/Fonts/static/Raleway-Italic SDF.asset
+  artifactKey: Guid(ad8d4f151d26a184ba50c5b1588c8f91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Italic SDF.asset using Guid(ad8d4f151d26a184ba50c5b1588c8f91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb1508ff635e0b2d5a56be60bd7683fa') in 0.091008 seconds 
+  Import took 0.094490 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000313 seconds.
+  path: Assets/Fonts/static/Raleway-Thin SDF.asset
+  artifactKey: Guid(840f0d1d70af07846bf017dcad5e1b33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Thin SDF.asset using Guid(840f0d1d70af07846bf017dcad5e1b33) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '631e3e4cad15595860a6c9666c18ea79') in 0.099776 seconds 
+  Import took 0.105851 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000338 seconds.
+  path: Assets/Fonts/static/Raleway-ExtraLightItalic SDF.asset
+  artifactKey: Guid(e3d96c125accfb841b085967096ed94c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-ExtraLightItalic SDF.asset using Guid(e3d96c125accfb841b085967096ed94c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4731474f62a98888cccfe3018efdf4c0') in 0.092628 seconds 
+  Import took 0.100030 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000179 seconds.
+  path: Assets/Fonts/static/Raleway-ThinItalic SDF.asset
+  artifactKey: Guid(73ced7ee28b19e14ab2ec8b0345dbddf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-ThinItalic SDF.asset using Guid(73ced7ee28b19e14ab2ec8b0345dbddf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59d1eb488bab5da3e3400ecf25573775') in 0.084390 seconds 
+  Import took 0.090347 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000303 seconds.
+  path: Assets/Fonts/static/Raleway-ExtraLight SDF.asset
+  artifactKey: Guid(cec8ecc9e461c4344a5385c9186a3c6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-ExtraLight SDF.asset using Guid(cec8ecc9e461c4344a5385c9186a3c6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6697a7dcf2647ee2f720b500440fd494') in 0.082564 seconds 
+  Import took 0.087498 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000355 seconds.
+  path: Assets/Fonts/static/Raleway-SemiBoldItalic SDF.asset
+  artifactKey: Guid(399190f8276360749aae21e65bbd1cf4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-SemiBoldItalic SDF.asset using Guid(399190f8276360749aae21e65bbd1cf4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46292e6203f0737c02adff032909986f') in 0.083965 seconds 
+  Import took 0.087399 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000276 seconds.
+  path: Assets/Fonts/static/Raleway-LightItalic SDF.asset
+  artifactKey: Guid(07a053b9512e67846a322632401968cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-LightItalic SDF.asset using Guid(07a053b9512e67846a322632401968cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3db52ce4e86e88c195f81027c65b053') in 0.083502 seconds 
+  Import took 0.089435 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000293 seconds.
+  path: Assets/Fonts/static/Raleway-Bold SDF.asset
+  artifactKey: Guid(7195495a384764d40a9b47c7de80fd1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Bold SDF.asset using Guid(7195495a384764d40a9b47c7de80fd1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c39dd4a7e8eba5da8fb1f60fa26211c5') in 0.082248 seconds 
+  Import took 0.086812 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000281 seconds.
+  path: Assets/Fonts/static/Raleway-Regular SDF.asset
+  artifactKey: Guid(2edd00ae6597911459eca96ce41ccf15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-Regular SDF.asset using Guid(2edd00ae6597911459eca96ce41ccf15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4b5010e550cfa7c05bfc53d6e17044a') in 0.083296 seconds 
+  Import took 0.087457 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000273 seconds.
+  path: Assets/Fonts/static/Raleway-ExtraBoldItalic SDF.asset
+  artifactKey: Guid(ccc439514c5e35f4aa2057fe3c76c595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-ExtraBoldItalic SDF.asset using Guid(ccc439514c5e35f4aa2057fe3c76c595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '326033919f19af62b38b9ed22b0de032') in 0.081600 seconds 
+  Import took 0.085665 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000309 seconds.
+  path: Assets/Fonts/static/Raleway-ExtraBold SDF.asset
+  artifactKey: Guid(baf4dcb568893ad4cba4c155a433ab20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/static/Raleway-ExtraBold SDF.asset using Guid(baf4dcb568893ad4cba4c155a433ab20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64b964615d07220e5d0ac8f254efb867') in 0.085650 seconds 
+  Import took 0.089263 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.148447 seconds.
+  path: Assets/Animations/FadeIn/StartFade.anim
+  artifactKey: Guid(b81359b9389bce64aa73585436f114b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/FadeIn/StartFade.anim using Guid(b81359b9389bce64aa73585436f114b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6623f86d608929666c21233c6d700ca9') in 0.005510 seconds 
+  Import took 0.009366 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.005755 seconds.
+  path: Assets/Animations/FadeIn/StartFade.anim
+  artifactKey: Guid(b81359b9389bce64aa73585436f114b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/FadeIn/StartFade.anim using Guid(b81359b9389bce64aa73585436f114b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6623f86d608929666c21233c6d700ca9') in 0.003352 seconds 
+  Import took 0.009092 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.012926 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.49 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.016 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1017ms)
+		BeginReloadAssembly (110ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (35ms)
+		EndReloadAssembly (849ms)
+			LoadAssemblies (84ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (306ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (44ms)
+			SetupLoadedEditorAssemblies (308ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (82ms)
+				ProcessInitializeOnLoadAttributes (206ms)
+				ProcessInitializeOnLoadMethodAttributes (7ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.57 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2500 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 120.8 MB.
+System memory in use after: 121.0 MB.
+
+Unloading 15 unused Assets to reduce memory usage. Loaded Objects now: 3066.
+Total: 5.543000 ms (FindLiveObjects: 0.600400 ms CreateObjectMapping: 0.248500 ms MarkObjects: 4.654500 ms  DeleteObjects: 0.036200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 401.292839 seconds.
+  path: Assets/Scenes/Level_01/Level_01.unity
+  artifactKey: Guid(abb680fd9872ce746a669c3602afdc38) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level_01/Level_01.unity using Guid(abb680fd9872ce746a669c3602afdc38) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d6cca649c0e593c90da901c2b401222') in 0.017783 seconds 
+  Import took 0.024979 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004720 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.50 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.129 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1129ms)
+		BeginReloadAssembly (111ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (35ms)
+		EndReloadAssembly (954ms)
+			LoadAssemblies (87ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (386ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (49ms)
+			SetupLoadedEditorAssemblies (322ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (88ms)
+				ProcessInitializeOnLoadAttributes (214ms)
+				ProcessInitializeOnLoadMethodAttributes (7ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
+Platform modules already initialized, skipping

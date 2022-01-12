@@ -2,49 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using UnityEngine.SceneManagement;
 
 public class HUDController : MonoBehaviour
 {
 
-    [SerializeField] private TextMeshProUGUI textStars;
-    [SerializeField] private TextMeshProUGUI textLives;
+    [SerializeField] private Text textStars;
+
+    [SerializeField] private Sprite[] livesSprites;
+    [SerializeField] private Image livesImg;
+
+    private Animator animStar;
 
     private void Awake()
     {
-        PlayerController.onPlayerLivesChange += OnPlayerLivesChangeHandler;
+        PlayerController.onPlayerDeath += OnPlayerDeathHandler;
         PlayerController.onPlayerStarsChange += OnPlayerStarsChangeHandler;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerController.onPlayerDeath += OnPlayerDeathHandler;
+        PlayerController.onPlayerLivesChange += OnPlayerLivesChangeHandler;
+        animStar = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       // UpdateStars();
     }
 
-    //void UpdateStars()
-    //{
-    //    int stars = GameManager.instance.GetStars();
+    void OnDestroy()
+    {
+        PlayerController.onPlayerDeath -= OnPlayerDeathHandler;
+        PlayerController.onPlayerLivesChange -= OnPlayerLivesChangeHandler;
+        PlayerController.onPlayerStarsChange -= OnPlayerStarsChangeHandler;
+    }
 
-    //    textStars.text = stars.ToString();
-
-    //}
 
     void OnPlayerLivesChangeHandler(int lives)
     {
 
-        textLives.text = lives.ToString();
+        livesImg.sprite = livesSprites[lives];
+
     }
     void OnPlayerStarsChangeHandler(int stars)
     {
-
+        animStar.SetTrigger("NewStar");
         textStars.text = stars.ToString();
     }
 
