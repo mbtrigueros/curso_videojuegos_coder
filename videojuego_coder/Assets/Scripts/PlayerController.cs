@@ -396,7 +396,6 @@ public class PlayerController : MonoBehaviour
             if (!attacked)
             {
                 animPlayer.SetTrigger("isAttacked");
-                StartCoroutine(gameObject.GetComponent<TimeTilt>().TimeChange());
                 foreach (GameObject camera in cameras)
                 {
                     if (camera.activeInHierarchy)

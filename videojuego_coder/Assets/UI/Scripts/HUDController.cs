@@ -16,8 +16,8 @@ public class HUDController : MonoBehaviour
 
     private void Awake()
     {
-        PlayerController.onPlayerDeath += OnPlayerDeathHandler;
         PlayerController.onPlayerStarsChange += OnPlayerStarsChangeHandler;
+        PlayerController.onPlayerDeath += OnPlayerDeathHandler;
     }
 
     // Start is called before the first frame update
@@ -40,6 +40,12 @@ public class HUDController : MonoBehaviour
     }
 
 
+    public void OnPlayerDeathHandler()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+
+
     void OnPlayerLivesChangeHandler(int lives)
     {
 
@@ -52,8 +58,5 @@ public class HUDController : MonoBehaviour
         textStars.text = stars.ToString();
     }
 
-    void OnPlayerDeathHandler()
-    {
-        SceneManager.LoadScene("GameOver");
-    }
+    
 }
