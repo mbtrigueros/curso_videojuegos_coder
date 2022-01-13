@@ -58,5 +58,6 @@ public class HUDController : MonoBehaviour
         textStars.text = stars.ToString();
     }
 
+
     
 }
