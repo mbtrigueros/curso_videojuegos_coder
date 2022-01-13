@@ -218,14 +218,12 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Salto en el mirror");
                 rbPlayer.AddForce(jumpMirror * forceJump, ForceMode.Impulse); //aplico fuerza en el vector jumpMirror. el modo de la fuerza es de tipo impulso para generar mejor el moviemiento 
-                Debug.Log("Velocity del player en el espejo:" + rbPlayer.velocity.y);
             }
 
             else //si no esta en el espejo
             {
                 Debug.Log("Salto");
                 rbPlayer.AddForce(jump * forceJump, ForceMode.Impulse); //aplico fuerza en el vector jump
-                Debug.Log("Velocity del player:" + rbPlayer.velocity.y);
             }
         }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCeiling : Enemy
+public class EnemyCeiling : MonoBehaviour
 {
 
 
@@ -15,6 +15,6 @@ public class EnemyCeiling : Enemy
 
     private void Rotation()
     {
-        transform.Rotate(new Vector3(0, 0, -180), Space.Self);
+        transform.Rotate(new Vector3(0, 0, -180), Space.World);
     }
 }

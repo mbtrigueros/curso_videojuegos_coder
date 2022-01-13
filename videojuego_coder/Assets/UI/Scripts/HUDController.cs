@@ -54,7 +54,7 @@ public class HUDController : MonoBehaviour
     }
     void OnPlayerStarsChangeHandler(int stars)
     {
-        animStar.SetTrigger("NewStar");
+       if(animStar != null) animStar.SetTrigger("NewStar");
         textStars.text = stars.ToString();
     }
 
