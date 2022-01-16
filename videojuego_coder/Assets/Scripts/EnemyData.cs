@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 [CreateAssetMenu(fileName = "New EnemyData", menuName = "Enemy Data")]
+
 
 public class EnemyData : ScriptableObject
 {
@@ -12,7 +14,6 @@ public class EnemyData : ScriptableObject
     
     [SerializeField]
     private float speedEnemy;
-
 
     public int EnemyLives
     {
@@ -26,7 +27,10 @@ public class EnemyData : ScriptableObject
 
     public void EnemyDead(GameObject enemy)
     {
-        if (enemyLives <= 0) enemy.SetActive(false);
+        if (enemyLives <= 0)
+        {
+            enemy.SetActive(false);
+        }
         
     }
 

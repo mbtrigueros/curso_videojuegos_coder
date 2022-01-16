@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] protected Animator animEnemy; //animacion del enemigo 
 
+    [SerializeField] public UnityEvent onEnemyDeath;
 
 
     // Start is called before the first frame update
@@ -30,7 +31,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Walk();
-        EnemyDies();
+
     }
 
     //--------------------------------------------------------------------METODOS PROPIOS--------------------------------------------------------------------
@@ -72,7 +73,7 @@ public class Enemy : MonoBehaviour
     //metodo para destruir al enemigo
     public void EnemyDies()
     {
-        enemyData.EnemyDead(gameObject);
+        if (GetEnemyLives() <= 0) onEnemyDeath?.Invoke();
     }
 
     //--------------------------------------------------------------------MOVIMIENTO

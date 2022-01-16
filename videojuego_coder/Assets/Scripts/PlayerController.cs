@@ -445,8 +445,8 @@ public class PlayerController : MonoBehaviour
             var enemy = collision.gameObject;
             if (attacked)
             {
-                rbPlayer.AddForce((transform.position - enemy.transform.position).normalized * 60f, ForceMode.Impulse);
-                enemy.GetComponent<Rigidbody>().AddForce((enemy.transform.position - transform.position).normalized * 80f, ForceMode.Impulse);
+                //rbPlayer.AddForce((transform.position - enemy.transform.position).normalized * 60f, ForceMode.Impulse);
+               // enemy.GetComponent<Rigidbody>().AddForce((enemy.transform.position - transform.position).normalized * 80f, ForceMode.Impulse);
                 enemy.GetComponent<Enemy>().EnemyLivesDown();
                 enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
                 Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());

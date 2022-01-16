@@ -86,14 +86,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6619928143065901760, guid: d1868a0ed2493a840ba4e8decd193117, type: 3}
-      propertyPath: onSwitchCameras.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6619928143065901760, guid: d1868a0ed2493a840ba4e8decd193117, type: 3}
-      propertyPath: onSwitchCameras.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1868a0ed2493a840ba4e8decd193117, type: 3}
 --- !u!4 &5629626062056302390 stripped
