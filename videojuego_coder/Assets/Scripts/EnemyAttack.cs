@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAttack : Enemy
 {
+    private float durationAttack = 2f;
     private bool hasAttacked = false;
     protected Rigidbody rbEnemy; //rigidbody del enemigo
     // Start is called before the first frame update
@@ -18,35 +19,25 @@ public class EnemyAttack : Enemy
         EnemyDies();
         DetectPlayer(origen.transform);
 
-        if (playerSeen && !hasAttacked)
-        {
-            Attack();
-        }
-        else
-        {
-            Walk();
-        }
+        if (playerSeen && !hasAttacked) Attack();
+        else Walk();
     }
 
-    private void Attack()
+    public void Attack()
     {
         animEnemy.SetTrigger("Attack");
         StartCoroutine(TimeAttack());
-
     }
 
-    private float durationAttack = 2f;
     public IEnumerator TimeAttack()
     {
         float elapsed = 0f;
 
         while (elapsed < durationAttack)
         {
-
             hasAttacked = true;
             elapsed += Time.deltaTime;
             yield return null;
-
         }
 
         hasAttacked = false;

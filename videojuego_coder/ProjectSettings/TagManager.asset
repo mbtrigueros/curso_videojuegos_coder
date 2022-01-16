@@ -10,6 +10,8 @@ TagManager:
   - Star
   - Trap
   - Obstacle
+  - Void
+  - Platform
   layers:
   - Default
   - TransparentFX

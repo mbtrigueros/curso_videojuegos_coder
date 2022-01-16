@@ -8,10 +8,9 @@ public class HUDController : MonoBehaviour
 {
 
     [SerializeField] private Text textStars;
-
     [SerializeField] private Sprite[] livesSprites;
     [SerializeField] private Image livesImg;
-
+        
     private Animator animStar;
 
     private void Awake()
@@ -46,18 +45,16 @@ public class HUDController : MonoBehaviour
     }
 
 
-    void OnPlayerLivesChangeHandler(int lives)
+    public void OnPlayerLivesChangeHandler(int lives)
     {
 
         livesImg.sprite = livesSprites[lives];
 
     }
-    void OnPlayerStarsChangeHandler(int stars)
+    public void OnPlayerStarsChangeHandler(int stars)
     {
        if(animStar != null) animStar.SetTrigger("NewStar");
         textStars.text = stars.ToString();
     }
-
-
     
 }

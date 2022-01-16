@@ -48,15 +48,12 @@ public class Enemy : MonoBehaviour
 
         while (elapsed < duration)
         {
-            enemyMaterial = GetComponentInChildren<SkinnedMeshRenderer>().material;
-            enemyMaterial.color = originalColor;
-            enemyMaterial.SetColor("_Color", colorCollisionEnemy);
+
+            animEnemy.Play("changeColorAnim");
             elapsed += Time.deltaTime;
             yield return null;
 
         }
-
-        enemyMaterial.color = originalColor;
 
     }
 
@@ -64,7 +61,7 @@ public class Enemy : MonoBehaviour
 
     public int EnemyLivesDown()
     { //parametro que indica la cantidad de vidas que pierde
-        return enemyData.EnemyLivesDown(); //establezco la cantidad de vidas actuales
+        return enemyData.EnemyLivesDown(); 
     }
 
     public int GetEnemyLives()
@@ -120,6 +117,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
     protected GameObject player; //llamo al player para poder usarlo
     [SerializeField] protected LayerMask playerMask; //llamo a la capa player
 
@@ -133,7 +131,7 @@ public class Enemy : MonoBehaviour
         Ray ray = new Ray(origen.position, origen.TransformDirection(Vector3.forward));
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 10, playerMask))
+        if (Physics.Raycast(ray, out hit, 7f, playerMask))
         {
             playerSeen = true;
             Debug.DrawLine(ray.origin, hit.point, Color.red);
@@ -141,7 +139,7 @@ public class Enemy : MonoBehaviour
 
         else
         {
-            Debug.DrawLine(ray.origin, ray.origin + ray.direction * 10, Color.blue);
+            Debug.DrawLine(ray.origin, ray.origin + ray.direction * 7f, Color.blue);
         }
     }
 

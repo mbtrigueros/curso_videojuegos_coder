@@ -21,5 +21,21 @@ public class MirrorRotation : MonoBehaviour
     public void Rotation() {
 
         animMirror.SetTrigger("Rotation");
+        StartCoroutine(DeactivateCollider());
+    }
+
+    public IEnumerator DeactivateCollider()
+    {
+        float elapsed = 0f;
+
+        while (elapsed < 2f)
+        {
+            GetComponent<Collider>().enabled = false;
+            elapsed += Time.deltaTime;
+            yield return null;
+
+        }
+
+        GetComponent<Collider>().enabled = true;
     }
 }

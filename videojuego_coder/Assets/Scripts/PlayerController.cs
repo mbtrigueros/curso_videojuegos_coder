@@ -40,13 +40,14 @@ public class PlayerController : MonoBehaviour
 
     GameObject globalPostProcessing;
 
-    private Material enemyMaterial;
-    private Color colorCollisionEnemy = Color.white;
-    private Color colorEnemy = Color.magenta;
+    private float lastPostion;
+    private Vector3 lastGrounded;
+    private Vector3 groundedOffset = new Vector3(1.5f, 0f, 0f);
 
 
     //variables de eventos
     public static event Action onPlayerDeath;
+    [SerializeField] private UnityEvent onPlayerFallen;
     public static event Action<int> onPlayerLivesChange;
     public static event Action<int> onPlayerStarsChange;
     [SerializeField] private UnityEvent onAllEnemiesDeath;
@@ -171,11 +172,14 @@ public class PlayerController : MonoBehaviour
 
     //--------------------------------------------------------------------MOVIMIENTO Y ATAQUE
 
+    private float dataEjeHorizontal;
 
     //Metodo para que el jugador se mueva con el input del usuario. 
-    private void PlayerMove()
+    public void PlayerMove()
     {
         float ejeHorizontal = Input.GetAxis("Horizontal"); //establecemos el eje horizontal con getaxis
+
+        dataEjeHorizontal = ejeHorizontal;
 
         rbPlayer.velocity = new Vector3(ejeHorizontal * speedPlayer, rbPlayer.velocity.y, 0); //modifico la velocidad del jugador para poder moverlo a traves del input. en el ejehorizontal estara el input, en el vertical queda igual(10 unidades por segundo) y en el z es 0. esto es para poder moverlo unicamente en los ejes horizontal y vertical, y no en el eje z.
 
@@ -336,7 +340,6 @@ public class PlayerController : MonoBehaviour
         {
             //primero chequeo que el enemigo exista sino me pincha todo
             if (enemy != null) enemy.GetComponent<Rigidbody>().useGravity = false;
-
             else Debug.Log("Ya mataste a este enemigo");
 
         }
@@ -345,7 +348,6 @@ public class PlayerController : MonoBehaviour
         {
 
             if (enemy != null) enemy.GetComponent<Rigidbody>().useGravity = true;
-
             else Debug.Log("Ya mataste a este enemigo");
 
         }
@@ -400,11 +402,7 @@ public class PlayerController : MonoBehaviour
                     {
                         StartCoroutine(camera.GetComponent<CameraShake>().Shake(0.1f, -4f)); 
                     }
-                    
-
-                        }
-
-
+                }
 
                 // rbPlayer.AddForce((transform.position-enemy.transform.position).normalized * 200f, ForceMode.Impulse);
                 GameManager.playerLives--;
@@ -427,7 +425,7 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.playerLives--;
             onPlayerLivesChange?.Invoke(GetPlayerLives());
-            Debug.Log("La cantidad de vidas es: " + GameManager.instance.GetPlayerLives());
+            Debug.Log("La cantidad de vidas es: " + GetPlayerLives());
         }
 
     }
@@ -435,13 +433,14 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionStay(Collision collision) 
     {
 
-        if (collision.gameObject.CompareTag("Floor")) //detecto que estoy en el piso para asi poder saltar luego
+        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Platform")) //detecto que estoy en el piso para asi poder saltar luego
         {
             Debug.Log("Estoy tocando el piso");
             isGrounded = true;
             animPlayer.SetBool("isGrounded", true);
+            if (collision.gameObject.CompareTag("Floor")) lastGrounded = transform.position;
         }
-        if (collision.gameObject.CompareTag("Enemy")) //si colisiona con un enemigo, pierde 2 vidas
+        if (collision.gameObject.CompareTag("Enemy")) 
         {
             var enemy = collision.gameObject;
             if (attacked)
@@ -449,7 +448,6 @@ public class PlayerController : MonoBehaviour
                 rbPlayer.AddForce((transform.position - enemy.transform.position).normalized * 60f, ForceMode.Impulse);
                 enemy.GetComponent<Rigidbody>().AddForce((enemy.transform.position - transform.position).normalized * 80f, ForceMode.Impulse);
                 enemy.GetComponent<Enemy>().EnemyLivesDown();
-                StartCoroutine(enemy.GetComponent<Enemy>().ColorChange());
                 enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
                 Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
             }
@@ -466,10 +464,10 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             animPlayer.SetBool("isGrounded", false);
         }
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(false);
-        }
+        //if (collision.gameObject.CompareTag("Enemy"))
+        //{
+        //    globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(false);
+        //}
     }
 
     //--------------------------------------------------------------------TRIGGERS--------------------------------------------------------------------
@@ -499,10 +497,39 @@ public class PlayerController : MonoBehaviour
             other.gameObject.GetComponent<MirrorRotation>().Rotation();
             
         }
+
+        else if (other.gameObject.CompareTag("Void"))
+        {
+
+            onPlayerFallen?.Invoke();
+            GameManager.playerLives--;
+            onPlayerLivesChange?.Invoke(GetPlayerLives());
+            Debug.Log("La cantidad de vidas es: " + GetPlayerLives());
+        }
         
     }
 
-    
+
+    public void ResetPosition()
+    {
+        StartCoroutine(ResetPositionCorrutina());
+    }
+    public IEnumerator ResetPositionCorrutina()
+    {
+        float elapsed = 0f;
+
+        while (elapsed < 2.2f)
+        {
+            lastPostion = transform.position.x;
+            elapsed += Time.deltaTime;
+            yield return null;
+
+        }
+
+        if (lastPostion < lastGrounded.x ) transform.position = lastGrounded + groundedOffset;
+        else transform.position = lastGrounded - groundedOffset;
+    }
+
 }
 
 
