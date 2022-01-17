@@ -33,16 +33,21 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerController.onLevelCompleted += LevelChange;
     }
 
-    public void LevelChange()
+    public void LevelChange(int numero)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(LevelLoader(numero));
     }
 
-    public void TryAgain()
+    IEnumerator LevelLoader(int numero)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + numero);
+        
+        while (!operation.isDone)
+        {
+            Debug.Log("Progreso de carga " + operation.progress);
+            yield return null;
+        }
     }
 }

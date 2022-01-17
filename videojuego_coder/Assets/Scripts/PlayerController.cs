@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UnityEvent onPlayerFallen;
     public static event Action<int> onPlayerLivesChange;
     public static event Action<int> onPlayerStarsChange;
-    public static event Action onLevelCompleted;
+    //public static event Action<int> onLevelCompleted;
 
     // Start is called before the first frame update
     void Start() {
@@ -479,8 +479,8 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("SpecialStar")) 
         {
-            onLevelCompleted?.Invoke();
-            LevelManager.instance.LevelChange();
+            GameManager.instance.LevelChange();
+            LevelManager.instance.LevelChange(1);
         }
 
         //atravieso el espejo y paso al techo

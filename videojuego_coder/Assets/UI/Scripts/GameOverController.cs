@@ -22,6 +22,6 @@ public class GameOverController : MonoBehaviour
     public void OnClickPlay()
     {
         Debug.Log("Presione TRY AGAIN");
-        LevelManager.instance.TryAgain();
+        LevelManager.instance.LevelChange(-1);
     }
 }
