@@ -41,6 +41,8 @@ public class TrapController : MonoBehaviour
             Debug.DrawLine(ray.origin, hit.point, Color.red);
             rbTrap.isKinematic = false;
             rbTrap.useGravity = true;
+
+            StartCoroutine(DeactivateTrap());
         }
 
         else
@@ -49,6 +51,22 @@ public class TrapController : MonoBehaviour
 
         }
 
+    }
+
+    private float trapTime = 8f;
+
+    public IEnumerator DeactivateTrap()
+    {
+        float elapsed = 0f;
+
+        while (elapsed < trapTime)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+
+        }
+
+        gameObject.SetActive(false);
     }
 
 }

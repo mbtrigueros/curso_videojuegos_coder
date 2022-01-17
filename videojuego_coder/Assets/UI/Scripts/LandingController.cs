@@ -22,6 +22,6 @@ public class LandingController : MonoBehaviour
     public void OnClickPlay()
     {
         Debug.Log("Presione PLAY");
-        SceneManager.LoadScene("Level_01");
+        LevelManager.instance.LevelChange();
     }
 }

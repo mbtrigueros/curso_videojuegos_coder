@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         PlayerController.onPlayerDeath += GameOver;
+        PlayerController.onLevelCompleted += LevelComplete;
     }
 
     public int GetStars()
@@ -52,6 +53,12 @@ public class GameManager : MonoBehaviour
         ResetGravity();
 
 
+    }
+
+    public void LevelComplete()
+    {
+        ResetLives();
+        ResetGravity();
     }
 
     public int GetPlayerLives()

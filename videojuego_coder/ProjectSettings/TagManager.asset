@@ -12,6 +12,7 @@ TagManager:
   - Obstacle
   - Void
   - Platform
+  - SpecialStar
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
-
 public class PlayerController : MonoBehaviour
 {
     //variables publicas
@@ -50,7 +49,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UnityEvent onPlayerFallen;
     public static event Action<int> onPlayerLivesChange;
     public static event Action<int> onPlayerStarsChange;
-    [SerializeField] private UnityEvent onAllEnemiesDeath;
+    public static event Action onLevelCompleted;
 
     // Start is called before the first frame update
     void Start() {
@@ -78,7 +77,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerAttack();
 
-        OnAllEnemiesDeath();
+        //OnAllEnemiesDeath();
 
         if (GameManager.playerLives == 0) {
             OnPlayerDeath();
@@ -142,13 +141,13 @@ public class PlayerController : MonoBehaviour
         onPlayerDeath?.Invoke();
     }
 
-    public void OnAllEnemiesDeath()
-    {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+    //public void OnAllEnemiesDeath()
+    //{
+    //    enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        if (enemies.Length == 0) onAllEnemiesDeath?.Invoke();
+    //    if (enemies.Length == 0) onAllEnemiesDeath?.Invoke();
 
-    }
+    //}
 
     //--------------------------------------------------------------------PLAYER HEALTH Y SCORE
 
@@ -172,14 +171,12 @@ public class PlayerController : MonoBehaviour
 
     //--------------------------------------------------------------------MOVIMIENTO Y ATAQUE
 
-    private float dataEjeHorizontal;
 
     //Metodo para que el jugador se mueva con el input del usuario. 
     public void PlayerMove()
     {
         float ejeHorizontal = Input.GetAxis("Horizontal"); //establecemos el eje horizontal con getaxis
 
-        dataEjeHorizontal = ejeHorizontal;
 
         rbPlayer.velocity = new Vector3(ejeHorizontal * speedPlayer, rbPlayer.velocity.y, 0); //modifico la velocidad del jugador para poder moverlo a traves del input. en el ejehorizontal estara el input, en el vertical queda igual(10 unidades por segundo) y en el z es 0. esto es para poder moverlo unicamente en los ejes horizontal y vertical, y no en el eje z.
 
@@ -384,6 +381,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private bool isHit = false;
+
     //--------------------------------------------------------------------COLISIONES--------------------------------------------------------------------
 
     private void OnCollisionEnter(Collision collision)
@@ -415,7 +414,9 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Trap"))
         {
+            isHit = true;
             animPlayer.SetTrigger("isHit");
+            collision.gameObject.GetComponent<Collider>().enabled = false;
             onPlayerFallen?.Invoke();
             GameManager.playerLives--;
             onPlayerLivesChange?.Invoke(GetPlayerLives());
@@ -428,7 +429,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionStay(Collision collision) 
     {
 
-        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Platform")) //detecto que estoy en el piso para asi poder saltar luego
+        if ((collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Platform")) && !isHit) 
         {
             Debug.Log("Estoy tocando el piso");
             isGrounded = true;
@@ -476,6 +477,12 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
         }
 
+        if (other.gameObject.CompareTag("SpecialStar")) 
+        {
+            onLevelCompleted?.Invoke();
+            LevelManager.instance.LevelChange();
+        }
+
         //atravieso el espejo y paso al techo
         else if (other.gameObject.CompareTag("Mirror") && !mirror) 
         {
@@ -493,7 +500,7 @@ public class PlayerController : MonoBehaviour
             
         }
 
-        else if (other.CompareTag("Void") || other.CompareTag("Obstacle"))
+        else if ((other.CompareTag("Void") || other.CompareTag("Obstacle")) && !isHit)
         {
             onPlayerFallen?.Invoke();
             GameManager.playerLives--;
@@ -520,8 +527,10 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        // GetComponent<Collider>().enabled = true;
         if (lastPostion < lastGrounded.x ) transform.position = lastGrounded + groundedOffset;
         else transform.position = lastGrounded - groundedOffset;
+        isHit = false;
     }
 
 }
