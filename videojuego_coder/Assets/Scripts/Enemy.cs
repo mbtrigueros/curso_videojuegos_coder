@@ -31,32 +31,11 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Walk();
+        EnemyDies();
 
     }
 
     //--------------------------------------------------------------------METODOS PROPIOS--------------------------------------------------------------------
-
-    private float duration = 0.8f;
-
-    private Material enemyMaterial;
-    private Color colorCollisionEnemy = Color.white;
-    private Color originalColor;
-
-
-    public IEnumerator ColorChange()
-    {
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-
-            animEnemy.Play("changeColorAnim");
-            elapsed += Time.deltaTime;
-            yield return null;
-
-        }
-
-    }
 
     //--------------------------------------------------------------------ENEMY HEALTH
 

@@ -412,20 +412,15 @@ public class PlayerController : MonoBehaviour
             }
             
         }
-        
 
-        if (collision.gameObject.CompareTag("Trap")) //si colisiona con una trampa, muere
+        if (collision.gameObject.CompareTag("Trap"))
         {
-            GameManager.playerLives--;
-            onPlayerLivesChange?.Invoke(GetPlayerLives());
-            Debug.Log("La cantidad de vidas es: " + GameManager.instance.GetPlayerLives());
-        }
-        
-        if (collision.gameObject.CompareTag("Obstacle")) //si colisiona con el obstaculo generado por la fuente, muere
-        {
+            animPlayer.SetTrigger("isHit");
+            onPlayerFallen?.Invoke();
             GameManager.playerLives--;
             onPlayerLivesChange?.Invoke(GetPlayerLives());
             Debug.Log("La cantidad de vidas es: " + GetPlayerLives());
+           // collision.gameObject.SetActive(false);
         }
 
     }
@@ -498,9 +493,8 @@ public class PlayerController : MonoBehaviour
             
         }
 
-        else if (other.gameObject.CompareTag("Void"))
+        else if (other.CompareTag("Void") || other.CompareTag("Obstacle"))
         {
-
             onPlayerFallen?.Invoke();
             GameManager.playerLives--;
             onPlayerLivesChange?.Invoke(GetPlayerLives());
@@ -518,7 +512,7 @@ public class PlayerController : MonoBehaviour
     {
         float elapsed = 0f;
 
-        while (elapsed < 2.2f)
+        while (elapsed < 2.3f)
         {
             lastPostion = transform.position.x;
             elapsed += Time.deltaTime;
