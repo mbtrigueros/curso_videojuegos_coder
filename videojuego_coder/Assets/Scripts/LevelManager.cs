@@ -13,21 +13,26 @@ public class LevelManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            if (dontDestroyOnLoad)
-            {
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        if (GetLevel() <= 1)
+        {
+            AudioManager.instance.PlaySound("SoundTrack_01");
+        }
+        else if (GetLevel() >= 2)
+        {
+            AudioManager.instance.PlaySound("SoundTrack_02");
+        }
     }
 
     // Update is called once per frame
@@ -38,6 +43,11 @@ public class LevelManager : MonoBehaviour
     public void LevelChange(int numero)
     {
         StartCoroutine(LevelLoader(numero));
+    }
+
+    public int GetLevel()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
     }
 
     IEnumerator LevelLoader(int numero)

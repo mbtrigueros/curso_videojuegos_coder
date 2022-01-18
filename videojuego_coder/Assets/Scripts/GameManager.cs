@@ -12,24 +12,23 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
-            if (dontDestroyOnLoad)
-            {
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
         }
+
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
     }
     // Start is called before the first frame update
     void Start()
     {
 
-
+        ResetGravity();
 
     }
 
@@ -49,7 +48,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         ResetLives();
         ResetStars();
-        ResetGravity();
 
 
     }

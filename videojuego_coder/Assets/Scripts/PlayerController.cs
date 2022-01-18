@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     //variables de eventos
     public static event Action onPlayerDeath;
     [SerializeField] private UnityEvent onPlayerFallen;
+    [SerializeField] private UnityEvent onLevelChange;
     public static event Action<int> onPlayerLivesChange;
     public static event Action<int> onPlayerStarsChange;
     //public static event Action<int> onLevelCompleted;
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour
         //OnAllEnemiesDeath();
 
         if (GameManager.playerLives == 0) {
+            AudioManager.instance.PlaySound("Dead");
             OnPlayerDeath();
             Debug.Log("Has sido derrotadx por tus demonios :(");
         }
@@ -90,6 +92,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z) && coyoteTimeCounter > 0f)  //si apreto Z y estoy en el piso
         {
+            AudioManager.instance.PlaySound("Jump");
             pressedJump = true; //esta variable es para que el input del jugador se maneje en el update y no el fixed update porque puede traer problemas de
             hasDoubleJumped = false;
             coyoteTimeCounter = 0f;
@@ -97,7 +100,7 @@ public class PlayerController : MonoBehaviour
         }
 
         else if (Input.GetKeyDown(KeyCode.Z) && !isGrounded && !hasDoubleJumped) {
-
+            AudioManager.instance.PlaySound("DoubleJump");
             doubleJump = true;
             hasDoubleJumped = true;
 
@@ -109,11 +112,20 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        var dash = Input.GetKeyDown(KeyCode.C) ? pressedDash = true : pressedDash = false;
+        if (Input.GetKeyDown(KeyCode.C)) {
+
+            pressedDash = true;
+            AudioManager.instance.PlaySound("Dash");
+        }
+
+        else {
+            pressedDash = false;
+        }
 
 
         if (!wasGrounded && isGrounded)
         {
+            AudioManager.instance.PlaySound("Landing");
             impact.transform.position = footsteps.transform.position;
             impact.Play();
 
@@ -187,12 +199,15 @@ public class PlayerController : MonoBehaviour
         //determino si el jugador se mueve, y le asigno true a la variable booleana para correr
         if (ejeHorizontal != 0)
         {
+            if (isGrounded) AudioManager.instance.PlaySound("Steps");
+            else AudioManager.instance.StopSound("Steps");
             animPlayer.SetBool("isRunning", true);
             if (isGrounded) footsteps.Play(); //disparo las particulas
         }
 
         else
         {
+            AudioManager.instance.StopSound("Steps");
             animPlayer.SetBool("isRunning", false);
         }
 
@@ -290,6 +305,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
+            AudioManager.instance.PlaySound("Attack");
             animPlayer.SetBool("isAttacking", true);
             attacked = true;
             attackEffect.Play();
@@ -414,6 +430,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Trap"))
         {
+            AudioManager.instance.PlaySound("Thump");
             isHit = true;
             animPlayer.SetTrigger("isHit");
             collision.gameObject.GetComponent<Collider>().enabled = false;
@@ -472,6 +489,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Star")) //si toco las estrellas las "agarro" 
         {
+            AudioManager.instance.PlaySound("Star");
             PlayerStarsUp();
             Debug.Log("Tienes " + GetPlayerStars() + " estrellas");
             other.gameObject.SetActive(false);
@@ -479,14 +497,16 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("SpecialStar")) 
         {
-            GameManager.instance.LevelChange();
-            LevelManager.instance.LevelChange(1);
+            onLevelChange?.Invoke();
+            //AudioManager.instance.PlaySound("Mirror");
+            //GameManager.instance.LevelChange();
+            //LevelManager.instance.LevelChange(1);
         }
 
         //atravieso el espejo y paso al techo
         else if (other.gameObject.CompareTag("Mirror") && !mirror) 
         {
-
+            AudioManager.instance.PlaySound("Mirror");
             enterUpsideDown();
             other.gameObject.GetComponent<MirrorRotation>().Rotation();
             
@@ -495,6 +515,7 @@ public class PlayerController : MonoBehaviour
         //vuelvo a atravesar el espejo y retorno a la normalidad
         else if (other.gameObject.CompareTag("Mirror") && mirror)
         {
+            AudioManager.instance.PlaySound("Mirror");
             outOfUpsideDown();
             other.gameObject.GetComponent<MirrorRotation>().Rotation();
             

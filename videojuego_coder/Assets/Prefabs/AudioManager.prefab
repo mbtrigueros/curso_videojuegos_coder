@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2779816723545042436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2779816723545042434}
+  - component: {fileID: 2779816723545042437}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2779816723545042434
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2779816723545042436}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1116.4165, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2779816723545042437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2779816723545042436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 922003a054f642c4492893de97bfe757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  sounds:
+  - name: Steps
+    clip: {fileID: 8300000, guid: 497c4a613317f084fb909a310ce44e67, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Jump
+    clip: {fileID: 8300000, guid: 21502d9f8ecea9d4a8c653ed6675ba8a, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: DoubleJump
+    clip: {fileID: 8300000, guid: 0567920bc8c24174c8de014bdd3ee49c, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Attack
+    clip: {fileID: 8300000, guid: f186e82bb2574834ca213f849977d5fc, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Dash
+    clip: {fileID: 8300000, guid: ea515c72fae82254882d0279c190e48f, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Landing
+    clip: {fileID: 8300000, guid: 72da547dd60846047b4fa991705b1864, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: SoundTrack_01
+    clip: {fileID: 8300000, guid: 7f135e17c73d6b84b936bbecef3293ac, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
+  - name: SoundTrack_02
+    clip: {fileID: 8300000, guid: d0ad2ed4bfe98ae40a891e93ebda14da, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Star
+    clip: {fileID: 8300000, guid: 479d47fa5d43e474abd5b58b5f6a8f5b, type: 3}
+    volume: 1
+    pitch: 4
+    source: {fileID: 0}
+    loop: 0
+  - name: Mirror
+    clip: {fileID: 8300000, guid: f186e82bb2574834ca213f849977d5fc, type: 3}
+    volume: 1
+    pitch: 0.3
+    source: {fileID: 0}
+    loop: 0
+  - name: Thump
+    clip: {fileID: 8300000, guid: 57524c3d1960fe947a15dd9c0a47d8f2, type: 3}
+    volume: 1
+    pitch: 1.8
+    source: {fileID: 0}
+    loop: 0
+  - name: Dead
+    clip: {fileID: 8300000, guid: 0567920bc8c24174c8de014bdd3ee49c, type: 3}
+    volume: 1
+    pitch: 0.3
+    source: {fileID: 0}
+    loop: 0
