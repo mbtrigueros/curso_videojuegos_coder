@@ -28,8 +28,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
-        ResetGravity();
-
     }
 
     // Update is called once per frame
@@ -48,6 +46,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         ResetLives();
         ResetStars();
+        ResetGravity();
 
 
     }

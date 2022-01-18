@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAttack : Enemy
 {
+    [SerializeField] GameObject hips;
     private float durationAttack = 2f;
     private bool hasAttacked = false;
     protected Rigidbody rbEnemy; //rigidbody del enemigo
@@ -18,15 +19,19 @@ public class EnemyAttack : Enemy
     {
         EnemyDies();
         DetectPlayer(origen.transform);
-
-        if (playerSeen && !hasAttacked) Attack();
+        if (playerSeen && !hasAttacked)
+        {
+            Attack();
+        }
         else Walk();
+
     }
 
     public void Attack()
     {
         animEnemy.SetTrigger("Attack");
         StartCoroutine(TimeAttack());
+
     }
 
     public IEnumerator TimeAttack()

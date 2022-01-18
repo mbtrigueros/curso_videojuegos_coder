@@ -44,7 +44,7 @@ public class EnemyFollow : Enemy
 
         transform.forward = dir.normalized; //modifico el forward para que el frente del enemigo coincida con la direccion
 
-        transform.position +=  enemyData.SpeedEnemy * transform.forward  * Time.deltaTime;  //el metodo normalized es para que me devuelva el vector normalizado, es decir que su magnitud sea 1
+        transform.position +=  enemyData.SpeedRunEnemy * transform.forward  * Time.deltaTime;  //el metodo normalized es para que me devuelva el vector normalizado, es decir que su magnitud sea 1
         if (dir.magnitude < 2f)
         {
             Walk();

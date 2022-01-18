@@ -15,6 +15,9 @@ public class EnemyData : ScriptableObject
     [SerializeField]
     private float speedEnemy;
 
+    [SerializeField]
+    private float speedRunEnemy;
+
     public int EnemyLives
     {
         get { return enemyLives; }
@@ -38,6 +41,11 @@ public class EnemyData : ScriptableObject
     public float SpeedEnemy
     {
         get { return speedEnemy; }
+    }
+
+    public float SpeedRunEnemy
+    {
+        get { return speedRunEnemy; }
     }
 
 }

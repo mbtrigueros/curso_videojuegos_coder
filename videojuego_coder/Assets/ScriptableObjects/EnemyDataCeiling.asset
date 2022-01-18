@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: EnemyDataCeiling
   m_EditorClassIdentifier: 
   enemyLives: 2
-  speedEnemy: 5
+  speedEnemy: 4
+  speedRunEnemy: 7

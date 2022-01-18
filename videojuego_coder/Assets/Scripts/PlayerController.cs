@@ -310,7 +310,7 @@ public class PlayerController : MonoBehaviour
             attacked = true;
             attackEffect.Play();
         }
-        else
+        else if (Input.GetKeyUp(KeyCode.X))
         {
             animPlayer.SetBool("isAttacking", false);
             attacked = false;
@@ -405,19 +405,13 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(collision);
 
-        if (collision.gameObject.CompareTag("Enemy")) //si colisiona con un enemigo, pierde 2 vidas
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             var enemy = collision.gameObject;
-            if (!attacked)
+            if (animPlayer.GetBool("isAttacking") == false)
             {
                 animPlayer.SetTrigger("isAttacked");
-                foreach (GameObject camera in cameras)
-                {
-                    if (camera.activeInHierarchy)
-                    {
-                        StartCoroutine(camera.GetComponent<CameraShake>().Shake(0.1f, -4f)); 
-                    }
-                }
+                foreach (GameObject camera in cameras) if (camera.activeInHierarchy) StartCoroutine(camera.GetComponent<CameraShake>().Shake(0.1f, -4f));
 
                 // rbPlayer.AddForce((transform.position-enemy.transform.position).normalized * 200f, ForceMode.Impulse);
                 GameManager.playerLives--;
@@ -427,6 +421,9 @@ public class PlayerController : MonoBehaviour
             }
             
         }
+    
+            
+        
 
         if (collision.gameObject.CompareTag("Trap"))
         {
@@ -438,7 +435,6 @@ public class PlayerController : MonoBehaviour
             GameManager.playerLives--;
             onPlayerLivesChange?.Invoke(GetPlayerLives());
             Debug.Log("La cantidad de vidas es: " + GetPlayerLives());
-           // collision.gameObject.SetActive(false);
         }
 
     }
@@ -453,19 +449,6 @@ public class PlayerController : MonoBehaviour
             animPlayer.SetBool("isGrounded", true);
             if (collision.gameObject.CompareTag("Floor")) lastGrounded = transform.position;
         }
-        if (collision.gameObject.CompareTag("Enemy")) 
-        {
-            var enemy = collision.gameObject;
-            if (attacked)
-            {
-                //rbPlayer.AddForce((transform.position - enemy.transform.position).normalized * 60f, ForceMode.Impulse);
-               // enemy.GetComponent<Rigidbody>().AddForce((enemy.transform.position - transform.position).normalized * 80f, ForceMode.Impulse);
-                enemy.GetComponent<Enemy>().EnemyLivesDown();
-                enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
-                Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
-            }
-           
-        }
 
         }
 
@@ -477,16 +460,53 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             animPlayer.SetBool("isGrounded", false);
         }
-        //if (collision.gameObject.CompareTag("Enemy"))
-        //{
-        //    globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(false);
-        //}
     }
 
     //--------------------------------------------------------------------TRIGGERS--------------------------------------------------------------------
 
-    private void OnTriggerEnter(Collider other)
+   [SerializeField] GameObject enemyCollider;
+    void PRUEBA()
     {
+        if (animPlayer.GetBool("isAttacking") == true)
+        {
+
+             enemyCollider.GetComponent<Collider>().isTrigger = true;
+        }
+        else if (animPlayer.GetBool("isAttacking") == false)
+        {
+            enemyCollider.GetComponent<Collider>().isTrigger = false;
+        }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            var enemy = other.gameObject;
+            if (animPlayer.GetBool("isAttacking") == true)
+
+            {
+                enemy.GetComponent<Enemy>().EnemyLivesDown();
+                enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
+                Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
+            }
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            var enemy = other.gameObject;
+            if (animPlayer.GetBool("isAttacking") == true)
+
+            {
+                enemy.GetComponent<Enemy>().EnemyLivesDown();
+                enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
+                Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
+            }
+        }
+
         if (other.gameObject.CompareTag("Star")) //si toco las estrellas las "agarro" 
         {
             AudioManager.instance.PlaySound("Star");
@@ -495,12 +515,11 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
         }
 
+        
+
         if (other.gameObject.CompareTag("SpecialStar")) 
         {
             onLevelChange?.Invoke();
-            //AudioManager.instance.PlaySound("Mirror");
-            //GameManager.instance.LevelChange();
-            //LevelManager.instance.LevelChange(1);
         }
 
         //atravieso el espejo y paso al techo

@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+       
     }
 
     // Start is called before the first frame update
@@ -29,7 +30,7 @@ public class LevelManager : MonoBehaviour
         {
             AudioManager.instance.PlaySound("SoundTrack_01");
         }
-        else if (GetLevel() >= 2)
+        else if (GetLevel() > 1)
         {
             AudioManager.instance.PlaySound("SoundTrack_02");
         }
@@ -38,7 +39,10 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
+
+
 
     public void LevelChange(int numero)
     {

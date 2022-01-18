@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 
 {
-
     [SerializeField] protected EnemyData enemyData;
 
     [SerializeField] Transform[] waypoints; //waypoints hacia los que se movera el enemigo
@@ -22,8 +21,10 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         animEnemy.SetBool("isWalking", true); //determino las variables de animacion de correr como falsa por default y la de caminar como verdadera
         animEnemy.SetBool("playerSeen", false);
+        ParticleSystem explosionParticles = GetComponent<ParticleSystem>();
 
     }
 
@@ -40,12 +41,12 @@ public class Enemy : MonoBehaviour
     //--------------------------------------------------------------------ENEMY HEALTH
 
     public int EnemyLivesDown()
-    { //parametro que indica la cantidad de vidas que pierde
+    { 
         return enemyData.EnemyLivesDown(); 
     }
 
     public int GetEnemyLives()
-    { //parametro que indica la cantidad de vidas que pierde
+    { 
         return enemyData.EnemyLives; //establezco la cantidad de vidas actuales
     }
 
@@ -123,5 +124,28 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //--------------------------------------------------------------------TRIGGERS--------------------------------------------------------------------
+
+    public void onTriggerEnter (Collider other)
+    {
+        if ((other.CompareTag("Void") || other.CompareTag("Obstacle"))) onEnemyDeath?.Invoke();
+    }
+
+    //--------------------------------------------------------------------COLLISIONS--------------------------------------------------------------------
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Trap")) onEnemyDeath?.Invoke();
+
+        if (collision.gameObject.layer == 9) {
+
+        GameObject destroyable = collision.gameObject;
+        ParticleSystem particulas = destroyable.GetComponentInParent<ParticleSystem>();
+        destroyable.SetActive(false);
+        particulas.Play();
+        }
+
+        
+    }
 
 }
