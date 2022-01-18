@@ -419,18 +419,23 @@ public class PlayerController : MonoBehaviour
                 //globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(true);
                 Debug.Log("La cantidad de vidas es: " + GameManager.instance.GetPlayerLives());
             }
+
+            else if (animPlayer.GetBool("isAttacking") == true)
+
+            {
+                enemy.GetComponent<Enemy>().EnemyLivesDown();
+                enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
+                Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
+            
+            }
             
         }
-    
-            
-        
 
-        if (collision.gameObject.CompareTag("Trap"))
+        if (collision.gameObject.CompareTag("Trap") && !isHit)
         {
             AudioManager.instance.PlaySound("Thump");
             isHit = true;
             animPlayer.SetTrigger("isHit");
-            collision.gameObject.GetComponent<Collider>().enabled = false;
             onPlayerFallen?.Invoke();
             GameManager.playerLives--;
             onPlayerLivesChange?.Invoke(GetPlayerLives());
@@ -442,12 +447,25 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionStay(Collision collision) 
     {
 
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            var enemy = collision.gameObject;
+            if (animPlayer.GetBool("isAttacking") == true)
+
+            {
+                enemy.GetComponent<Enemy>().EnemyLivesDown();
+                enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
+                Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
+            }
+        }
+
         if ((collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Platform")) && !isHit) 
         {
             Debug.Log("Estoy tocando el piso");
             isGrounded = true;
             animPlayer.SetBool("isGrounded", true);
             if (collision.gameObject.CompareTag("Floor")) lastGrounded = transform.position;
+
         }
 
         }
@@ -464,48 +482,35 @@ public class PlayerController : MonoBehaviour
 
     //--------------------------------------------------------------------TRIGGERS--------------------------------------------------------------------
 
-   [SerializeField] GameObject enemyCollider;
-    void PRUEBA()
-    {
-        if (animPlayer.GetBool("isAttacking") == true)
-        {
-
-             enemyCollider.GetComponent<Collider>().isTrigger = true;
-        }
-        else if (animPlayer.GetBool("isAttacking") == false)
-        {
-            enemyCollider.GetComponent<Collider>().isTrigger = false;
-        }
-    }
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            var enemy = other.gameObject;
-            if (animPlayer.GetBool("isAttacking") == true)
+        //if (other.gameObject.CompareTag("Enemy"))
+        //{
+        //    var enemy = other.gameObject;
+        //    if (animPlayer.GetBool("isAttacking") == true)
 
-            {
-                enemy.GetComponent<Enemy>().EnemyLivesDown();
-                enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
-                Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
-            }
-        }
+        //    {
+        //        enemy.GetComponent<Enemy>().EnemyLivesDown();
+        //        enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
+        //        Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
+        //    }
+        //}
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            var enemy = other.gameObject;
-            if (animPlayer.GetBool("isAttacking") == true)
+        //if (other.gameObject.CompareTag("Enemy"))
+        //{
+        //    var enemy = other.gameObject;
+        //    if (animPlayer.GetBool("isAttacking") == true)
 
-            {
-                enemy.GetComponent<Enemy>().EnemyLivesDown();
-                enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
-                Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
-            }
-        }
+        //    {
+        //        enemy.GetComponent<Enemy>().EnemyLivesDown();
+        //        enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
+        //        Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
+        //    }
+        //}
 
         if (other.gameObject.CompareTag("Star")) //si toco las estrellas las "agarro" 
         {
@@ -540,8 +545,9 @@ public class PlayerController : MonoBehaviour
             
         }
 
-        else if ((other.CompareTag("Void") || other.CompareTag("Obstacle")) && !isHit)
+         if ((other.CompareTag("Void") || other.CompareTag("Obstacle")) && !isHit)
         {
+            isHit = true;
             onPlayerFallen?.Invoke();
             GameManager.playerLives--;
             onPlayerLivesChange?.Invoke(GetPlayerLives());
@@ -570,6 +576,23 @@ public class PlayerController : MonoBehaviour
         // GetComponent<Collider>().enabled = true;
         if (lastPostion < lastGrounded.x ) transform.position = lastGrounded + groundedOffset;
         else transform.position = lastGrounded - groundedOffset;
+        isHit = false;
+    }
+
+    public IEnumerator DelayHits()
+    {
+        float elapsed = 0f;
+        float delay = 4f;
+
+        while (elapsed < delay)
+        {
+            isHit = true;
+            lastPostion = transform.position.x;
+            elapsed += Time.deltaTime;
+            yield return null;
+
+        }
+
         isHit = false;
     }
 

@@ -9,7 +9,8 @@ public class TrapController : MonoBehaviour
     [SerializeField] private LayerMask playerMask; //llamo a la capa del player
     [SerializeField] private Transform origen;
 
-    private bool playerDetected = false; //booleana para la deteccion juegador
+    private bool hasFallen;
+    private bool playerDetected;//booleana para la deteccion juegador
 
     private Rigidbody rbTrap; //traigo el rigidbody de la trampa
 
@@ -41,7 +42,6 @@ public class TrapController : MonoBehaviour
             Debug.DrawLine(ray.origin, hit.point, Color.red);
             rbTrap.isKinematic = false;
             rbTrap.useGravity = true;
-
             StartCoroutine(DeactivateTrap());
         }
 
@@ -53,7 +53,16 @@ public class TrapController : MonoBehaviour
 
     }
 
-    private float trapTime = 8f;
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+        if (collision.gameObject.CompareTag("Floor") && hasFallen)
+        {
+            gameObject.tag = "Floor";
+        }
+    }
+
+    private float trapTime = 2f;
 
     public IEnumerator DeactivateTrap()
     {
@@ -65,8 +74,7 @@ public class TrapController : MonoBehaviour
             yield return null;
 
         }
-
-        gameObject.SetActive(false);
+        hasFallen = true;
     }
 
 }

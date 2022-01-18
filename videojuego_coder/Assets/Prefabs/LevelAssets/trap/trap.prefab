@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8034299533716283970}
   - component: {fileID: 58596836}
   - component: {fileID: 58596832}
-  - component: {fileID: 58596833}
   m_Layer: 8
   m_Name: trap
   m_TagString: Trap
@@ -113,21 +112,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.593275, y: 1.0000604, z: 0.48079202}
   m_Center: {x: -1.3636382, y: -0.000009715557, z: 0.12498666}
---- !u!114 &58596833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8394547714428322711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83c60446dcbaf604da723103ce0a6106, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0.5
-  timePassed: 0
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  speedFall: 12

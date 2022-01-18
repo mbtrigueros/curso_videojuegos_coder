@@ -10,7 +10,7 @@ using UnityEngine.Events;
 public class EnemyData : ScriptableObject
 {
     [SerializeField]
-    protected int enemyLives;
+    protected int enemyLives = 2;
     
     [SerializeField]
     private float speedEnemy;
@@ -36,6 +36,7 @@ public class EnemyData : ScriptableObject
         }
         
     }
+
 
 
     public float SpeedEnemy
