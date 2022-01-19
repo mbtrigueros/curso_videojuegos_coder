@@ -18,7 +18,7 @@ public class NextLevelController : MonoBehaviour
 
     public void NextLevel()
     {
-        if (LevelManager.instance.GetLevel() > 0)
+        if (LevelManager.instance.GetLevel() >= 1)
         {
             AudioManager.instance.PlaySound("SoundTrack_02");
             AudioManager.instance.StopSound("SoundTrack_01");

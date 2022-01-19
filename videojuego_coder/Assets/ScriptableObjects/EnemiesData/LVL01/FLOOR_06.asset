@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf58f619f4e7f647a002e71b8a501b7, type: 3}
   m_Name: FLOOR_06
   m_EditorClassIdentifier: 
-  enemyLives: 5
+  enemyLives: 4
   speedEnemy: 4
   speedRunEnemy: 7

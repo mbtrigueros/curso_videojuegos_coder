@@ -15,14 +15,14 @@ public class HUDController : MonoBehaviour
 
     private void Awake()
     {
-        PlayerController.onPlayerStarsChange += OnPlayerStarsChangeHandler;
+        PlayerController.onPlayerLivesChange += OnPlayerLivesChangeHandler;
         PlayerController.onPlayerDeath += OnPlayerDeathHandler;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerController.onPlayerLivesChange += OnPlayerLivesChangeHandler;
+        PlayerController.onPlayerStarsChange += OnPlayerStarsChangeHandler;
         animStar = GetComponentInChildren<Animator>();
     }
 

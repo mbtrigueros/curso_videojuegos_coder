@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UnityEvent onLevelChange;
     public static event Action<int> onPlayerLivesChange;
     public static event Action<int> onPlayerStarsChange;
-    //public static event Action<int> onLevelCompleted;
 
     // Start is called before the first frame update
     void Start() {
@@ -77,8 +76,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerAttack();
-
-        //OnAllEnemiesDeath();
 
         if (GameManager.playerLives == 0) {
             AudioManager.instance.PlaySound("Dead");
@@ -139,9 +136,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMove();
         PlayerJump();
-
         PlayerDash();
-
     }
 
     //--------------------------------------------------------------------METODOS PROPIOS--------------------------------------------------------------------
@@ -152,14 +147,6 @@ public class PlayerController : MonoBehaviour
     {
         onPlayerDeath?.Invoke();
     }
-
-    //public void OnAllEnemiesDeath()
-    //{
-    //    enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-    //    if (enemies.Length == 0) onAllEnemiesDeath?.Invoke();
-
-    //}
 
     //--------------------------------------------------------------------PLAYER HEALTH Y SCORE
 
@@ -181,12 +168,6 @@ public class PlayerController : MonoBehaviour
         return GameManager.playerStars++;
     }
 
-    public int PlayerLivesUp()
-    { //parametro que indica la cantidad de vidas que gana 
-        if (GetPlayerStars() >= 2) 
-        onPlayerStarsChange?.Invoke(GetPlayerLives());
-        return GameManager.playerLives++;
-    }
     //--------------------------------------------------------------------MOVIMIENTO Y ATAQUE
 
 
@@ -248,7 +229,6 @@ public class PlayerController : MonoBehaviour
                 rbPlayer.AddForce(jump * forceJump, ForceMode.Impulse); //aplico fuerza en el vector jump
             }
         }
-
 
         pressedJump = false;
         doubleJump = false;
@@ -418,11 +398,8 @@ public class PlayerController : MonoBehaviour
             {
                 animPlayer.SetTrigger("isAttacked");
                 foreach (GameObject camera in cameras) if (camera.activeInHierarchy) StartCoroutine(camera.GetComponent<CameraShake>().Shake(0.1f, -4f));
-
-                // rbPlayer.AddForce((transform.position-enemy.transform.position).normalized * 200f, ForceMode.Impulse);
                 GameManager.playerLives--;
                 onPlayerLivesChange?.Invoke(GetPlayerLives());
-                //globalPostProcessing.GetComponent<PostProcessingGlobalController>().colorEffect(true);
                 Debug.Log("La cantidad de vidas es: " + GameManager.instance.GetPlayerLives());
             }
 
@@ -439,13 +416,13 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Trap") && !isHit)
         {
-            AudioManager.instance.PlaySound("Thump");
             isHit = true;
             animPlayer.SetTrigger("isHit");
             onPlayerFallen?.Invoke();
             GameManager.playerLives--;
             onPlayerLivesChange?.Invoke(GetPlayerLives());
             Debug.Log("La cantidad de vidas es: " + GetPlayerLives());
+            //StartCoroutine(DelayHits());
         }
 
     }
@@ -489,34 +466,8 @@ public class PlayerController : MonoBehaviour
     //--------------------------------------------------------------------TRIGGERS--------------------------------------------------------------------
 
 
-    public void OnTriggerStay(Collider other)
-    {
-        //if (other.gameObject.CompareTag("Enemy"))
-        //{
-        //    var enemy = other.gameObject;
-        //    if (animPlayer.GetBool("isAttacking") == true)
-
-        //    {
-        //        enemy.GetComponent<Enemy>().EnemyLivesDown();
-        //        enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
-        //        Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
-        //    }
-        //}
-    }
-
     public void OnTriggerEnter(Collider other)
     {
-        //if (other.gameObject.CompareTag("Enemy"))
-        //{
-        //    var enemy = other.gameObject;
-        //    if (animPlayer.GetBool("isAttacking") == true)
-
-        //    {
-        //        enemy.GetComponent<Enemy>().EnemyLivesDown();
-        //        enemy.GetComponentInChildren<Animator>().SetTrigger("isAttacked");
-        //        Debug.Log("Al enemigo le quedan: " + enemy.GetComponent<Enemy>().GetEnemyLives());
-        //    }
-        //}
 
         if (other.gameObject.CompareTag("Star")) //si toco las estrellas las "agarro" 
         {
@@ -558,6 +509,7 @@ public class PlayerController : MonoBehaviour
             GameManager.playerLives--;
             onPlayerLivesChange?.Invoke(GetPlayerLives());
             Debug.Log("La cantidad de vidas es: " + GetPlayerLives());
+            //StartCoroutine(DelayHits());
         }
         
     }
@@ -571,7 +523,7 @@ public class PlayerController : MonoBehaviour
     {
         float elapsed = 0f;
 
-        while (elapsed < 2.3f)
+        while (elapsed < 1.8f)
         {
             lastPostion = transform.position.x;
             elapsed += Time.deltaTime;
@@ -579,28 +531,25 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        // GetComponent<Collider>().enabled = true;
         if (lastPostion < lastGrounded.x ) transform.position = lastGrounded + groundedOffset;
         else transform.position = lastGrounded - groundedOffset;
         isHit = false;
     }
 
-    public IEnumerator DelayHits()
-    {
-        float elapsed = 0f;
-        float delay = 4f;
+    //public IEnumerator DelayHits()
+    //{
+    //    float elapsed = 0f;
+    //    float delay = 2f;
 
-        while (elapsed < delay)
-        {
-            isHit = true;
-            lastPostion = transform.position.x;
-            elapsed += Time.deltaTime;
-            yield return null;
+    //    while (elapsed < delay)
+    //    {
+    //        isHit = true;
+    //        elapsed += Time.deltaTime;
+    //        yield return null;
+    //    }
 
-        }
-
-        isHit = false;
-    }
+    //    isHit = false;
+    //}
 
 }
 

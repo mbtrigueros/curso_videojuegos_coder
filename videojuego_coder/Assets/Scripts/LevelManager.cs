@@ -30,10 +30,6 @@ public class LevelManager : MonoBehaviour
         {
             AudioManager.instance.PlaySound("SoundTrack_01");
         }
-        else if (GetLevel() > 1)
-        {
-            AudioManager.instance.PlaySound("SoundTrack_02");
-        }
     }
 
     // Update is called once per frame
@@ -56,7 +52,7 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator LevelLoader(int numero)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + numero);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(GetLevel() + numero);
         
         while (!operation.isDone)
         {

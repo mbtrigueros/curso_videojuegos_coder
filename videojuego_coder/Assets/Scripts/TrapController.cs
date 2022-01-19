@@ -74,6 +74,7 @@ public class TrapController : MonoBehaviour
             yield return null;
 
         }
+        AudioManager.instance.PlaySound("Thump");
         hasFallen = true;
     }
 

@@ -55,8 +55,6 @@ public class GameManager : MonoBehaviour
     {
         ResetLives();
         ResetGravity();
-
-
     }
 
     public int GetPlayerLives()
