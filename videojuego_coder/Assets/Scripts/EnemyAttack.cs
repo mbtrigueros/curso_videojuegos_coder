@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyAttack : Enemy
 {
-    [SerializeField] GameObject hips;
     private float durationAttack = 2f;
     private bool hasAttacked = false;
     protected Rigidbody rbEnemy; //rigidbody del enemigo

@@ -22,6 +22,7 @@ public class FuenteGenerator : MonoBehaviour
     //--------------------------------------------------------------------METODOS PROPIOS--------------------------------------------------------------------
     private void Generator()
     {
+        AudioManager.instance.PlaySound("Bubble");
         Instantiate(obstacle, transform); //metodo para instanciar el obstaculo
 
     }

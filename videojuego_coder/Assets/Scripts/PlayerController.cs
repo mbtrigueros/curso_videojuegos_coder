@@ -176,11 +176,17 @@ public class PlayerController : MonoBehaviour
     }
 
     public int PlayerStarsUp()
-    { //parametro que indica la cantidad de vidas que gana 
+    { 
         onPlayerStarsChange?.Invoke(GetPlayerStars());
         return GameManager.playerStars++;
     }
 
+    public int PlayerLivesUp()
+    { //parametro que indica la cantidad de vidas que gana 
+        if (GetPlayerStars() >= 2) 
+        onPlayerStarsChange?.Invoke(GetPlayerLives());
+        return GameManager.playerLives++;
+    }
     //--------------------------------------------------------------------MOVIMIENTO Y ATAQUE
 
 

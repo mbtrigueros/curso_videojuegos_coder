@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyMaterial_00
+  m_Name: EnemyMaterial_Attack
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHABLEND_ON
   m_LightmapFlags: 4
@@ -74,6 +74,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0, g: 0.058823586, b: 1, a: 0.61960787}
-    - _EmissionColor: {r: 13.885152, g: 1.9020756, b: 1.9020756, a: 1}
+    - _Color: {r: 0.6509434, g: 0.42599586, b: 0.30950513, a: 0.61960787}
+    - _EmissionColor: {r: 4.634897, g: 3.0899315, b: 1.2359726, a: 1}
   m_BuildTextureStacks: []
