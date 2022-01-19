@@ -391,7 +391,12 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(collision);
 
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Boss"))
+        {
+            OnPlayerDeath();
+        }
+
+            if (collision.gameObject.CompareTag("Enemy"))
         {
             var enemy = collision.gameObject;
             if (!attacked)
