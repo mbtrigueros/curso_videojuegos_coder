@@ -133,6 +133,8 @@ public class Enemy : MonoBehaviour
 
     //--------------------------------------------------------------------COLLISIONS--------------------------------------------------------------------
 
+    ParticleSystem particulas;
+
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Trap")) onEnemyDeath?.Invoke();
@@ -140,9 +142,13 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.layer == 9) {
 
         GameObject destroyable = collision.gameObject;
-        ParticleSystem particulas = destroyable.GetComponentInParent<ParticleSystem>();
-        destroyable.SetActive(false);
-        particulas.Play();
+            if (destroyable.GetComponentInParent<ParticleSystem>() != null)
+            {
+                particulas = destroyable.GetComponentInParent<ParticleSystem>();
+                destroyable.SetActive(false);
+                particulas.Play();
+            }
+            else destroyable.SetActive(false);
         }
 
         
