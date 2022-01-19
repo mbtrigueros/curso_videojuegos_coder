@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Time.timeScale = 1f;
+        ResetTime();
         ResetLives();
         ResetStars();
         ResetGravity();
@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelChange()
     {
+        ResetTime();
         ResetLives();
         ResetGravity();
     }
@@ -60,6 +61,11 @@ public class GameManager : MonoBehaviour
     public int GetPlayerLives()
     {
         return playerLives;
+    }
+
+    public void ResetTime()
+    {
+        Time.timeScale = 1f;
     }
 
     public void ResetStars()

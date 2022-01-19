@@ -394,7 +394,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             var enemy = collision.gameObject;
-            if (animPlayer.GetBool("isAttacking") == false)
+            if (!attacked)
             {
                 animPlayer.SetTrigger("isAttacked");
                 foreach (GameObject camera in cameras) if (camera.activeInHierarchy) StartCoroutine(camera.GetComponent<CameraShake>().Shake(0.1f, -4f));
@@ -403,7 +403,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("La cantidad de vidas es: " + GameManager.instance.GetPlayerLives());
             }
 
-            else if (animPlayer.GetBool("isAttacking") == true)
+            else if (attacked)
 
             {
                 enemy.GetComponent<Enemy>().EnemyLivesDown();
@@ -433,7 +433,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             var enemy = collision.gameObject;
-            if (animPlayer.GetBool("isAttacking") == true)
+            if (attacked)
 
             {
                 enemy.GetComponent<Enemy>().EnemyLivesDown();
@@ -465,7 +465,6 @@ public class PlayerController : MonoBehaviour
 
     //--------------------------------------------------------------------TRIGGERS--------------------------------------------------------------------
 
-
     public void OnTriggerEnter(Collider other)
     {
 
@@ -482,6 +481,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("SpecialStar")) 
         {
             onLevelChange?.Invoke();
+            other.gameObject.SetActive(false);
         }
 
         //atravieso el espejo y paso al techo
@@ -510,12 +510,10 @@ public class PlayerController : MonoBehaviour
             onPlayerLivesChange?.Invoke(GetPlayerLives());
             Debug.Log("La cantidad de vidas es: " + GetPlayerLives());
             //StartCoroutine(DelayHits());
-        }
-        
+        }   
     }
 
-
-    public void ResetPosition()
+        public void ResetPosition()
     {
         StartCoroutine(ResetPositionCorrutina());
     }

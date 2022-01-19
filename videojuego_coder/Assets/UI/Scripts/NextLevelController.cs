@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class NextLevelController : MonoBehaviour
 {
+
+    private int level;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        level = LevelManager.instance.GetLevel();
     }
 
     // Update is called once per frame
@@ -16,7 +19,7 @@ public class NextLevelController : MonoBehaviour
         
     }
 
-    public void NextLevel()
+    public void OnClickPlay()
     {
         if (LevelManager.instance.GetLevel() >= 1)
         {
@@ -24,7 +27,21 @@ public class NextLevelController : MonoBehaviour
             AudioManager.instance.StopSound("SoundTrack_01");
         }
 
-        LevelManager.instance.LevelChange(1);
+        switch (level)
+        {
+            case 3:
+                LevelManager.instance.GameOver();
+                break;
+            case 2:
+                LevelManager.instance.ThirdLevel();
+                break;
+            case 1:
+                LevelManager.instance.SecondLevel();
+                break;
+            default:
+                LevelManager.instance.FirstLevel();
+                break;
+        }
         GameManager.instance.LevelChange();
     }
 }

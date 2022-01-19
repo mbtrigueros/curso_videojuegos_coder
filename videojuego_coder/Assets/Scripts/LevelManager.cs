@@ -8,6 +8,13 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
     public bool dontDestroyOnLoad;
 
+
+    private string lvl1 = "Level_01";
+    private string lvl2 = "Level_02";
+    private string lvl3 = "Level_03";
+    private string gameOver = "GameOver";
+    private string landing = "Landing";
+
     private void Awake()
     {
         if (instance == null)
@@ -20,7 +27,8 @@ public class LevelManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-       
+        PlayerController.onPlayerDeath += GameOver;
+
     }
 
     // Start is called before the first frame update
@@ -32,32 +40,31 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GameOver()
     {
-
+        SceneManager.LoadScene(gameOver);
     }
-
-
-
-    public void LevelChange(int numero)
-    {
-        StartCoroutine(LevelLoader(numero));
-    }
-
     public int GetLevel()
     {
         return SceneManager.GetActiveScene().buildIndex;
     }
 
-    IEnumerator LevelLoader(int numero)
+    public void Landing()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(GetLevel() + numero);
-        
-        while (!operation.isDone)
-        {
-            Debug.Log("Progreso de carga " + operation.progress);
-            yield return null;
-        }
+        SceneManager.LoadScene(landing);
+    }
+    public void FirstLevel()
+    {
+        SceneManager.LoadScene(lvl1);
+    }
+
+    public void SecondLevel()
+    {
+        SceneManager.LoadScene(lvl2);
+    }
+
+    public void ThirdLevel()
+    {
+        SceneManager.LoadScene(lvl3);
     }
 }
