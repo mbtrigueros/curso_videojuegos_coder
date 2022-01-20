@@ -40,6 +40,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
+
     }
 
     public Sound GetSound(string name)
@@ -47,6 +48,34 @@ public class AudioManager : MonoBehaviour
         Sound sound = Array.Find(sounds, sound => sound.name == name);
         return sound;
     }
+
+    public void Soundtrack(string name)
+    {
+        int level = LevelManager.instance.GetLevel();
+
+        switch (level)
+        {
+            case 1:
+                PlaySound("SoundTrack_01");
+                break;
+            case 2:
+                PlaySound("SoundTrack_01");
+                break;
+            case 3:
+                PlaySound("SoundTrack_02");
+                break;
+            case 4:
+                PlaySound("SoundTrack_01");
+                break;
+            case 5:
+                PlaySound("SoundTrack_02");
+                break;
+            default:
+                PlaySound("SoundTrack_01");
+                break;
+        }
+    }
+
 
     public void PlaySound(string name)
     {

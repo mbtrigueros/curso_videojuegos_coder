@@ -21,14 +21,11 @@ public class NextLevelController : MonoBehaviour
 
     public void OnClickPlay()
     {
-        if (LevelManager.instance.GetLevel() >= 1)
-        {
-            AudioManager.instance.PlaySound("SoundTrack_02");
-            AudioManager.instance.StopSound("SoundTrack_01");
-        }
-
         switch (level)
         {
+            case 4:
+                LevelManager.instance.YouWin();
+                break;
             case 3:
                 LevelManager.instance.GameOver();
                 break;

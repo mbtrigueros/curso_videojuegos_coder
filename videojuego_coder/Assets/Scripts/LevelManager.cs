@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     private string lvl3 = "Level_03";
     private string gameOver = "GameOver";
     private string landing = "Landing";
+    private string youWin = "YouWin";
 
     private void Awake()
     {
@@ -29,15 +30,6 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         PlayerController.onPlayerDeath += GameOver;
 
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (GetLevel() <= 1)
-        {
-            AudioManager.instance.PlaySound("SoundTrack_01");
-        }
     }
 
     public void GameOver()
@@ -66,5 +58,10 @@ public class LevelManager : MonoBehaviour
     public void ThirdLevel()
     {
         SceneManager.LoadScene(lvl3);
+    }
+
+    public void YouWin()
+    {
+        SceneManager.LoadScene(youWin);
     }
 }
