@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BOSS
   m_EditorClassIdentifier: 
   enemyLives: 10
-  speedEnemy: 6
-  speedRunEnemy: 6
+  speedEnemy: 5
+  speedRunEnemy: 8

@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 lastGrounded;
     private Vector3 groundedOffset = new Vector3(1.5f, 0f, 0f);
 
+    private float ejeHorizontal;
 
     //variables de eventos
     public static event Action onPlayerDeath;
@@ -53,6 +54,8 @@ public class PlayerController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
+
+         ejeHorizontal = Input.GetAxis("Horizontal"); //establecemos el eje horizontal con getaxis
 
         globalPostProcessing = GameObject.Find("GlobalPostProcessing");
 
@@ -419,7 +422,7 @@ public class PlayerController : MonoBehaviour
             
         }
 
-        if (collision.gameObject.CompareTag("Trap") && !isHit)
+        if (collision.gameObject.CompareTag("Trap"))
         {
             isHit = true;
             animPlayer.SetTrigger("isHit");

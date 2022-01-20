@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 
 {
+
+    
     [SerializeField] protected EnemyData enemyData;
 
     [SerializeField] Transform[] waypoints; //waypoints hacia los que se movera el enemigo
@@ -21,10 +23,9 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         animEnemy.SetBool("isWalking", true); //determino las variables de animacion de correr como falsa por default y la de caminar como verdadera
         animEnemy.SetBool("playerSeen", false);
-        ParticleSystem explosionParticles = GetComponent<ParticleSystem>();
 
     }
 
@@ -131,27 +132,11 @@ public class Enemy : MonoBehaviour
         if ((other.CompareTag("Void") || other.CompareTag("Obstacle"))) onEnemyDeath?.Invoke();
     }
 
-    //--------------------------------------------------------------------COLLISIONS--------------------------------------------------------------------
+    //--------------------------------------------------------------------COLLISIONS
 
-    ParticleSystem particulas;
-
-    public void OnCollisionEnter(Collision collision)
+    public virtual void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Trap")) onEnemyDeath?.Invoke();
-
-        if (collision.gameObject.layer == 9) {
-
-        GameObject destroyable = collision.gameObject;
-            if (destroyable.GetComponentInParent<ParticleSystem>() != null)
-            {
-                particulas = destroyable.GetComponentInParent<ParticleSystem>();
-                destroyable.SetActive(false);
-                particulas.Play();
-            }
-            else destroyable.SetActive(false);
-        }
-
-        
     }
 
 }
