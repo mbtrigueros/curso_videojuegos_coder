@@ -16,6 +16,7 @@ public class GameOverController : MonoBehaviour
     {
         LevelManager.instance.Landing();
         Debug.Log("Presione TRY AGAIN");
+        GameManager.instance.LevelChange();
 
     }
 }

@@ -43,10 +43,11 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        ResetGravity();
         ResetTime();
         ResetLives();
         ResetStars();
-        ResetGravity();
+        
 
 
     }
@@ -54,7 +55,6 @@ public class GameManager : MonoBehaviour
     public void LevelChange()
     {
 
-        ResetTime();
         ResetLives();
         ResetGravity();
     }

@@ -20,6 +20,7 @@ public class SelectLevel : MonoBehaviour
 
     public void OnClickPlay()
     {
+
         if (LevelManager.instance.GetLevel() >= 1)
         {
             AudioManager.instance.PlaySound("SoundTrack_02");
@@ -30,15 +31,19 @@ public class SelectLevel : MonoBehaviour
         {
             case 3:
                 LevelManager.instance.ThirdLevel();
+                GameManager.instance.LevelChange();
                 break;
             case 2:
                 LevelManager.instance.SecondLevel();
+                GameManager.instance.LevelChange();
                 break;
             case 1:
                 LevelManager.instance.FirstLevel();
+                GameManager.instance.LevelChange();
                 break;
             default:
                 LevelManager.instance.Landing();
+                GameManager.instance.LevelChange();
                 break;
         }
     }

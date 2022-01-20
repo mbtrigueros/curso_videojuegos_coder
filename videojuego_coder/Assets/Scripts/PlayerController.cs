@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
 
+        SetGravity(gravedad);
 
         if (LevelManager.instance.GetLevel() == 3)
         {
