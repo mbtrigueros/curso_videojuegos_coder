@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelChange()
     {
+
         ResetTime();
         ResetLives();
         ResetGravity();

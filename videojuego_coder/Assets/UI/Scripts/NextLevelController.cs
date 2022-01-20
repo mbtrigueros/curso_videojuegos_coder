@@ -23,17 +23,14 @@ public class NextLevelController : MonoBehaviour
     {
         switch (level)
         {
-            case 4:
-                LevelManager.instance.YouWin();
-                break;
-            case 3:
-                LevelManager.instance.GameOver();
-                break;
             case 2:
                 LevelManager.instance.ThirdLevel();
                 break;
             case 1:
                 LevelManager.instance.SecondLevel();
+                break;
+            case 0:
+                LevelManager.instance.FirstLevel();
                 break;
             default:
                 LevelManager.instance.FirstLevel();

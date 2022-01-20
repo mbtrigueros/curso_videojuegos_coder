@@ -9,6 +9,7 @@ public class EnemyBoss : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.instance.PlaySound("BossSteps");
         explosionSound = AudioManager.instance.GetSound("Explosion");
     }
 
@@ -20,7 +21,6 @@ public class EnemyBoss : Enemy
 
     void MoveForwards()
     {
-        AudioManager.instance.PlaySound("BossSteps");
         animEnemy.SetBool("bossAttack", true); //determino la variable como cierta para activar la animacion de correr
         transform.forward = Vector3.right;
         transform.position += enemyData.SpeedRunEnemy * transform.forward * Time.deltaTime;

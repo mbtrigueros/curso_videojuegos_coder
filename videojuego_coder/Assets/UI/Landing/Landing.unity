@@ -6709,7 +6709,7 @@ MonoBehaviour:
   sounds:
   - name: Steps
     clip: {fileID: 8300000, guid: 497c4a613317f084fb909a310ce44e67, type: 3}
-    volume: 0.8
+    volume: 0.2
     pitch: 1
     source: {fileID: 0}
     loop: 0
@@ -6721,25 +6721,25 @@ MonoBehaviour:
     loop: 0
   - name: DoubleJump
     clip: {fileID: 8300000, guid: 0567920bc8c24174c8de014bdd3ee49c, type: 3}
-    volume: 0.3
+    volume: 0.2
     pitch: 1
     source: {fileID: 0}
     loop: 0
   - name: Attack
     clip: {fileID: 8300000, guid: f186e82bb2574834ca213f849977d5fc, type: 3}
-    volume: 0.4
+    volume: 0.3
     pitch: 1
     source: {fileID: 0}
     loop: 0
   - name: Dash
     clip: {fileID: 8300000, guid: ea515c72fae82254882d0279c190e48f, type: 3}
-    volume: 0.5
+    volume: 0.4
     pitch: 1
     source: {fileID: 0}
     loop: 0
   - name: Landing
     clip: {fileID: 8300000, guid: 72da547dd60846047b4fa991705b1864, type: 3}
-    volume: 0.5
+    volume: 0.2
     pitch: 1
     source: {fileID: 0}
     loop: 0
@@ -6769,7 +6769,7 @@ MonoBehaviour:
     loop: 0
   - name: Thump
     clip: {fileID: 8300000, guid: 57524c3d1960fe947a15dd9c0a47d8f2, type: 3}
-    volume: 0.7
+    volume: 0.4
     pitch: 1.8
     source: {fileID: 0}
     loop: 0
@@ -6793,14 +6793,8 @@ MonoBehaviour:
     loop: 0
   - name: BossSteps
     clip: {fileID: 8300000, guid: 3a722358e4decb5489ef465db6bc725f, type: 3}
-    volume: 1
-    pitch: 0.6
-    source: {fileID: 0}
-    loop: 1
-  - name: HeartBeat
-    clip: {fileID: 8300000, guid: 3fae8c3804550764d895da499ac30c16, type: 3}
-    volume: 1
-    pitch: 0.5
+    volume: 0.5
+    pitch: 1
     source: {fileID: 0}
     loop: 1
 --- !u!4 &4300010808573171788

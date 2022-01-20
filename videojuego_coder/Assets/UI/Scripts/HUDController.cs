@@ -45,10 +45,9 @@ public class HUDController : MonoBehaviour
 
     public void OnPlayerLivesChangeHandler(int lives)
     {
-
         livesImg.sprite = livesSprites[lives];
-
     }
+
     public void OnPlayerStarsChangeHandler(int stars)
     {
        if(animStar != null) animStar.SetTrigger("NewStar");

@@ -55,7 +55,16 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
 
-         ejeHorizontal = Input.GetAxis("Horizontal"); //establecemos el eje horizontal con getaxis
+
+        if (LevelManager.instance.GetLevel() == 3)
+        {
+            AudioManager.instance.StopSound("SoundTrack_01");
+            AudioManager.instance.PlaySound("SoundTrack_02");
+        }
+                
+        
+
+        ejeHorizontal = Input.GetAxis("Horizontal"); //establecemos el eje horizontal con getaxis
 
         globalPostProcessing = GameObject.Find("GlobalPostProcessing");
 
